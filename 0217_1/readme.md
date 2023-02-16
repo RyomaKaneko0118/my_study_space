@@ -1,0 +1,2 @@
+# TypeScriptの開発環境を構築
+本を読んでTypeScriptの開発環境を構築してみた。

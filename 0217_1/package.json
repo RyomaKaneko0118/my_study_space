@@ -1,0 +1,17 @@
+{
+  "name": "0217_1",
+  "version": "1.0.0",
+  "description": "本を読んでTypeScriptの開発環境を構築してみた。",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "typescript": "^4.9.5"
+  }
+}
