@@ -9,7 +9,7 @@
     "target": "es2020",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "/Users/bou/workspace/git_clone/my_study_space/0218_1/",
     "importsNotUsedAsValues": "error",
     "paths": {
       "@src/*": ["src/*"]

@@ -1,3 +1,3 @@
-import { message } from "@src/message/attribute";
+import { message } from "./message/attribute";
 
 console.log(message)
