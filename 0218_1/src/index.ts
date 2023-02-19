@@ -1,2 +1,1 @@
-const message: string = "Hello"
-console.log(message)
+export const message: string = "Hello"
