@@ -1,4 +1,4 @@
-type Animal = {
-  name: string
-  age: number
+export {}
+const getName = (name) => {
+  return console.log(name)
 }
