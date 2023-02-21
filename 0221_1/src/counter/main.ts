@@ -1,3 +1,5 @@
 import  { increment } from "./counter";
 
-console.log(`カウンタの値は${increment()}です。`)
+for (let i = 0; i < 3; i++) {
+  console.log(`カウンタの値は${increment()}です。`)
+}
