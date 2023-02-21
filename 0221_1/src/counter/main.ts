@@ -1,5 +1,8 @@
-import  { increment } from "./counter";
+import { outputMessage } from "../helper/output_message";
+import  { getValue, increment } from "./counter";
+
+const text1 = "カウンタの値は"
 
 for (let i = 0; i < 3; i++) {
-  console.log(`カウンタの値は${increment()}です。`)
+  outputMessage(text1, increment())
 }
