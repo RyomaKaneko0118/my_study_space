@@ -13,7 +13,7 @@ def add_list(data):
             break
 
     if n == -1:
-      message = "データ領域に空きがありません。"
+      message = "データ領域に空きがありません"
       print(message)
       return False
     
@@ -28,5 +28,40 @@ def add_list(data):
     print(message)
     return True
 
+def del_list(data):
+    global head
+    n = -1
+    
+    for i in range(MAX):
+        if dataList[i] == data:
+            n = i
+            break
+    
+    if n == -1:
+      message = "そのデータは存在しません"
+      print(message)
+      return False 
+    
+    if n != head:
+        for i in range(MAX):
+            if pointer[i] == n:
+                pointer[i] == pointer[n]
+    else:
+        head = pointer[n]
+        if head == None:
+            head = 0
+    
+    dataList[n] = None
+    pointer[n] = None
+    message = f"データ{data}を削除しました"
+    print(message)
+    return True
+
 add_list(10)
+print(dataList)
+del_list(10)
+print(dataList)
+add_list(100)
+print(dataList)
+del_list(10)
 print(dataList)
