@@ -8,4 +8,9 @@ def calculate_factorial(n):
 
 n = 10
 message = f"10! = {calculate_factorial(n)}"
+
+print(message)
+
+result = 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1
+message = f"{str(result)} = {result}"
 print(message)
