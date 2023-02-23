@@ -1,5 +1,5 @@
-MAX = 5
-# 空の要素が5つある配列を作成する
+MAX = 10
+# 空の要素が10つある配列を作成する
 dataList = [None] * MAX
 pointer = [None] * MAX
 head = 0
@@ -45,7 +45,7 @@ def del_list(data):
     if n != head:
         for i in range(MAX):
             if pointer[i] == n:
-                pointer[i] == pointer[n]
+                pointer[i] = pointer[n]
     else:
         head = pointer[n]
         if head == None:
@@ -57,11 +57,28 @@ def del_list(data):
     print(message)
     return True
 
-add_list(10)
-print(dataList)
-del_list(10)
-print(dataList)
-add_list(100)
-print(dataList)
-del_list(10)
-print(dataList)
+def put_list():
+    p = head
+    while True:
+        message = f"{dataList[p]} → "
+        print(message, end="")
+        if pointer[p] == None:
+            message = "EOF"
+            print(message, end="")
+            break
+        p = pointer[p]
+
+for i in range(10, 110, 10):
+    
+    add_list(i)
+
+put_list()
+print("")
+del_list(40)
+put_list()
+print("")
+del_list(70)
+put_list()
+print("")
+del_list(20)
+put_list()
