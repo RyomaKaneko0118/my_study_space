@@ -1,4 +1,4 @@
-type Human = {
+export type Human = {
   name: string
   age: number
 }
