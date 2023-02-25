@@ -5,8 +5,13 @@ right = MAX - 1
 flag = False
 
 while left <= right:
-    message = "探す値を入力して下さい"
-    key = int(input(f"{message} "))
+    try:
+        message = "探す値を入力して下さい"
+        key = int(input(f"{message} "))
+    except:
+        message = "数値を入力して下さい"
+        print(message)
+        continue
     middle = (left + right)//2
     print(middle)
     if data[middle] == key:
