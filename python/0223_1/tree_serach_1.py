@@ -2,14 +2,14 @@ LEFT = 0
 RIGHT = 1
 DATA = 2
 node = [
-    [1, 2, 10],
-    [3, 4, 20],
-    [5, None, 30],
-    [None, None, 40],
-    [6, 7, 50],
-    [None, None, 60],
-    [None, None, 70],
-    [None, None, 80],
+    [1, 2, 0],
+    [3, 4, 1],
+    [5, None, 2],
+    [None, None, 3],
+    [6, 7, 4],
+    [None, None, 5],
+    [None, None, 6],
+    [None, None, 7],
 ]
 MAX = len(node)
 count = 0
@@ -19,7 +19,8 @@ def traverse(p):
     print(count)
     if p != None:
         traverse(node[p][LEFT])
-        message = f"ノード{node[p][DATA]}"
+        index = node[p][DATA] + 1 
+        message = f"ノード{index}"
         print(message)
         traverse(node[p][RIGHT])
         
