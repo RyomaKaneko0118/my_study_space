@@ -1,3 +1,4 @@
+# 右から左に並び替える
 data = [45, 78, 71, 14, 1, 9, 65, 85]
 message = f"元のデータ: {data}"
 print(message)
