@@ -9,9 +9,7 @@ for i in range(0, MAX -1):
         if data[j] < data[m]:
             m = j
     
-    print(data)
     data[i], data[m] = data[m], data[i]
-    print(data)
     
 message = f"ソート後のデータ: {data}"
 print(message)
