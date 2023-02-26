@@ -13,9 +13,9 @@ def add_list(data):
             break
 
     if n == -1:
-      message = "データ領域に空きがありません"
-      print(message)
-      return False
+        message = "データ領域に空きがありません"
+        print(message)
+        return False
     
     for i in range(MAX):
         if dataList[i] != None and pointer[i] == None:
