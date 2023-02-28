@@ -4,6 +4,7 @@ print(message)
 MAX = len(data)
 
 for i in range(1, MAX):
+    print(data)
     tmp = data[i]
     j = i
 
