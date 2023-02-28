@@ -9,6 +9,7 @@ message = f"元のデータ: {data}"
 print(message)
 
 for i in range(1, MAX):
+    print(data)
     tmp = data[i]
     j = i
 
