@@ -1,0 +1,1 @@
+echo "ibase=10;obase=2;120" | bc 
