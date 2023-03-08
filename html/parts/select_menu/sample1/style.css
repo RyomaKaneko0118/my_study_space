@@ -1,0 +1,103 @@
+/**
+ * Custom Form Select Styles.
+ * Used to create custom form select menus from regular input fields.
+ * @author Rainner Lins @raintek_
+ */
+*, *:before, *:after {
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  background: radial-gradient(circle, #fff 0%, #ffc 30%, #efe 100%) fixed;
+  color: #303030;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+}
+
+form {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+form .form-row {
+  display: block;
+  margin: 20px 0;
+}
+form .select {
+  display: block;
+  position: relative;
+  vertical-align: middle;
+  text-align: left;
+}
+form .select > span {
+  display: block;
+  color: #636363;
+}
+form .select > input {
+  display: block;
+  cursor: pointer;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
+  line-height: 16px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+form .select > ul {
+  display: block;
+  position: absolute;
+  list-style: none;
+  overflow: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  left: 20px;
+  right: 20px;
+  top: 100%;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  max-height: 0;
+}
+form .select > ul li {
+  display: block;
+  cursor: pointer;
+  margin: 0;
+  padding: 5px 10px;
+  background-color: #fff;
+}
+form .select > select {
+  display: inline-block;
+  position: absolute;
+  overflow: hidden;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  opacity: 0.000000001;
+}
+
+/*# sourceMappingURL=style.css.map */
