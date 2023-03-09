@@ -1,10 +1,11 @@
 * {
    user-select: none;
- }
- 
- *:focus {
+}
+
+//  外枠を削除する
+*:focus {
    outline: none;
- }
+}
  
  html,
  body {
