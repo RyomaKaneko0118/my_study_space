@@ -12,10 +12,10 @@ provider "aws" {
 }
 # 64 ビット (Arm)
 resource "aws_instance" "app_server" {
-  ami = "ami-0fa715233bba2f42e"
-  instance_type = "c6g.medium"
+  ami = "ami-0b828c1c5ac3f13ee"
+  instance_type = "t2.micro"
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = "Terraform0312"
     }
 }
 
