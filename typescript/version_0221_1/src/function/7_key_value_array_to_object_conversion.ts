@@ -5,6 +5,6 @@ const entryified = [
   ["key3", "value3"]
 ];
 
-const originalObject = Object.fromEntries(entryified);
+const originalObject: object[] = Object.fromEntries(entryified)
 
 console.log(originalObject); // { key1: 'value1', ... }
