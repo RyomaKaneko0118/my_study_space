@@ -1,0 +1,9 @@
+ssh -i ~/.ssh/20230312_key ubuntu@ec2-13-115-92-75.ap-northeast-1.compute.amazonaws.com
+chmod u+x
+echo "$(pwd)"
+aws sts get-caller-identity --query Account --output text
+alias docker_terraform='docker run --rm -i -v $PWD:/work -w /work \
+-e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+-e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+-e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+hashicorp/terraform:latest'
