@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "set -eの挙動"
 
 set -e
 
