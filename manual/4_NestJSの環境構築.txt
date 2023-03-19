@@ -1,0 +1,10 @@
+npm install -g @nestjs/cli
+npm install -g npm@9.6.2
+
+npm (Node Package Manager) は、Node.jsパッケージの管理ツール。
+npmは、Node.jsプロジェクトに必要なパッケージやモジュールを管理している。
+npmは、オンライン上のNode.jsパッケージのレジストリであるnpm registryと統合されており、プログラマーは数百万ものパッケージから選択することができる。
+npmを使用することで、依存関係の解決やバージョン管理が簡単になる。
+
+nest new alice_0319
+npm run start:dev
