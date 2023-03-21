@@ -1,6 +1,36 @@
 ping -c 3 8.8.8.8
 ip address show
 sudo tcpdump -tn -i any icmp
+sudo apt update
 sudo apt install traceroute
 traceroute -n 8.8.8.8
 ip route show
+sudo apt install iproute2
+
+sudo ip netns add helloworld
+ip netns list
+sudo ip netns exec helloworld ip address show
+sudo ip netns exec helloworld ip route show
+sudo ip netns exec helloworld bash
+sudo ip netns delete helloworld
+
+sudo ip netns add ns1
+sudo ip netns add ns2
+sudo ip link add ns1-veth0 type veth peer name ns2-veth0
+ip link show
+
+sudo ip link set ns1-veth0 netns ns1 
+sudo ip link set ns2-veth0 netns ns2 
+
+sudo ip netns exec ns1 ip address add 192.0.2.1/24 dev ns1-veth0 
+sudo ip netns exec ns2 ip address add 192.0.2.2/24 dev ns2-veth0 
+
+sudo ip netns exec ns1 ip link show ns1-veth0
+
+sudo ip netns exec ns1 ip link set ns1-veth0 up
+sudo ip netns exec ns2 ip link set ns2-veth0 up
+
+sudo ip netns exec ns1 ping -c 3 192.0.2.2
+sudo ip netns delete ns1
+sudo ip netns delete ns2
+sudo ip link delete ns1-veth0
