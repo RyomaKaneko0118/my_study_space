@@ -7,4 +7,5 @@ const entryified = [
 
 const originalObject: object[] = Object.fromEntries(entryified)
 
+console.log("------------- 7 -------------------------")
 console.log(originalObject); // { key1: 'value1', ... }
