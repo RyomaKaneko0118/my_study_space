@@ -170,9 +170,79 @@ sudo ip netns exec ns2 ip route add default via 198.51.100.254
 sudo ip netns exec router1 sysctl net.ipv4.ip_forward=1
 sudo ip netns exec router2 sysctl net.ipv4.ip_forward=1
 
+失敗する
 sudo ip netns exec ns1 ping -c 3 198.51.100.1
 
 sudo ip netns exec router1 ip route add 198.51.100.0/24 via 203.0.113.2
 sudo ip netns exec router2 ip route add 192.0.2.0/24 via 203.0.113.1
 
 sudo ip --all netns delete
+
+------------------------------------------------------------
+35: gw1-veth0@if36: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether be:3e:13:08:5b:ea brd ff:ff:ff:ff:ff:ff link-netns ns1
+    inet 192.0.2.254/24 scope global gw1-veth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::bc3e:13ff:fe08:5bea/64 scope link 
+       valid_lft forever preferred_lft forever
+
+link/etherフィールドはインターフェースに割り当てられたMACアドレスを示す。
+この場合は「be:3e:13:08:5b:ea」になる。
+inetフィールドは、インターフェースに割り当てられたIPv4アドレスを示す。
+この場合は「192.0.2.254/24」になる。
+/24はサブネットマスクを示し、この場合は255.255.255.0です。
+inet6フィールドは、インターフェースに割り当てられたIPv6アドレスを示しす。
+この場合は「fe80::bc3e:13ff:fe08:5Bea/64」になる。
+/64はIPv6のサブネットマスクを示し、この場合は64ビット。
+stateフィールドが「UP」となっており、インターフェースがアクティブであることを示す。
+mtuフィールドは、インターフェースの最大転送ユニット（MTU）を示す。
+この場合は1500バイトです。
+qlenフィールドは、インターフェースの送信キューの長さを示す。
+link-netnsフィールドは、インターフェースがどのネットワーク名前空間にあるかを示す。
+------------------------------------------------------------
+default via 192.0.2.254 dev ns1-veth0 
+192.0.2.0/24 dev ns1-veth0 proto kernel scope link src 192.0.2.1 
+
+Linuxマシンのルーティングテーブルの2つのエントリーを示す。
+一つ目のエントリーは、
+ホストが宛先IPアドレスに対応するネットワークに直接接続されていない場合に、
+どこにパケットを送信するかを示す。
+このエントリーは、デフォルトゲートウェイが「192.0.2.254」で、
+それに接続されているネットワークインターフェースが「ns1-veth0」であることを示す。
+二つ目のエントリーは、
+ネットワークインターフェース「ns1-veth0」が192.0.2.0/24ネットワークに属しており、
+そのIPアドレスは「192.0.2.1」であることを示す。
+------------------------------------------------------------
+ns1、ns2という仮想環境を作る。
+ns1-veth0というイーサネットデバイスを作成し、
+始点をns1-veth0、終点をns2-veth0とする。
+ns1-veth0イーサネットデバイスの始点をns1、終点をns2と紐付ける。
+ns1側のns1-veth0イーサネットデバイスのエンドポイントを198.0.2.1/24、
+ns2側のns1-veth0イーサネットデバイスのエンドポイントを198.0.2.2/24、
+にする。
+それぞれのエンドポイントを起動する。
+------------------------------------------------------------
+sudo ip netns add ns1
+sudo ip netns add ns2
+
+sudo ip link add ns1-veth0 type veth peer name ns2-veth0
+
+sudo ip link set ns1-veth0 netns ns1 
+sudo ip link set ns2-veth0 netns ns2 
+
+sudo ip netns exec ns1 ip link set ns1-veth0 up
+sudo ip netns exec ns2 ip link set ns2-veth0 up
+
+sudo ip netns exec ns1 ip address add 192.0.2.1/24 dev ns1-veth0
+sudo ip netns exec ns2 ip address add 192.0.2.2/24 dev ns2-veth0
+
+sudo ip netns exec ns1 ip link set dev ns1-veth0 address 00:00:5E:00:53:01 
+sudo ip netns exec ns2 ip link set dev ns2-veth0 address 00:00:5E:00:53:02 
+
+sudo ip netns exec ns1 tcpdump -tnel -i ns1-veth0 icmp or arp
+sudo ip netns exec ns1 ping -c 3 192.0.2.2
+
+キャッシュの削除
+sudo ip netns exec ns1 ip neigh flush all
+キャッシュの確認
+sudo ip netns exec ns1 ip neigh
