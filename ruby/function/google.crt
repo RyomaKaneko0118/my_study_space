@@ -1,0 +1,60 @@
+CONNECTED(00000005)
+---
+Certificate chain
+ 0 s:CN = www.google.com
+   i:C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
+ 1 s:C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
+   i:C = US, O = Google Trust Services LLC, CN = GTS Root R1
+ 2 s:C = US, O = Google Trust Services LLC, CN = GTS Root R1
+   i:C = BE, O = GlobalSign nv-sa, OU = Root CA, CN = GlobalSign Root CA
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIEiDCCA3CgAwIBAgIRAJ90WtrZUKwfEh1TyQTz19owDQYJKoZIhvcNAQELBQAw
+RjELMAkGA1UEBhMCVVMxIjAgBgNVBAoTGUdvb2dsZSBUcnVzdCBTZXJ2aWNlcyBM
+TEMxEzARBgNVBAMTCkdUUyBDQSAxQzMwHhcNMjMwMzA2MDgxOTEyWhcNMjMwNTI5
+MDgxOTExWjAZMRcwFQYDVQQDEw53d3cuZ29vZ2xlLmNvbTBZMBMGByqGSM49AgEG
+CCqGSM49AwEHA0IABF/iLcaGOlCY1uHSNRxufcA6dLIzOVxbuHq9yE5qyv6e6IH5
+efeEMFqXQABGmuSdeTByAaetdh7UA2MOE/LD836jggJnMIICYzAOBgNVHQ8BAf8E
+BAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIwADAdBgNVHQ4E
+FgQUL3JGbQmDhLR+Nx0B/ZyUpQtjmJcwHwYDVR0jBBgwFoAUinR/r4XN7pXNPZzQ
+4kYU83E1HScwagYIKwYBBQUHAQEEXjBcMCcGCCsGAQUFBzABhhtodHRwOi8vb2Nz
+cC5wa2kuZ29vZy9ndHMxYzMwMQYIKwYBBQUHMAKGJWh0dHA6Ly9wa2kuZ29vZy9y
+ZXBvL2NlcnRzL2d0czFjMy5kZXIwGQYDVR0RBBIwEIIOd3d3Lmdvb2dsZS5jb20w
+IQYDVR0gBBowGDAIBgZngQwBAgEwDAYKKwYBBAHWeQIFAzA8BgNVHR8ENTAzMDGg
+L6AthitodHRwOi8vY3Jscy5wa2kuZ29vZy9ndHMxYzMvUU92SjBOMXNUMkEuY3Js
+MIIBBAYKKwYBBAHWeQIEAgSB9QSB8gDwAHYAejKMVNi3LbYg6jjgUh7phBZwMhOF
+TTvSK8E6V6NS61IAAAGGtjfFPQAABAMARzBFAiBCYaG/AzsJ8iEB9JKww6G/NZ8b
+ByxrCj1fMgPJlMRXiAIhAOdDOezgUjVpzKagd/QUnraD4LG4VvxfJicgX7WgMzQz
+AHYArfe++nz/EMiLnT2cHj4YarRnKV3PsQwkyoWGNOvcgooAAAGGtjfFOAAABAMA
+RzBFAiAki2pdYEQKQrNb1W26YM6efcvuedTGMydU1YAz7UzfkgIhAMJg6fUZQRad
+NSaMGauT7pp5tF50tTheLAGOlrVtMccQMA0GCSqGSIb3DQEBCwUAA4IBAQCv3peY
+U6vc6GLP4JVlKVyu5qqjPAFFhtnLfGZB8Ak0tPo57K4RitBbt4GDoG3tEjTBMqba
+hYZQ2XnXiEtmV3uAsAtDGfM9N7nmzUnfitYEnxoFaqYIMwPiDTPx/o8E/EDNbHER
+uuzH9R0bAMn7U4rzi7CbcSU/3DRiTHB2DqtKAOPT/VRUiunPZFexBF59X6ZHY0Dy
+MfrNwDX0AnT0XaXwztxyWNCuD5tJyiWrWvtPh1BMndx4ydfdUk5Xm6RKSDxFpTws
+BnLv8nWZTkQAbiuC60gfOidvqY1RHGdpiFmqV3Ki29ys/t18C0i1FUgrpaJ6aGgB
+htE5DJm6/OitVfyr
+-----END CERTIFICATE-----
+subject=CN = www.google.com
+
+issuer=C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: ECDSA
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4296 bytes and written 396 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 256 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

@@ -1,0 +1,2 @@
+openssl s_client -connect www.google.com:443 < /dev/null > google.crt
+openssl x509 -in google.crt -noout -text
