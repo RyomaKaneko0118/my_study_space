@@ -32,6 +32,10 @@ sub_cer.serial  = 3
 sub_cer.issuer  = issu
 sub_cer.subject = sub
 sub_cer.sign issu_rsa, digest
+
+puts(" sub_cer-----------------------------------------------------------")
+puts(subcer)
+puts("-------------------------------------------------------------")
 File.open 'client.pem', 'wb' do | f |
   f.write sub_cer.to_pem
 end
