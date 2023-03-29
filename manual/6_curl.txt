@@ -1,1 +1,6 @@
-curl http://localhost:18888
+curl --http1.0 http://abehiroshi.la.coocan.jp/
+curl -v --http1.0 http://abehiroshi.la.coocan.jp/
+curl -v --http1.0 google.co.jp
+curl -v --http1.0 --compressed http://abehiroshi.la.coocan.jp/
+curl -v --http1.0 -c cookie.txt -b cookie.txt -b "name=value" http://abehiroshi.la.coocan.jp/
+curl -v --http1.0 -H "If-Modified-Since: Thu, 27 Feb 2020 07:10:16 GMT" http://abehiroshi.la.coocan.jp/
