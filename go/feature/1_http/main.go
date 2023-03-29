@@ -6,7 +6,7 @@ import(
 )
 
 func main() {
-	resp, err := http.Get("http://localhost:18888")
+	resp, err := http.Get("http://abehiroshi.la.coocan.jp")
 	if err != nil {
 		panic(err)
 	}
