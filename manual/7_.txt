@@ -1,1 +1,0 @@
-SSLEAY_CONFIG="-config /home/rails/etc/pki/tls/openssl-client.cnf" /home/rails/etc/pki/tls/misc/CA -newreq

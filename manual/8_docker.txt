@@ -1,0 +1,1 @@
+sudo docker run -it --user root --cap-add=NET_ADMIN ubuntu 
