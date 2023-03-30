@@ -1,0 +1,23 @@
+sudo docker run -it --user root --cap-add=NET_ADMIN ubuntu 
+
+sudo apt update
+sudo apt install nginx
+
+sudo ufw allow 80/tcp
+sudo ufw status
+sudo vim /etc/ufw/user.rules
+
+以下を記入
+-A ufw-user-input -p tcp --dport 80 -j ACCEPT
+
+sudo ufw reload
+
+systemctl start nginx
+systemctl stop nginx
+systemctl restart nginx
+systemctl reload nginx
+
+バイナリ入れ替え
+/sbin/service nginx upgrade
+
+systemctl status nginx
