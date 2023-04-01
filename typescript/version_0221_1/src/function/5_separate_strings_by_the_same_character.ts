@@ -1,4 +1,4 @@
-// 文字列を同じ文字ごとに分ける
+// 文字列を同じ文字ごとに分けて配列にする
 export const str = "abbcccdeefghhiijklll";
 export const splitChars: string[] = str.match(/(.)\1*/g);
 console.log("------------- 5 -------------------------")

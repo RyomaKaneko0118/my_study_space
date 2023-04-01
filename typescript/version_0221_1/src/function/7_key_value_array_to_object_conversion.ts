@@ -1,3 +1,4 @@
+// 配列からオブジェクトを作成する
 export {}
 const entryified = [
   ["key1", "value1"],
@@ -5,7 +6,7 @@ const entryified = [
   ["key3", "value3"]
 ];
 
-const originalObject: object[] = Object.fromEntries(entryified)
+const originalObject: object = Object.fromEntries(entryified)
 
 console.log("------------- 7 -------------------------")
 console.log(originalObject); // { key1: 'value1', ... }
