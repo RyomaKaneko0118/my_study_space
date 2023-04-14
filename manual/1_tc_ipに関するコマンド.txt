@@ -10,14 +10,11 @@ sudo ip netns exec ns1 ip neigh flush all
 キャッシュの確認
 sudo ip netns exec ns1 ip neigh
 sudo tcpdump -tn -i any icmp
-------------------------------------------------------------
-ping -c 3 8.8.8.8
-ip address show
-sudo tcpdump -tn -i any icmp
+
 sudo apt update
 sudo apt install traceroute
 traceroute -n 8.8.8.8
-ip route show
+------------------------------------------------------------
 sudo apt install iproute2
 
 helloworldという仮想環境を作成
