@@ -1,0 +1,18 @@
+$(window).on("unload", function() {
+  $.ajax({
+    type: "POST",
+    url: "/sessions/logout",
+    async: false,
+    dataType: "json",
+    data: { authenticity_token: $("meta[name='csrf-token']").attr("content") },
+  });
+});
+
+class SessionsController < ApplicationController
+  def logout
+    reset_session
+    render json: { message: "ログアウトしました。" }
+  end
+end
+
+post '/sessions/logout', to: 'sessions#logout', as: 'logout'
