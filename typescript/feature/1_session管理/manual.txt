@@ -1,0 +1,15 @@
+npm install express-session
+const session = require('express-session');
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+req.session.user = {
+  name: 'John',
+  age: 30
+};
+
+const user = req.session.user
