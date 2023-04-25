@@ -2,13 +2,20 @@ sudo docker run -it --user root --cap-add=NET_ADMIN ubuntu
 
 sudo apt update
 sudo apt install nginx
+バッケージのバージョン確認
+dpkg -l nginx
 
+ubuntuにおけるファイヤーウォールの設定
+
+sudo ufw allow 22/tcp
 sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
 sudo ufw status
-sudo vim /etc/ufw/user.rules
 
-以下を記入
+以下を記入?(要検証)
 -A ufw-user-input -p tcp --dport 80 -j ACCEPT
+sudo vim /etc/ufw/user.rules
 
 sudo ufw reload
 
