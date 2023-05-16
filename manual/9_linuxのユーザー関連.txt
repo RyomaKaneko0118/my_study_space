@@ -7,3 +7,7 @@ groupadd -r --gid 1000 rails && useradd -m -r --uid 1000 --gid 1000 rails
 
 railsというユーザーと、railsというグループに対し、再帰的に/seminar-assistに属するファイル群に所有権を与える
 chown -R rails:rails /seminar-assist
+
+ユーザー情報の表示
+id
+groups

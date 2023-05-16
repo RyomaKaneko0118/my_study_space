@@ -1,0 +1,32 @@
+util
+exec $SHELL
+容量の確認
+df
+
+nodeのインストール
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo bash
+sudo apt-get install -y nodejs
+
+yarnのインストール
+sudo wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get install -y nodejs
+
+rubyをインストールするまでに行ったインストール
+sudo apt-get install -y build-essential default-mysql-client
+sudo apt-get install zlib1g-dev
+sudo apt-get install libssl-dev
+sudo apt-get install libyaml-dev
+sudo apt install ruby-bundler
+
+mysqlのインストール
+sudo apt install mysql-server
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+mysqlのパスワード関連
+sudo mysql_secure_installation
+
+プロダクション環境
+bundle install --without development:test --deployment
