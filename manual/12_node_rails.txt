@@ -1,7 +1,14 @@
-util
+util関連
 exec $SHELL
-容量の確認
 df
+dpkg -l | grep postgres
+sudo systemctl
+スワップファイルの作成
+sudo fallocate -l 1G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo vim /etc/fstab
 
 nodeのインストール
 sudo apt-get update -y && sudo apt-get upgrade -y
@@ -30,3 +37,48 @@ sudo mysql_secure_installation
 
 プロダクション環境
 bundle install --without development:test --deployment
+
+初期構築
+sudo apt-get install -y build-essential
+sudo apt install -y make patch git curl
+sudo apt install zlib1g-dev libreadline-dev
+
+ポストグレス
+sudo -u postgres psql
+sudo -u postgres psql -d iicom_sub < back_up
+
+メモ
+openssl genpkey -algorithm RSA -out iicom_sub_2023_private.key
+openssl req -new -key iicom_sub_2023_private.key -out iicom_sub_2023.csr -des3 -outform PEM
+openssl rsa -in iicom_sub_2023_private.key -out iicom_sub_2023_private_unencrypted.key
+
+openssl req -new -newkey rsa:2048 -nodes -keyout iicom_sub_2023_private.key -out iicom_sub_2023.pem -des3 -outform PEM
+
+sudo chown -R ubuntu iicom-sub
+
+--------------------------------------------------------------------------------------
+sudo git clone -b production https://github.com/grabss/iicom-sub.git
+sudo chown -R ubuntu iicom-sub
+rbenv versions
+RAILS_ENV=production bundle install --path vendor/bundle
+mater.keyの転送
+.envの転送
+RAILS_ENV=production rails db:create
+RAILS_ENV=production rails assets:precompile
+-----------------------------------------------------------------------------------------
+SELECT user, host FROM mysql.user;
+SHOW GRANTS FOR 'iicpdb'@'localhost';
+SHOW DATABASES;
+DROP DATABASE iicom_sub_production;
+-----------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------
+SSLEAY_CONFIG="-config /etc/pki/tls/openssl-client.cnf" /etc/pki/tls/misc/CA -newreq
+SSLEAY_CONFIG="-config /etc/pki/tls/openssl-client.cnf" /etc/pki/tls/misc/CA -sign
+sudo mv newreq.pem iicom-client-newreq-2023.pem
+sudo mv newkey.pem iicom-client-2023.key
+sudo mv newcert.pem iicom-client-2023.crt
+openssl pkcs12 -export -in iicom-client-2023.crt -inkey iicom-client-2023.key -certfile /etc/pki/CA/cacert.pem -out iicom-client-2023.p12
+RAILS_ENV=production EDITOR=vim rails credentials:edit
+---------------------------------------------------------------------------------------------
+RENAME DATABASE iicom-sub_production TO tmptest;
