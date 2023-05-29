@@ -11,3 +11,13 @@ chown -R rails:rails /seminar-assist
 ユーザー情報の表示
 id
 groups
+
+------------------------------------
+SUID/SGIDが設定されたファイルの調査
+find / -perm -u+s -ls
+開いてているポートの確認
+ss -atu
+-----------------------------------
+sudo adduser iicp
+sudo visudo
+Defaults        rootpw

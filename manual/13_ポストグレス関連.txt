@@ -1,19 +1,8 @@
-sudo yum install epel-release
-sudo rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-3.noarch.rpm
-sudo rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-3.noarch.rpm
-sudo vi /etc/yum.repos.d/pgdg.repo
-[pgdg95]
-name=PostgreSQL 9.5 $releasever - $basearch
-baseurl=https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-$releasever-$basearch
-enabled=1
-gpgcheck=0
-sudo yum install postgresql95-server postgresql95-contrib
-
 ポストグレス関連
 sudo -u postgres psql
 SELECT version();
 
-インストール
+ダンプファイルの作成
 pg_dump -U iicpdb -h 133.242.156.117 -p 5432 -Fc iicpdb > /home/iicp/`date '+%Y%m%d_%H%M%S'`.dump
 
 sudo ssh-copy-id -i ~/.ssh/sakura_key_0424.pub -f centos@133.167.109.54

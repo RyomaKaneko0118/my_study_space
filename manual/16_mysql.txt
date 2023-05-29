@@ -1,0 +1,2 @@
+SHOW DATABASES;
+DROP DATABASE production_name;

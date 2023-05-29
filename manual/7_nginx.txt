@@ -12,6 +12,9 @@ sudo ufw allow 443/tcp
 sudo ufw enable
 sudo ufw status
 
+
+【アーカイブ】
+参考程度に
 以下を記入?(要検証)
 -A ufw-user-input -p tcp --dport 80 -j ACCEPT
 sudo vim /etc/ufw/user.rules
