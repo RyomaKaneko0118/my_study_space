@@ -1,6 +1,0 @@
-サーバー証明書の取得と表示
-openssl s_client -connect www.google.com:443 < /dev/null > google.crt
-openssl x509 -in google.crt -noout -text
-
-暗号スィート
-openssl ciphers -v | wc -l
