@@ -1,19 +1,53 @@
-ユーザーが認証情報を入力しログインボタンを押す   -->   apiに認証の可否のリクエストを送る   -->   (認証が通る)
-                                                                                         |
-                                                                                         |
-                                                トークンをクッキーに設定          <--   トークンを生成し、送る
+ユーザーが認証情報を入力しログインボタンを押す   -->   apiに認証の可否のリクエストを送る   　　　　　-->   (認証が通る)
+                                                                                         　　　　　|
+                                                                                         　　　　　|
+                                                トークンをクッキーに設定          　　　　　<--   トークンを生成し、送る
                                                          |
                                                          |
                                                 (クッキーにトークンがある場合)
-                                                apiのgraphqlにクエリを投げる     -->   admin情報を検索
-                                                                                         |
-                                                                                         |
-                                                                              <--   admin情報を返す
+                                                         |
+                                                         |
+                                                authorizationヘッダーにアクセストークンをセット
+                                                apiのgraphqlにクエリを投げる     　　　　　-->   admin情報を検索
+                                                                                         　　　　　|
+                                                                                         　　　　　|
+                                                                              　　　　　<--   admin情報を返す
                                                 adminsストアのsignedInオブジェクトの
                                                 adminプロパティにadmin情報を設定
                                                 initializeプロパティをtrueにする    
 ホーム画面に遷移                            <--
+--------------------------------------------------------------------------------------------------------------------------
+authorizationヘッダーにアクセストークンをセット
+apiのgraphqlにクエリを投げる     　　　　　          -->   ヘッダーからアクセストークンを取り出す
+                                                                     |
+                                                                     |
+                                                      　　　　トークンの検証を行う
+                                                      　　　　　　　　　|
+                                                                     |
+ trueを受け取る                                   <--          検証が通るとtrueを返す
 
+ --------------------------------------------------------------------------------------------------------------------------
+authorizationヘッダーにアクセストークンをセット
+apiのgraphqlにクエリを投げる     　　　　　          -->   ヘッダーからアクセストークンを取り出す
+                                                                     |
+                                                                     |
+                                                      　　　　トークンの検証を行う
+                                                      　　　　　　　　　|
+                                                                     |
+ UnauthorizedExceptionを受け取る                  <--   検証が通らない場合、UnauthorizedExceptionを返す
+            |
+            |
+リフレッシュトークンをapiになげる                     -->  　　　リフレッシュトークンの検証
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　|
+                                                                    |
+                                                      idを元にadminを検索し、adminのreauthTokenを取得 
+                                                                    |
+                                                                    |
+                                                      リフレッシュトークンのreauthTokenと同じであるか検証
+                                                                    |
+                                                                    |
+                                                      トークンを新たに作成
+受け取ったトークンをヘッダーに設定する                <--
 ------------------------------------------------------------------------------------------------------------------
 ユーザーがログイン画面にアクセス   -->                 adminsストアを呼び出す
                                                          |
@@ -44,3 +78,146 @@
                                                          |
                                   redirectをキー、特定のURLのフルパスをバリューとするクエリパラメータの設定
 ログイン画面に遷移             <--
+
+-----------------------------------------------------------------------------------------------------
+【疎結合】
+【apiにリクエストを送った後、クッキーを設定する】
+src/lib/axios
+受け取ったレスポンスにトークンが設定されている場合、クッキーを設定する。
+
+【graphQLリクエストする前の処理】
+src/lib/graphql
+クッキーに認証情報がある場合、ヘッダーにアクセストークンを設定する
+
+【api側のsrc/www/authに対してputリクエストを行う】
+src/api/auth
+refreshTokenメソッド
+api側のsrc/www/authに対してputリクエストを行う
+
+【graphqlから認証エラー(UNAUTHENTICATED)が返された場合の処理】
+src/lib/graphql
+クッキーに認証情報がある場合、ヘッダーにリフレッシュトークンを設定する
+src/api/authのrefreshTokenを実行する
+(apiにリクエストを送った後、クッキーを設定する)
+クッキーからヘッダーにアクセストークンを設定する
+
+【src/auth AuthService】
+src/auth
+verifyJsonWebToken
+jwtの検証を行う
+
+comparePassword
+パスワードの検証を行う
+
+【リクエストのdocdist-context-adminプロパティを返す】
+src/www/graphql
+AuthContextデコレーター
+リクエストのdocdist-context-adminプロパティを返す
+
+【api側で認証情報を検証し、リクエストのdocdist-context-adminプロパティにAuthContextオブジェクトを設定する】
+src/wwww/graphql
+Authデコレーター 
+ヘッダーに認証情報がある場合、
+src/authからverifyJsonWebTokenを呼び出す
+ AuthContextオブジェクトを返し、( { id: number })
+ リクエストのdocdist-context-adminプロパティに設定する
+
+ 【ログイン情報からidを取り出し、idを条件にデータベースから、adminオブジェクトを取得する】
+ src/www/graphql/admins
+ authenticatedAdmin
+Authデコレーターを呼び出し、
+ログイン情報からidを取り出し、idを条件にデータベースから、adminオブジェクトを取得する
+
+【adminsストア】
+src/store
+adminsストア
+signedInオブジェクトを保有する
+signedInオブジェクトのプロパティは、initialized、admin
+fetchSignedInAdminメソッド
+apiのsrc/www/graphqlに authenticatedAdminクエリを投げる
+ログインしているadminの情報をadminプロパティに設定する
+
+【routesのミドルウェア】
+src/router
+adminsストアのinitializeがfalseの場合、
+adminsストアのfetchSignedInAdminメソッドを実行する
+
+【src/auth AuthService】
+パスワードの検証
+comparePassword
+認証用トークンの作成
+createJsonWebToken
+
+【www/auth/signinのsigninメソッド】
+www/auth/signin
+signin
+パスワードの検証を行う
+(src/auth AuthServiceのcomparePassword)
+トークンの作成
+(src/auth AuthServiceのcreateJsonWebToken)
+アクセストークンとリクエストをヘッダーにセットして返す
+
+【apiのauth/signinコントローラーにpostリクエストを送る】
+src/api/auth
+signinメソッド
+apiのauth/signinコントローラーにpostリクエストを送り、api側のwww/auth/signinのsigninメソッドを実行する
+------------------------------------------------------------------------------------------------
+src/api/auth
+src/api/graphql
+src/lib/axios
+src/lib/graphql
+
+src/auth
+src/www/auth
+src/www/graphql
+------------------------------------------------------------------------------------------------
+ログインボタンを押す
+↓
+src/api/auth
+signinメソッド
+(signin)
+apiに/auth/signinコントローラーにpostリクエストを送る
+↓
+(SigninController)
+signinメソッドを実行
+(api signin)
+emailを条件にデータベースからadminを取得
+↓
+src/auth AuthService
+comparePasswordメソッドを呼び出す
+パスワードの検証を行う
+↓
+src/auth AuthService
+createJsonWebTokenメソッドを呼び出す
+トークンの作成
+↓
+アクセストークンとリクエストをヘッダーにセットして返す
+(~api signin)
+(~SigninController)
+(~signin)
+↓
+src/lib/axios
+受け取ったレスポンスにトークンが設定されている場合、クッキーを設定する。
+↓
+(fetchSignedInAdmin)
+src/lib/graphql
+クッキーに認証情報がある場合、ヘッダーにアクセストークンを設定する
+↓
+apiのsrc/www/graphqlに authenticatedAdminクエリを投げる
+↓
+(AdminsResolver)
+(Authデコレーター)
+ヘッダーに認証情報があるかチェック
+src/auth
+verifyJsonWebToken
+jwtの検証を行い、AuthContextオブジェクトを取得( { id: number })
+AuthContextオブジェクトをリクエストのdocdist-context-adminプロパティに設定する
+(~Authデコレーター)
+(AuthContextデコレーター)
+リクエストのdocdist-context-adminプロパティを返す
+(~AuthContextデコレーター)
+AuthContextオブジェクトからidを取得し、idを条件にデータベースからadminを取得
+(~AdminsResolver)
+↓
+ログインしているadminの情報をadminプロパティに設定する
+( ~fetchSignedInAdmin)
