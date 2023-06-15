@@ -1,0 +1,4 @@
+ログから重複したIPアドレスを除いてカウントする
+cat access.log | awk '!arr[$1]++ {count++} END {print count}'
+特定の日付からデータを取得
+Hoge.where("DATE(created_at) = ?", "2023-06-11" )
