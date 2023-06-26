@@ -1,3 +1,4 @@
+// 問い合わせによる一時変数の置き換え
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -30,6 +31,11 @@ const invoicesObject = [
     ]
   }
 ]
+
+function playFor(aPerfomance) {
+  const parsedPlays = JSON.parse(plays)
+  return parsedPlays[aPerfomance.playID]
+}
 
 function amountFor(aPerfomance, play) {
   let result = 0
@@ -65,7 +71,7 @@ const statement = (invoice, plays) => {
   }).format
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID]
+    const play = playFor(perf)
     let thisAmount = amountFor(perf, play)
 
     volumeCredits += Math.max(perf.audience - 30, 0)

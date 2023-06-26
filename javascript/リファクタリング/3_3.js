@@ -1,3 +1,4 @@
+// 関数宣言の変更
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -31,9 +32,14 @@ const invoicesObject = [
   }
 ]
 
+function playFor(aPerfomance) {
+  const parsedPlays = JSON.parse(plays)
+  return parsedPlays[aPerfomance.playID]
+}
+
 function amountFor(aPerfomance, play) {
   let result = 0
-  switch(play.type) {
+  switch(playFor(aPerfomance).type) {
     case "tragedy":
       result = 40000
       if (aPerfomance.audience > 30) {
@@ -48,7 +54,7 @@ function amountFor(aPerfomance, play) {
       result += 300 * aPerfomance.audience
       break
     default:
-      throw new Error(`unknown type: ${play.type}`)
+      throw new Error(`unknown type: ${playFor(aPerfomance).type}`)
   } 
   return result
 }
@@ -65,12 +71,11 @@ const statement = (invoice, plays) => {
   }).format
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID]
-    let thisAmount = amountFor(perf, play)
+    let thisAmount = amountFor(perf, playFor(perf))
 
     volumeCredits += Math.max(perf.audience - 30, 0)
-    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5)
-    result += ` ${play.name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
+    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5)
+    result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
     totalAmount += thisAmount
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`

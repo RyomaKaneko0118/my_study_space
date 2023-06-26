@@ -1,3 +1,4 @@
+// volumeCreditsFor内の変数名の修正
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -31,9 +32,21 @@ const invoicesObject = [
   }
 ]
 
+function playFor(aPerfomance) {
+  const parsedPlays = JSON.parse(plays)
+  return parsedPlays[aPerfomance.playID]
+}
+
+function volumeCreditsFor(aPerfomance) {
+  let result = 0
+  result += Math.max(aPerfomance.audience - 30, 0)
+  if ("comedy" === playFor(aPerfomance).type) result += Math.floor(aPerfomance.audience / 5)
+  return result
+}
+
 function amountFor(aPerfomance, play) {
   let result = 0
-  switch(play.type) {
+  switch(playFor(aPerfomance).type) {
     case "tragedy":
       result = 40000
       if (aPerfomance.audience > 30) {
@@ -48,13 +61,13 @@ function amountFor(aPerfomance, play) {
       result += 300 * aPerfomance.audience
       break
     default:
-      throw new Error(`unknown type: ${play.type}`)
+      throw new Error(`unknown type: ${playFor(aPerfomance).type}`)
   } 
   return result
 }
 
 const invoices = JSON.stringify(invoicesObject)
-const statement = (invoice, plays) => {
+const statement = (invoice) => {
   let totalAmount = 0
   let volumeCredits = 0
   let result = `Statement for ${invoice.customer}\n`
@@ -65,12 +78,11 @@ const statement = (invoice, plays) => {
   }).format
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID]
-    let thisAmount = amountFor(perf, play)
+    let thisAmount = amountFor(perf)
 
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5)
-    result += ` ${play.name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
+    volumeCredits += volumeCreditsFor(perf)
+
+    result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
     totalAmount += thisAmount
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`
@@ -79,3 +91,8 @@ const statement = (invoice, plays) => {
 }
 
 console.log(statement(JSON.parse(invoices)[0], JSON.parse(plays)))
+
+// リファクタリングによって、playを取得するコードはループにつき1回取得していたが、3回になった。
+// →　リファクタリングとパフォーマンスの相互作用
+// しかし、パフォーマンスに大きな影響を与えないし、コードが整然としていた方がチューニングが容易になる
+// ローカル変数を削除することのメリットは、扱うべきローカルスコープが減り、メソッドの抽出が楽になる
