@@ -21,3 +21,11 @@ ss -atu
 sudo adduser iicp
 sudo visudo
 Defaults        rootpw
+
+------------------------------------------------------------------
+【ユーティリティ】
+ユーザー一覧の表示
+cat /etc/passwd
+
+グループ一覧の表示
+cat /etc/group
