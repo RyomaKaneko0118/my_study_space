@@ -1,4 +1,10 @@
-// 関数宣言の変更のあと、パラメータの削除
+//play変数の削除 
+// 問い合わせによる一時変数の置き換え
+// playForメソッドの作成
+// play変数のインライン化
+// 関数宣言の変更
+//amountFor関数の修正
+// playパラメータの削除
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -37,7 +43,7 @@ function playFor(aPerfomance) {
   return parsedPlays[aPerfomance.playID]
 }
 
-function amountFor(aPerfomance, play) {
+function amountFor(aPerfomance) {
   let result = 0
   switch(playFor(aPerfomance).type) {
     case "tragedy":

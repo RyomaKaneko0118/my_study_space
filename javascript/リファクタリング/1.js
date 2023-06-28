@@ -32,6 +32,7 @@ const invoicesObject = [
 ]
 
 const invoices = JSON.stringify(invoicesObject)
+
 const statement = (invoice, plays) => {
   let totalAmount = 0
   let volumeCredits = 0
@@ -41,10 +42,6 @@ const statement = (invoice, plays) => {
     style: "currency", currency: "USD",
     minimumFractionDigits: 2
   }).format
-
-  // // const price = 99.99
-  // const formattedPrice = format(price)
-  // console.log(formattedPrice)
 
   for (let perf of invoice.performances) {
     const play = plays[perf.playID]

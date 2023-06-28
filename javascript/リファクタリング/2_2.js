@@ -1,3 +1,8 @@
+// 関数の抽出
+// amountForメソッド
+// 抽出した関数をより分かりやすくする
+// 結果を返す変数名をresult修正
+// 引数をaPerformanceに修正
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"

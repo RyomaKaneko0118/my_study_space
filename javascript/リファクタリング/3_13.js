@@ -1,4 +1,4 @@
-// volumeCreditsFor内の変数名の修正
+//totalAmount変数の削除
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -66,33 +66,42 @@ function amountFor(aPerfomance, play) {
   return result
 }
 
+function usd(aNumber) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD",
+    minimumFractionDigits: 2
+  }).format(aNumber / 100)
+}
+
+function totalVolumeCredits(invoice) {
+  let result = 0
+  for (let perf of invoice.performances) {
+    result += volumeCreditsFor(perf)
+  }
+  return result
+}
 const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
   let totalAmount = 0
-  let volumeCredits = 0
   let result = `Statement for ${invoice.customer}\n`
 
-  const format = new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD",
-    minimumFractionDigits: 2
-  }).format
-
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf)
-
-    volumeCredits += volumeCreditsFor(perf)
-
-    result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
-    totalAmount += thisAmount
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats) \n`
+    totalAmount += amountFor(perf)
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`
-  result += `You earned ${volumeCredits} credits \n`
+
+
+  result += `Amount owed is ${usd(totalAmount)}\n`
+  result += `You earned ${totalVolumeCredits(invoice)} credits \n`
   return result
 }
 
 console.log(statement(JSON.parse(invoices)[0], JSON.parse(plays)))
 
-// リファクタリングによって、playを取得するコードはループにつき1回取得していたが、3回になった。
-// →　リファクタリングとパフォーマンスの相互作用
-// しかし、パフォーマンスに大きな影響を与えないし、コードが整然としていた方がチューニングが容易になる
-// ローカル変数を削除することのメリットは、扱うべきローカルスコープが減り、メソッドの抽出が楽になる
+// よく整備されたコードの方が後から整備しやすい
+// パフォーマンスのチューニングはリファクタリングの後からでもよい
+// ループの分離
+// ステートメントのスライド
+// 関数の抽出
+// 変数のインライン化
+// 問題が複雑になり始めたときは作業を細かく分解していく

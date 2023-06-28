@@ -1,3 +1,5 @@
+// 関数の抽出
+// amountForメソッド
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
