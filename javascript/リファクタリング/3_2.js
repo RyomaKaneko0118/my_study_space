@@ -1,4 +1,7 @@
-// 変数のインライン化
+//play変数の削除 
+// 問い合わせによる一時変数の置き換え
+// playForメソッドの作成
+// play変数のインライン化
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"

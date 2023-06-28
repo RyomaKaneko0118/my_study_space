@@ -1,4 +1,8 @@
 // format変数の削除
+// formatメソッドの作成
+// 関数宣言の変更
+// formateメソッドをusd
+// formatメソッドを修正
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -37,13 +41,6 @@ function playFor(aPerfomance) {
   return parsedPlays[aPerfomance.playID]
 }
 
-function format(aNumber) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD",
-    minimumFractionDigits: 2
-  }).format(aNumber)
-}
-
 function volumeCreditsFor(aPerfomance) {
   let result = 0
   result += Math.max(aPerfomance.audience - 30, 0)
@@ -73,6 +70,13 @@ function amountFor(aPerfomance, play) {
   return result
 }
 
+function usd(aNumber) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD",
+    minimumFractionDigits: 2
+  }).format(aNumber / 100)
+}
+
 const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
   let totalAmount = 0
@@ -80,14 +84,13 @@ const statement = (invoice) => {
   let result = `Statement for ${invoice.customer}\n`
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf)
 
     volumeCredits += volumeCreditsFor(perf)
 
-    result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
-    totalAmount += thisAmount
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats) \n`
+    totalAmount += amountFor(perf)
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`
+  result += `Amount owed is ${usd(totalAmount)}\n`
   result += `You earned ${volumeCredits} credits \n`
   return result
 }

@@ -1,6 +1,8 @@
-//volumeCredits変数の削除 
-// ループの分離
-// ステートメントのスライド
+// 計算部分における2つのローカル変数の削除
+// volumeCreditsForメソッドの作成
+// volumeCreditsFor内の変数名を分かりやすい名前に修正
+// 引数名の修正
+// 結果を返す変数の修正
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -46,7 +48,7 @@ function volumeCreditsFor(aPerfomance) {
   return result
 }
 
-function amountFor(aPerfomance, play) {
+function amountFor(aPerfomance) {
   let result = 0
   switch(playFor(aPerfomance).type) {
     case "tragedy":
@@ -68,28 +70,25 @@ function amountFor(aPerfomance, play) {
   return result
 }
 
-function usd(aNumber) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD",
-    minimumFractionDigits: 2
-  }).format(aNumber / 100)
-}
-
 const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
   let totalAmount = 0
+  let volumeCredits = 0
   let result = `Statement for ${invoice.customer}\n`
 
+  const format = new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD",
+    minimumFractionDigits: 2
+  }).format
+
   for (let perf of invoice.performances) {
-    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats) \n`
+
+    volumeCredits += volumeCreditsFor(perf)
+
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats) \n`
     totalAmount += amountFor(perf)
   }
-
-  let volumeCredits = 0
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf)
-  }
-  result += `Amount owed is ${usd(totalAmount)}\n`
+  result += `Amount owed is ${format(totalAmount / 100)}\n`
   result += `You earned ${volumeCredits} credits \n`
   return result
 }

@@ -1,4 +1,9 @@
+//play変数の削除 
+// 問い合わせによる一時変数の置き換え
+// playForメソッドの作成
+// play変数のインライン化
 // 関数宣言の変更
+//amountFor関数の修正
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"

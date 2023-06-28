@@ -1,11 +1,5 @@
-//play変数の削除 
-// 問い合わせによる一時変数の置き換え
-// playForメソッドの作成
-// play変数のインライン化
-// 関数宣言の変更
-//amountFor関数の修正
-// playパラメータの削除
-// 変数のインライン化を適用しthisAmountを削除
+// format変数の削除
+// formatメソッドの作成
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -44,6 +38,20 @@ function playFor(aPerfomance) {
   return parsedPlays[aPerfomance.playID]
 }
 
+function format(aNumber) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD",
+    minimumFractionDigits: 2
+  }).format(aNumber)
+}
+
+function volumeCreditsFor(aPerfomance) {
+  let result = 0
+  result += Math.max(aPerfomance.audience - 30, 0)
+  if ("comedy" === playFor(aPerfomance).type) result += Math.floor(aPerfomance.audience / 5)
+  return result
+}
+
 function amountFor(aPerfomance) {
   let result = 0
   switch(playFor(aPerfomance).type) {
@@ -72,15 +80,10 @@ const statement = (invoice) => {
   let volumeCredits = 0
   let result = `Statement for ${invoice.customer}\n`
 
-  const format = new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD",
-    minimumFractionDigits: 2
-  }).format
-
   for (let perf of invoice.performances) {
 
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5)
+    volumeCredits += volumeCreditsFor(perf)
+
     result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats) \n`
     totalAmount += amountFor(perf)
   }
