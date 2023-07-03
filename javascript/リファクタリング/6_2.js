@@ -2,6 +2,7 @@
 // ループの分離
 // volumeCreditsを集計しているループを分離し、新たなループを作成
 // ステートメントのスライド
+// 変数のインライン化
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -86,12 +87,16 @@ const statement = (invoice) => {
     totalAmount += amountFor(perf)
   }
 
-  let volumeCredits = 0
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf)
+  const totalVolumeCredits = () => {
+    let volumeCredits = 0
+    for (let perf of invoice.performances) {
+      volumeCredits += volumeCreditsFor(perf)
+    }
+    return volumeCredits
   }
+
   result += `Amount owed is ${usd(totalAmount)}\n`
-  result += `You earned ${volumeCredits} credits \n`
+  result += `You earned ${totalVolumeCredits()} credits \n`
   return result
 }
 

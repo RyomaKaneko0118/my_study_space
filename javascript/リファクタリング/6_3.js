@@ -86,10 +86,15 @@ const statement = (invoice) => {
     totalAmount += amountFor(perf)
   }
 
-  let volumeCredits = 0
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf)
+  const totalVolumeCredits = () => {
+    let result = 0
+    for (let perf of invoice.performances) {
+      result += volumeCreditsFor(perf)
+    }
+    return result
   }
+
+  let volumeCredits = totalVolumeCredits()
   result += `Amount owed is ${usd(totalAmount)}\n`
   result += `You earned ${volumeCredits} credits \n`
   return result

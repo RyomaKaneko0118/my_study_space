@@ -78,18 +78,30 @@ function usd(aNumber) {
 
 const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
-  let totalAmount = 0
+
+  const tmpTotalAmount = () => {
+    let result = 0
+    for (let perf of invoice.performances) {
+      result += amountFor(perf)
+    }
+    return result
+  }
+  let totalAmount = tmpTotalAmount()
   let result = `Statement for ${invoice.customer}\n`
 
   for (let perf of invoice.performances) {
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats) \n`
-    totalAmount += amountFor(perf)
   }
 
-  let volumeCredits = 0
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf)
+  const totalVolumeCredits = () => {
+    let result = 0
+    for (let perf of invoice.performances) {
+      result += volumeCreditsFor(perf)
+    }
+    return result
   }
+
+  let volumeCredits = totalVolumeCredits()
   result += `Amount owed is ${usd(totalAmount)}\n`
   result += `You earned ${volumeCredits} credits \n`
   return result
