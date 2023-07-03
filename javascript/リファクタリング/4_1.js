@@ -45,7 +45,7 @@ function volumeCreditsFor(perf) {
   return volumeCredits
 }
 
-function amountFor(aPerfomance, play) {
+function amountFor(aPerfomance) {
   let result = 0
   switch(playFor(aPerfomance).type) {
     case "tragedy":
