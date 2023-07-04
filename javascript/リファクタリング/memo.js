@@ -1,3 +1,8 @@
+//volumeCredits変数の削除 
+// ループの分離
+// volumeCreditsを集計しているループを分離し、新たなループを作成
+// ステートメントのスライド
+// 変数のインライン化
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -33,64 +38,93 @@ const invoicesObject = [
 
 const invoices = JSON.stringify(invoicesObject)
 
-const playFor = (aPerfomance) => {
-  const parsedPlays = JSON.parse(plays)
-  return parsedPlays[aPerfomance.playID]
-}
-
-const amountFor = (aPerformance) => {
-  let result = 0
-  switch(playFor(aPerformance).type) {
-    case "tragedy":
-      result = 40000
-      if (aPerformance.audience > 30) {
-        result += 1000 * (aPerformance.audience - 30)
-      }
-      break
-    case "comedy":
-      result = 30000
-      if (aPerformance.audience > 20) {
-        result += 10000 + 500 * (aPerformance.audience - 20)
-      }
-      result += 300 * aPerformance.audience
-      break
-    default:
-      throw new Error(`unknown type: ${playFor(aPerformance).type}`)
-  }
-  return result
-}
-
-const volumeCreditsFor = (aPerformance) => {
-  let volumeCredits = 0
-  volumeCredits += Math.max(aPerformance.audience - 30, 0)
-  if ("comedy" === playFor(aPerformance).type) volumeCredits += Math.floor(aPerformance.audience / 5)
-  return volumeCredits
-}
-
-const usd = (aNumber) => {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD",
-    minimumFractionDigits: 2
-  }).format(aNumber / 100)
-}
-
 const statement = (invoice) => {
+  const statementData = {}
+  statementData.customer = invoice.customer
+  statementData.performances = invoice.performances.map(enrichPerformance)
 
-  let result = `Statement for ${invoice.customer}\n`
+  return renderPlainText(statementData)
 
-  let totalAmount = 0
-  for (let perf of invoice.performances) {
-    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats) \n`
-    totalAmount += amountFor(perf)
+  function enrichPerformance(aPerfomance) {
+    const result = Object.assign({}, aPerfomance)
+    result.play = playFor(result)
+    return result
+  }
+}
+const renderPlainText = (data) => {
+  let result = `Statement for ${data.customer}\n`
+  for (let perf of data.performances) {
+    result += ` ${perf.play.name}: ${usd(amountFor(perf))} (${perf.audience} seats) \n`
   }
 
-  let volumeCredits = 0
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf)
-  }
-  result += `Amount owed is ${usd(totalAmount)}\n`
+  let volumeCredits = totalVolumeCredits()
+  result += `Amount owed is ${usd(totalAmount())}\n`
   result += `You earned ${volumeCredits} credits \n`
+
   return result
+
+  function playFor(aPerfomance) {
+    const parsedPlays = JSON.parse(plays)
+    return parsedPlays[aPerfomance.playID]
+  }
+  
+  function volumeCreditsFor(aPerfomance) {
+    let result = 0
+    result += Math.max(aPerfomance.audience - 30, 0)
+    if ("comedy" === aPerfomance.play.type) result += Math.floor(aPerfomance.audience / 5)
+    return result
+  }
+  
+  function amountFor(aPerfomance) {
+    let result = 0
+    switch(aPerfomance.play.type) {
+      case "tragedy":
+        result = 40000
+        if (aPerfomance.audience > 30) {
+          result += 1000 * (aPerfomance.audience - 30)
+        }
+        break
+      case "comedy":
+        result = 30000
+        if (aPerfomance.audience > 20) {
+          result += 10000 + 500 * (aPerfomance.audience - 20)
+        }
+        result += 300 * aPerfomance.audience
+        break
+      default:
+        throw new Error(`unknown type: ${aPerfomance.play.type}`)
+    } 
+    return result
+  }
+  
+  function usd(aNumber) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency", currency: "USD",
+      minimumFractionDigits: 2
+    }).format(aNumber / 100)
+  }
+
+  function totalAmount() {
+    let result = 0
+    for (let perf of data.performances) {
+      result += amountFor(perf)
+    }
+    return result
+  }
+
+  function totalVolumeCredits() {
+    let result = 0
+    for (let perf of data.performances) {
+      result += volumeCreditsFor(perf)
+    }
+    return result
+  }
+
 }
 
 console.log(statement(JSON.parse(invoices)[0], JSON.parse(plays)))
+
+// リファクタリングによって、playを取得するコードはループにつき1回取得していたが、3回になった。
+// →　リファクタリングとパフォーマンスの相互作用
+// しかし、パフォーマンスに大きな影響を与えないし、コードが整然としていた方がチューニングが容易になる
+// ローカル変数を削除することのメリットは、扱うべきローカルスコープが減り、メソッドの抽出が楽になる
