@@ -40,10 +40,8 @@ const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
   const statementData = {}
   statementData.customer = invoice.customer
-  statementData.performances = invoice.performances
-  console.log(statementData.performances)
   statementData.performances = invoice.performances.map(enrichPerformance)
-  console.log(statementData.performances)
+
   return renderPlainText(statementData)
 
   function enrichPerformance(aPerformance) {
