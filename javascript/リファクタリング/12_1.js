@@ -1,5 +1,6 @@
-//PerfomanceCalculatorの作成
-// 関数をPerfomanceCalculatorに移動
+// PerformanceCalculatorをポリモーフィックに
+// サブクラスによるタイプコードの置き換え
+// ファクトリ関数によりコンストラクタの置き換え
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -33,7 +34,7 @@ const invoicesObject = [
   }
 ]
 
-class PerfomanceCalculator {
+class PerformanceCalculator {
   constructor(aPerfomance, aPlay) {
     this.performance = aPerfomance
     this.play = aPlay
@@ -60,7 +61,26 @@ class PerfomanceCalculator {
     } 
     return result
   }
+
+  get volumeCredits() {
+    let result = 0
+    result += Math.max(this.performance.audience - 30, 0)
+    if ("comedy" === this.play.type) result += Math.floor(this.performance.audience / 5)
+    return result
+  }
 }
+
+const createPerformanceCalculator = (aPerfomance, aPlay) => {
+  return new PerformanceCalculator(aPerfomance, aPlay) 
+}
+
+class TragedyCalculator extends PerformanceCalculator {
+
+}
+
+class ComedyCalculator extends PerformanceCalculator {
+
+} 
 
 const invoices = JSON.stringify(invoicesObject)
 
@@ -125,11 +145,11 @@ function createStatementData(invoice) {
   return statementData
 
   function enrichPerformance(aPerformance) {
-    const calculator = new PerfomanceCalculator(aPerformance, playFor(aPerformance))
+    const calculator = createPerformanceCalculator(aPerformance, playFor(aPerformance))
     const result = Object.assign({}, aPerformance)
     result.play = calculator.play
-    result.amount = amountFor(result)
-    result.volumeCredits = volumeCreditsFor(result) 
+    result.amount = calculator.amount
+    result.volumeCredits = calculator.volumeCredits 
     return result
   }
   
@@ -139,7 +159,7 @@ function createStatementData(invoice) {
   }
 
   function amountFor(aPerfomance) {
-    return new PerfomanceCalculator(aPerfomance, playFor(aPerfomance)).amount 
+    return new PerformanceCalculator(aPerfomance, playFor(aPerfomance)).amount 
   }
   
   function volumeCreditsFor(aPerfomance) {
