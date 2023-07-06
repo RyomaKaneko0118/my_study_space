@@ -1,6 +1,7 @@
 // PerformanceCalculatorをポリモーフィックに
 // サブクラスによるタイプコードの置き換え
 // ファクトリ関数によりコンストラクタの置き換え
+// ポリモーフィズムによる条件記述の置き換え
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -35,8 +36,8 @@ const invoicesObject = [
 ]
 
 class PerformanceCalculator {
-  constructor(aPerfomance, aPlay) {
-    this.performance = aPerfomance
+  constructor(aPerformance, aPlay) {
+    this.performance = aPerformance
     this.play = aPlay
   }
 
@@ -70,10 +71,10 @@ class PerformanceCalculator {
   }
 }
 
-const createPerformanceCalculator = (aPerfomance, aPlay) => {
+const createPerformanceCalculator = (aPerformance, aPlay) => {
   switch(aPlay.type) {
-    case "tragedy": return new TragedyCalculator(aPerfomance, aPlay)
-    case "comedy": return new ComedyCalculator(aPerfomance, aPlay)
+    case "tragedy": return new TragedyCalculator(aPerformance, aPlay)
+    case "comedy": return new ComedyCalculator(aPerformance, aPlay)
     default: 
       throw new Error(`未知の演劇の種類: ${aPlay.type}`)
   }
@@ -113,6 +114,39 @@ const renderPlainText = (data) => {
 
 console.log(statement(JSON.parse(invoices)[0], JSON.parse(plays)))
 
+// ファイルの分割
+// export default createStatementData = (invoice) => {
+function createStatementData(invoice) {
+  const statementData = {}
+  statementData.customer = invoice.customer
+  statementData.performances = invoice.performances.map(enrichPerformance)
+  statementData.totalAmount = totalAmount(statementData) 
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
+  return statementData
+
+  function enrichPerformance(aPerformance) {
+    const calculator = createPerformanceCalculator(aPerformance, playFor(aPerformance))
+    const result = Object.assign({}, aPerformance)
+    result.play = calculator.play
+    result.amount = calculator.amount
+    result.volumeCredits = calculator.volumeCredits 
+    return result
+  }
+  
+  function playFor(aPerfomance) {
+    const parsedPlays = JSON.parse(plays)
+    return parsedPlays[aPerfomance.playID]
+  }
+  
+  function totalAmount(data) {
+    return data.performances.reduce((total, p) => total + p.amount, 0)
+  }
+  
+  function totalVolumeCredits(data) {
+    return data.performances.reduce((total, p) => total + p.volumeCredits, 0)
+  }
+}
+
 const htmlStatement = (invoice) => {
   return renderHtml(createStatementData(invoice))
 }
@@ -139,47 +173,3 @@ const renderHtml = (data) => {
   }
 }
 console.log(htmlStatement(JSON.parse(invoices)[0], JSON.parse(plays)))
-// ファイルの分割
-// export default createStatementData = (invoice) => {
-function createStatementData(invoice) {
-  const statementData = {}
-  statementData.customer = invoice.customer
-  statementData.performances = invoice.performances.map(enrichPerformance)
-  statementData.totalAmount = totalAmount(statementData) 
-  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
-  return statementData
-
-  function enrichPerformance(aPerformance) {
-    const calculator = createPerformanceCalculator(aPerformance, playFor(aPerformance))
-    const result = Object.assign({}, aPerformance)
-    result.play = calculator.play
-    result.amount = calculator.amount
-    result.volumeCredits = calculator.volumeCredits 
-    return result
-  }
-  
-  function playFor(aPerfomance) {
-    const parsedPlays = JSON.parse(plays)
-    return parsedPlays[aPerfomance.playID]
-  }
-
-  function amountFor(aPerfomance) {
-    return new PerformanceCalculator(aPerfomance, playFor(aPerfomance)).amount 
-  }
-  
-  function volumeCreditsFor(aPerfomance) {
-    let result = 0
-    result += Math.max(aPerfomance.audience - 30, 0)
-    if ("comedy" === aPerfomance.play.type) result += Math.floor(aPerfomance.audience / 5)
-    return result
-  }
-  
-  function totalAmount(data) {
-    return data.performances.reduce((total, p) => total + p.amount, 0)
-  }
-  
-  function totalVolumeCredits(data) {
-    return data.performances.reduce((total, p) => total + p.volumeCredits, 0)
-  }
-}
-
