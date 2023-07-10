@@ -19,7 +19,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
@@ -74,7 +74,7 @@ const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
   let totalAmount = 0
   let volumeCredits = 0
-  let result = `Statement for ${invoice.customer}\n`
+  let result = `請求書 ${invoice.customer}\n`
 
   const format = new Intl.NumberFormat("en-US", {
     style: "currency", currency: "USD",
@@ -88,8 +88,8 @@ const statement = (invoice) => {
     result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats) \n`
     totalAmount += amountFor(perf)
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`
-  result += `You earned ${volumeCredits} credits \n`
+  result += `支払額 ${format(totalAmount / 100)}\n`
+  result += `次回使用ポイント ${volumeCredits}\n`
   return result
 }
 
