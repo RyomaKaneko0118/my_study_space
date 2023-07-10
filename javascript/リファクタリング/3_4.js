@@ -21,7 +21,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
@@ -38,29 +38,29 @@ const invoicesObject = [
   }
 ]
 
-function playFor(aPerfomance) {
+function playFor(aPerformance) {
   const parsedPlays = JSON.parse(plays)
-  return parsedPlays[aPerfomance.playID]
+  return parsedPlays[aPerformance.playID]
 }
 
-function amountFor(aPerfomance) {
+function amountFor(aPerformance) {
   let result = 0
-  switch(playFor(aPerfomance).type) {
+  switch(playFor(aPerformance).type) {
     case "tragedy":
       result = 40000
-      if (aPerfomance.audience > 30) {
-        result += 1000 * (aPerfomance.audience - 30)
+      if (aPerformance.audience > 30) {
+        result += 1000 * (aPerformance.audience - 30)
       }
       break
     case "comedy":
       result = 30000
-      if (aPerfomance.audience > 20) {
-        result += 10000 + 500 * (aPerfomance.audience - 20)
+      if (aPerformance.audience > 20) {
+        result += 10000 + 500 * (aPerformance.audience - 20)
       }
-      result += 300 * aPerfomance.audience
+      result += 300 * aPerformance.audience
       break
     default:
-      throw new Error(`unknown type: ${playFor(aPerfomance).type}`)
+      throw new Error(`unknown type: ${playFor(aPerformance).type}`)
   } 
   return result
 }
@@ -69,7 +69,7 @@ const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice) => {
   let totalAmount = 0
   let volumeCredits = 0
-  let result = `Statement for ${invoice.customer}\n`
+  let result = `請求書 ${invoice.customer}\n`
 
   const format = new Intl.NumberFormat("en-US", {
     style: "currency", currency: "USD",
@@ -84,8 +84,8 @@ const statement = (invoice) => {
     result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
     totalAmount += thisAmount
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`
-  result += `You earned ${volumeCredits} credits \n`
+  result += `支払額 ${format(totalAmount / 100)}\n`
+  result += `次回使用ポイント ${volumeCredits}\n`
   return result
 }
 

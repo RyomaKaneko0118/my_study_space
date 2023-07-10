@@ -36,21 +36,21 @@ const invoicesObject = [
   }
 ]
 
-function amountFor(aPerfomance, play) {
+function amountFor(aPerformance, play) {
   let result = 0
   switch(play.type) {
     case "tragedy":
       result = 40000
-      if (aPerfomance.audience > 30) {
-        result += 1000 * (aPerfomance.audience - 30)
+      if (aPerformance.audience > 30) {
+        result += 1000 * (aPerformance.audience - 30)
       }
       break
     case "comedy":
       result = 30000
-      if (aPerfomance.audience > 20) {
-        result += 10000 + 500 * (aPerfomance.audience - 20)
+      if (aPerformance.audience > 20) {
+        result += 10000 + 500 * (aPerformance.audience - 20)
       }
-      result += 300 * aPerfomance.audience
+      result += 300 * aPerformance.audience
       break
     default:
       throw new Error(`unknown type: ${play.type}`)
@@ -62,7 +62,7 @@ const invoices = JSON.stringify(invoicesObject)
 const statement = (invoice, plays) => {
   let totalAmount = 0
   let volumeCredits = 0
-  let result = `Statement for ${invoice.customer}\n`
+  let result = `請求書 ${invoice.customer}\n`
 
   const format = new Intl.NumberFormat("en-US", {
     style: "currency", currency: "USD",
@@ -78,8 +78,8 @@ const statement = (invoice, plays) => {
     result += ` ${play.name}: ${format(thisAmount / 100)} (${perf.audience} seats) \n`
     totalAmount += thisAmount
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`
-  result += `You earned ${volumeCredits} credits \n`
+  result += `支払額 ${format(totalAmount / 100)}\n`
+  result += `次回使用ポイント ${volumeCredits}\n`
   return result
 }
 
