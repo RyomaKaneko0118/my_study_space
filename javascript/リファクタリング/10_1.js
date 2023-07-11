@@ -15,7 +15,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
@@ -39,13 +39,13 @@ const statement = (invoice) => {
 }
 
 const renderPlainText = (data) => {
-  let result = `Statement for ${data.customer}\n`
+  let result = `請求書 ${data.customer}\n`
   for (let perf of data.performances) {
     result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience} seats) \n`
   }
 
-  result += `Amount owed is ${usd(data.totalAmount)}\n`
-  result += `You earned ${data.totalVolumeCredits} credits \n`
+  result += `支払額 ${usd(data.totalAmount)}\n`
+  result += `次回使用ポイント ${data.totalVolumeCredits}\n`
   return result
 
   function usd(aNumber) {
@@ -76,37 +76,37 @@ function createStatementData(invoice) {
     return result
   }
 
-  function amountFor(aPerfomance) {
+  function amountFor(aPerformance) {
     let result = 0
-    switch(aPerfomance.play.type) {
+    switch(aPerformance.play.type) {
       case "tragedy":
         result = 40000
-        if (aPerfomance.audience > 30) {
-          result += 1000 * (aPerfomance.audience - 30)
+        if (aPerformance.audience > 30) {
+          result += 1000 * (aPerformance.audience - 30)
         }
         break
       case "comedy":
         result = 30000
-        if (aPerfomance.audience > 20) {
-          result += 10000 + 500 * (aPerfomance.audience - 20)
+        if (aPerformance.audience > 20) {
+          result += 10000 + 500 * (aPerformance.audience - 20)
         }
-        result += 300 * aPerfomance.audience
+        result += 300 * aPerformance.audience
         break
       default:
-        throw new Error(`unknown type: ${aPerfomance.play.type}`)
+        throw new Error(`unknown type: ${aPerformance.play.type}`)
     } 
     return result
   }
   
-  function playFor(aPerfomance) {
+  function playFor(aPerformance) {
     const parsedPlays = JSON.parse(plays)
-    return parsedPlays[aPerfomance.playID]
+    return parsedPlays[aPerformance.playID]
   }
   
-  function volumeCreditsFor(aPerfomance) {
+  function volumeCreditsFor(aPerformance) {
     let result = 0
-    result += Math.max(aPerfomance.audience - 30, 0)
-    if ("comedy" === aPerfomance.play.type) result += Math.floor(aPerfomance.audience / 5)
+    result += Math.max(aPerformance.audience - 30, 0)
+    if ("comedy" === aPerformance.play.type) result += Math.floor(aPerformance.audience / 5)
     return result
   }
   

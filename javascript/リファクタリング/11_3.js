@@ -1,5 +1,5 @@
-//PerfomanceCalculatorの作成
-// 関数をPerfomanceCalculatorに移動
+//PerformanceCalculatorの作成
+// 関数をPerformanceCalculatorに移動
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -16,7 +16,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
@@ -33,9 +33,9 @@ const invoicesObject = [
   }
 ]
 
-class PerfomanceCalculator {
-  constructor(aPerfomance, aPlay) {
-    this.performance = aPerfomance
+class PerformanceCalculator {
+  constructor(aPerformance, aPlay) {
+    this.performance = aPerformance
     this.play = aPlay
   }
 
@@ -76,13 +76,13 @@ const statement = (invoice) => {
 }
 
 const renderPlainText = (data) => {
-  let result = `Statement for ${data.customer}\n`
+  let result = `請求書 ${data.customer}\n`
   for (let perf of data.performances) {
     result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience} seats) \n`
   }
 
-  result += `Amount owed is ${usd(data.totalAmount)}\n`
-  result += `You earned ${data.totalVolumeCredits} credits \n`
+  result += `支払額 ${usd(data.totalAmount)}\n`
+  result += `次回使用ポイント ${data.totalVolumeCredits}\n`
   return result
 
   function usd(aNumber) {
@@ -94,6 +94,39 @@ const renderPlainText = (data) => {
 }
 
 console.log(statement(JSON.parse(invoices)[0], JSON.parse(plays)))
+
+// ファイルの分割
+// export default createStatementData = (invoice) => {
+function createStatementData(invoice) {
+  const statementData = {}
+  statementData.customer = invoice.customer
+  statementData.performances = invoice.performances.map(enrichPerformance)
+  statementData.totalAmount = totalAmount(statementData) 
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
+  return statementData
+
+  function enrichPerformance(aPerformance) {
+    const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance))
+    const result = Object.assign({}, aPerformance)
+    result.play = calculator.play
+    result.amount = calculator.amount
+    result.volumeCredits = calculator.volumeCredits 
+    return result
+  }
+  
+  function playFor(aPerformance) {
+    const parsedPlays = JSON.parse(plays)
+    return parsedPlays[aPerformance.playID]
+  } 
+  
+  function totalAmount(data) {
+    return data.performances.reduce((total, p) => total + p.amount, 0)
+  }
+  
+  function totalVolumeCredits(data) {
+    return data.performances.reduce((total, p) => total + p.volumeCredits, 0)
+  }
+}
 
 const htmlStatement = (invoice) => {
   return renderHtml(createStatementData(invoice))
@@ -121,47 +154,3 @@ const renderHtml = (data) => {
   }
 }
 console.log(htmlStatement(JSON.parse(invoices)[0], JSON.parse(plays)))
-// ファイルの分割
-// export default createStatementData = (invoice) => {
-function createStatementData(invoice) {
-  const statementData = {}
-  statementData.customer = invoice.customer
-  statementData.performances = invoice.performances.map(enrichPerformance)
-  statementData.totalAmount = totalAmount(statementData) 
-  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
-  return statementData
-
-  function enrichPerformance(aPerformance) {
-    const calculator = new PerfomanceCalculator(aPerformance, playFor(aPerformance))
-    const result = Object.assign({}, aPerformance)
-    result.play = calculator.play
-    result.amount = calculator.amount
-    result.volumeCredits = calculator.volumeCredits 
-    return result
-  }
-  
-  function playFor(aPerfomance) {
-    const parsedPlays = JSON.parse(plays)
-    return parsedPlays[aPerfomance.playID]
-  }
-
-  function amountFor(aPerfomance) {
-    return new PerfomanceCalculator(aPerfomance, playFor(aPerfomance)).amount 
-  }
-  
-  function volumeCreditsFor(aPerfomance) {
-    let result = 0
-    result += Math.max(aPerfomance.audience - 30, 0)
-    if ("comedy" === aPerfomance.play.type) result += Math.floor(aPerfomance.audience / 5)
-    return result
-  }
-  
-  function totalAmount(data) {
-    return data.performances.reduce((total, p) => total + p.amount, 0)
-  }
-  
-  function totalVolumeCredits(data) {
-    return data.performances.reduce((total, p) => total + p.volumeCredits, 0)
-  }
-}
-
