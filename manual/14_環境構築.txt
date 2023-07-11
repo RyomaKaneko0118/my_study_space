@@ -4,12 +4,13 @@ sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
 sudo vim /etc/fstab
+<swapfileパス> none swap sw 0 0
 初期構築
 sudo apt update
 sudo apt upgrade
 sudo apt install -y build-essential
 sudo apt install -y make patch git curl
-sudo apt install -y zlib1g-dev libreadlIne-dev libyaml-dev
+sudo apt install -y zlib1g-dev libreadline-dev libyaml-dev
 
 mysqlのインストール
 sudo apt install -y mysql-server
@@ -33,11 +34,13 @@ sudo apt install -y nodejs
 node -v
 
 yarnのインストール
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+------------------------------------
 sudo apt --purge remove cmdtest
 sudo apt autoremove
 (sudo wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -)
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+---------------------------------
 sudo apt install -y yarn
 (sudo apt install cmdtest)
 
@@ -76,9 +79,10 @@ bundler
 RAILS_ENV=production bundle install --path vendor/bundle
 mater.keyの転送
 .envの転送
-RAILS_ENV=production rails db:create
+RAILS_ENV=production bundle exec rails db:create
 (sudo apt install ruby-railties)
-RAILS_ENV=production rails assets:precompile
+RAILS_ENV=production bundle exec rails assets:precompile
+
 ----------------------------------------------------------------------
 SELECT user, host FROM mysql.user;
 CREATE USER 'iicpdb'@'localhost' IDENTIFIED BY 'gjik2pxcL19j';
@@ -92,11 +96,17 @@ systemctl restart postgresql
 ---------------------------------------------------------------------------------------
 
 util関連
+スワップファイルの確認
+free
 exec $SHELL
+ディスクの空き容量
 df
 dpkg -l | grep postgres
 sudo systemctl
 apt list --installed
 sudo apt remove ***
 sudo apt autoremove
-
+ファイル転送
+sftp
+ubuntuでrootユーザーに変更
+sudo su
