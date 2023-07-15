@@ -1,4 +1,8 @@
-//PerfomanceCalculatorの作成
+//volumeCredits変数の削除 
+// ループの分離
+// volumeCreditsを集計しているループを分離し、新たなループを作成
+// ステートメントのスライド
+// 変数のインライン化
 const playsObject = {
   hamlet: {
     name: "Hamlet", type: "tragedy"
@@ -15,7 +19,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
@@ -32,72 +36,85 @@ const invoicesObject = [
   }
 ]
 
-class PerformanceCalculator {
-  constructor(aPerformance, aPlay) {
-    this.performance = aPerformance
-    this.play = aPlay
-  }
-
-  get amount() {
-    let result = 0
-    switch(this.play.type) {
-      case "tragedy":
-        result = 40000
-        if (this.performance.audience > 30) {
-          result += 1000 * (this.performance.audience - 30)
-        }
-        break
-      case "comedy":
-        result = 30000
-        if (this.performance.audience > 20) {
-          result += 10000 + 500 * (this.performance.audience - 20)
-        }
-        result += 300 * this.performance.audience
-        break
-      default:
-        throw new Error(`unknown type: ${this.play.type}`)
-    } 
-    return result
-  }
-
-  get volumeCredits() {
-    let result = 0
-    result += Math.max(this.performance.audience - 30, 0)
-    if ("comedy" === this.play.type) result += Math.floor(this.performance.audience / 5)
-    return result
-  }
-
-}
-
 const invoices = JSON.stringify(invoicesObject)
 
-class TragedyCalculator extends PerformanceCalculator {}
-class ComedyCalculator extends PerformanceCalculator {}
-
-const createPerformanceCalculator = (aPerfomance, aPlay) => {
-  switch(aPlay.type) {
-    case "tragedy": return new TragedyCalculator(aPerfomance, aPlay)
-    case "comedy": return new ComedyCalculator(aPerfomance, aPlay)
-    default: throw new Error(`未知の演劇 ${aPlay.type}`)
-  }
+function playFor(aPerformance) {
+  const parsedPlays = JSON.parse(plays)
+  return parsedPlays[aPerformance.playID]
 }
 
-
+function amountFor(aPerformance) {
+  let result = 0
+  switch(aPerformance.play.type) {
+    case "tragedy":
+      result = 40000
+      if (aPerformance.audience > 30) {
+        result += 1000 * (aPerformance.audience - 30)
+      }
+      break
+    case "comedy":
+      result = 30000
+      if (aPerformance.audience > 20) {
+        result += 10000 + 500 * (aPerformance.audience - 20)
+      }
+      result += 300 * aPerformance.audience
+      break
+    default:
+      throw new Error(`unknown type: ${aPerformance.play.type}`)
+  } 
+  return result
+}
 
 const statement = (invoice) => {
-  return renderPlainText(createStatementData(invoice))
+  const statementData = {}
+  statementData.customer = invoice.customer
+  statementData.performances = invoice.performances.map(enrichPerformance)
+  statementData.totalAmount = totalAmount(statementData)
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
+  return renderPlainText(statementData)
+}
+
+function enrichPerformance(aPerformance) {
+  const result = Object.assign({}, aPerformance)
+  result.play = playFor(aPerformance)
+  result.amount = amountFor(result)
+  return result
+}
+
+function totalAmount(data) {
+  let result = 0
+  for (let perf of data.performances) {
+    result += perf.amount
+  }
+  return result
+}
+
+function totalVolumeCredits(data) {
+  let result = 0
+  for (let perf of data.performances) {
+    result += volumeCreditsFor(perf)
+  }
+  return result
+}
+
+function volumeCreditsFor(aPerformance) {
+  let result = 0
+  result += Math.max(aPerformance.audience - 30, 0)
+  if ("comedy" === aPerformance.play.type) result += Math.floor(aPerformance.audience / 5)
+  return result
 }
 
 const renderPlainText = (data) => {
-  let result = `Statement for ${data.customer}\n`
+  let result = `請求書 ${data.customer}\n`
+
   for (let perf of data.performances) {
     result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience} seats) \n`
   }
 
-  result += `Amount owed is ${usd(data.totalAmount)}\n`
-  result += `You earned ${data.totalVolumeCredits} credits \n`
+  result += `支払額 ${usd(data.totalAmount)}\n`
+  result += `次回使用ポイント ${data.totalVolumeCredits}\n`
   return result
-
+  
   function usd(aNumber) {
     return new Intl.NumberFormat("en-US", {
       style: "currency", currency: "USD",
@@ -108,91 +125,7 @@ const renderPlainText = (data) => {
 
 console.log(statement(JSON.parse(invoices)[0], JSON.parse(plays)))
 
-const htmlStatement = (invoice) => {
-  return renderHtml(createStatementData(invoice))
-}
-
-const renderHtml = (data) => {
-  let result = `<h1>Statement for ${data.customer}</h1>\n`
-  result += "<table>\n"
-  result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>"
-  for (let perf of data.performances) {
-    result += ` <tr><td>${perf.play.name}</td><td>${perf.audience}</td>`
-    result += `<td>${usd(perf.amount)}</td></tr>`
-  }
-
-  result += "<table>\n"
-  result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`
-  result += `<p>You earned <em>${data.totalVolumeCredits} credits</em></p>\n`
-  return result
-
-  function usd(aNumber) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency", currency: "USD",
-      minimumFractionDigits: 2
-    }).format(aNumber / 100)
-  }
-}
-console.log(htmlStatement(JSON.parse(invoices)[0], JSON.parse(plays)))
-// ファイルの分割
-// export default createStatementData = (invoice) => {
-function createStatementData(invoice) {
-  const statementData = {}
-  statementData.customer = invoice.customer
-  statementData.performances = invoice.performances.map(enrichPerformance)
-  statementData.totalAmount = totalAmount(statementData) 
-  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
-  return statementData
-
-  function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance))
-    const result = Object.assign({}, aPerformance)
-    result.play = calculator.play
-    result.amount = calculator.amount
-    result.volumeCredits = calculator.volumeCredits 
-    return result
-  }
-
-  function amountFor(aPerfomance) {
-    let result = 0
-    switch(aPerfomance.play.type) {
-      case "tragedy":
-        result = 40000
-        if (aPerfomance.audience > 30) {
-          result += 1000 * (aPerfomance.audience - 30)
-        }
-        break
-      case "comedy":
-        result = 30000
-        if (aPerfomance.audience > 20) {
-          result += 10000 + 500 * (aPerfomance.audience - 20)
-        }
-        result += 300 * aPerfomance.audience
-        break
-      default:
-        throw new Error(`unknown type: ${aPerfomance.play.type}`)
-    } 
-    return result
-  }
-  
-  function playFor(aPerfomance) {
-    const parsedPlays = JSON.parse(plays)
-    return parsedPlays[aPerfomance.playID]
-  }
-  
-  function volumeCreditsFor(aPerfomance) {
-    let result = 0
-    result += Math.max(aPerfomance.audience - 30, 0)
-    if ("comedy" === aPerfomance.play.type) result += Math.floor(aPerfomance.audience / 5)
-    return result
-  }
-  
-  function totalAmount(data) {
-    return data.performances.reduce((total, p) => total + p.amount, 0)
-  }
-  
-  function totalVolumeCredits(data) {
-    return data.performances.reduce((total, p) => total + p.volumeCredits, 0)
-  }
-}
-
+// リファクタリングによって、playを取得するコードはループにつき1回取得していたが、3回になった。
+// →　リファクタリングとパフォーマンスの相互作用
+// しかし、パフォーマンスに大きな影響を与えないし、コードが整然としていた方がチューニングが容易になる
+// ローカル変数を削除することのメリットは、扱うべきローカルスコープが減り、メソッドの抽出が楽になる

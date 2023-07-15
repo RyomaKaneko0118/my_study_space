@@ -18,7 +18,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
@@ -90,13 +90,13 @@ const statement = (invoice) => {
 }
 
 const renderPlainText = (data) => {
-  let result = `Statement for ${data.customer}\n`
+  let result = `請求書 ${data.customer}\n`
   for (let perf of data.performances) {
     result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience} seats) \n`
   }
 
-  result += `Amount owed is ${usd(data.totalAmount)}\n`
-  result += `You earned ${data.totalVolumeCredits} credits \n`
+  result += `支払額 ${usd(data.totalAmount)}\n`
+  result += `次回使用ポイント ${data.totalVolumeCredits}\n`
   return result
 
   function usd(aNumber) {

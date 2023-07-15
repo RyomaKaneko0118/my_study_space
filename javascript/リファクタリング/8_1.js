@@ -15,7 +15,7 @@ const plays = JSON.stringify(playsObject)
 
 const invoicesObject = [
   {
-    customer: "BigCg", performances: [
+    customer: "外山様", performances: [
       {
         playID: "hamlet",
         audience: 55
