@@ -3,7 +3,6 @@ function mediaQueriesWin(){
 	// var width = $(window).width();
 	let width = window.innerWidth
 	if(width <= 768) {//横幅が768px以下の場合
-		// $(".has-child>a").off('click');	//has-childクラスがついたaタグのonイベントを複数登録を避ける為offにして一旦初期状態へ
 
 		const elements = document.querySelectorAll('.has-child > a')
 		elements.forEach(element => {
@@ -33,7 +32,6 @@ function mediaQueriesWin(){
 			element.removeEventListener('click', {})
 			element.style.display = ''
 		})
-		// $('.has-child').children('ul').css("display","");//スライドトグルで動作したdisplayも無効化にする
 	}
 }
 
