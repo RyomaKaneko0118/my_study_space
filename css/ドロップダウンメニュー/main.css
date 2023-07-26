@@ -75,3 +75,59 @@ nav {
   nav li.has-child:active > ul {
     visibility: visible;
     opacity: 1; }
+
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 0; }
+    nav ul {
+      display: block; }
+      nav ul li a {
+        border-bottom: 1px solid #ccc; }
+      nav ul li.has-child::before {
+        left: 20px; }
+      nav ul ul li.has-child::before {
+        transform: rotate(135deg);
+        left: 20px; }
+      nav ul ul li.has-child.active::before {
+        transform: rotate(-45deg); }
+    nav li.has-child ul,
+    nav li.has-child ul ul {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      visibility: visible;
+      /*JSで制御するため一旦表示*/
+      opacity: 1;
+      /*JSで制御するため一旦表示*/
+      display: none;
+      /*JSのslidetoggleで表示させるため非表示に*/
+      transition: none;
+      /*JSで制御するためCSSのアニメーションを切る*/ } }
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 20px; }
+
+h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 0 30px 0; }
+
+p {
+  margin-top: 20px; }
+
+small {
+  background: #333;
+  color: #fff;
+  display: block;
+  text-align: center;
+  padding: 20px; }
+
+section {
+  padding: 30px; }
+
+section:nth-child(2n) {
+  background: #f3f3f3; }
