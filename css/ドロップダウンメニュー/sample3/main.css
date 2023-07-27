@@ -48,6 +48,9 @@ nav {
       padding: 20px; }
       nav ul li li a:hover {
         color: #fff; }
+  nav li.has-child:hover > ul {
+    visibility: visible;
+    opacity: 1; }
   nav li.has-child ul {
     /*絶対配置で位置を指定*/
     position: absolute;
@@ -66,7 +69,83 @@ nav {
     opacity: 0;
     /*アニメーション設定*/
     transition: all .3s; }
+    nav li.has-child ul li {
+      width: 20%; }
+      nav li.has-child ul li a {
+        color: #fff; }
+        nav li.has-child ul li a:hover, nav li.has-child ul li a:active {
+          background: #3577CA; }
 
 @media screen and (max-width: 1200px) {
   nav ul li.has-child dt {
     height: 12vh; } }
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 20px; }
+
+h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 0 30px 0; }
+
+p {
+  margin-top: 20px; }
+
+small {
+  background: #333;
+  color: #fff;
+  display: block;
+  text-align: center;
+  padding: 20px; }
+
+section {
+  padding: 30px; }
+
+section:nth-child(2n) {
+  background: #f3f3f3; }
+
+@media screen and (max-width: 768px) {
+  nav ul {
+    display: block; }
+  nav li.has-child ul {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    visibility: visible;
+    /*JSで制御するため一旦表示*/
+    opacity: 1;
+    /*JSで制御するため一旦表示*/
+    display: none;
+    /*JSのslidetoggleで表示させるため非表示に*/
+    transition: none;
+    /*JSで制御するためCSSのアニメーションを切る*/ }
+    nav li.has-child ul li {
+      width: 100%;
+      text-align: left; }
+      nav li.has-child ul li dl {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+      nav li.has-child ul li dt {
+        width: 30%;
+        height: auto;
+        margin: 0; }
+      nav li.has-child ul li dd {
+        width: 64%; }
+  nav li.has-child ul li dd {
+    width: 64%; }
+  nav ul li a {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc; }
+  nav ul li li a {
+    padding: 0; }
+  nav ul li.has-child > a::before {
+    top: 17px;
+    left: 20px;
+    transform: rotate(135deg); }
+  nav ul li.has-child.active > a::before {
+    transform: rotate(-45deg); } }
