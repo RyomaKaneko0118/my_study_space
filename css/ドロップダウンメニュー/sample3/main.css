@@ -1,0 +1,72 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+  line-height: inherit; }
+
+/*========= ドロップダウンのためのCSS ===============*/
+/*==ナビゲーション全体の設定*/
+nav {
+  background: #333;
+  color: #fff;
+  text-align: center; }
+  nav ul {
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: center; }
+    nav ul ul {
+      display: block; }
+    nav ul li a {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: #999;
+      padding: 20px 45px;
+      transition: all .3s; }
+    nav ul li.has-child > a::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 25px;
+      width: 6px;
+      height: 6px;
+      border-top: 2px solid #999;
+      border-right: 2px solid #999;
+      transform: rotate(135deg); }
+    nav ul li.has-child img {
+      max-width: 100%;
+      height: auto;
+      transition: all .5s;
+      vertical-align: bottom; }
+      nav ul li.has-child img:hover {
+        transform: scale(1.2); }
+    nav ul li.has-child dt {
+      overflow: hidden;
+      height: 20vh;
+      margin: 0 0 20px 0; }
+    nav ul li li a {
+      padding: 20px; }
+      nav ul li li a:hover {
+        color: #fff; }
+  nav li.has-child ul {
+    /*絶対配置で位置を指定*/
+    position: absolute;
+    left: 5%;
+    top: 58px;
+    z-index: 4;
+    /*子要素を横並びに*/
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /*形状を指定*/
+    background: #888;
+    width: 90%;
+    /*はじめは非表示*/
+    visibility: hidden;
+    opacity: 0;
+    /*アニメーション設定*/
+    transition: all .3s; }
+
+@media screen and (max-width: 1200px) {
+  nav ul li.has-child dt {
+    height: 12vh; } }

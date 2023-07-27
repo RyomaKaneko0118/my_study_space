@@ -50,6 +50,7 @@ document.querySelectorAll('#g-nav a').forEach(function(aElement) {
     const headerH = document.querySelector("#header").offsetHeight
     const pos = Math.round(targetElement.offsetTop - headerH)
 
+    console.log(pos)
     window.scrollTo({
       top: pos,
       behavior: 'smooth'
