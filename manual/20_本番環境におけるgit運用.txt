@@ -1,4 +1,0 @@
-検証環境及び本番環境
-git fetch
-RAILS_ENV=production rails assets:precompile
-RAILS_ENV=production rails unicornctl:restart

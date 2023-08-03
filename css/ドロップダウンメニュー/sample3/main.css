@@ -3,83 +3,6 @@
   box-sizing: border-box;
   line-height: inherit; }
 
-/*========= ドロップダウンのためのCSS ===============*/
-/*==ナビゲーション全体の設定*/
-nav {
-  background: #333;
-  color: #fff;
-  text-align: center; }
-  nav ul {
-    position: relative;
-    list-style: none;
-    display: flex;
-    justify-content: center; }
-    nav ul ul {
-      display: block; }
-    nav ul li a {
-      position: relative;
-      display: block;
-      text-decoration: none;
-      color: #999;
-      padding: 20px 45px;
-      transition: all .3s; }
-    nav ul li.has-child > a::before {
-      content: '';
-      position: absolute;
-      left: 15px;
-      top: 25px;
-      width: 6px;
-      height: 6px;
-      border-top: 2px solid #999;
-      border-right: 2px solid #999;
-      transform: rotate(135deg); }
-    nav ul li.has-child img {
-      max-width: 100%;
-      height: auto;
-      transition: all .5s;
-      vertical-align: bottom; }
-      nav ul li.has-child img:hover {
-        transform: scale(1.2); }
-    nav ul li.has-child dt {
-      overflow: hidden;
-      height: 20vh;
-      margin: 0 0 20px 0; }
-    nav ul li li a {
-      padding: 20px; }
-      nav ul li li a:hover {
-        color: #fff; }
-  nav li.has-child:hover > ul {
-    visibility: visible;
-    opacity: 1; }
-  nav li.has-child ul {
-    /*絶対配置で位置を指定*/
-    position: absolute;
-    left: 5%;
-    top: 58px;
-    z-index: 4;
-    /*子要素を横並びに*/
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    /*形状を指定*/
-    background: #888;
-    width: 90%;
-    /*はじめは非表示*/
-    visibility: hidden;
-    opacity: 0;
-    /*アニメーション設定*/
-    transition: all .3s; }
-    nav li.has-child ul li {
-      width: 20%; }
-      nav li.has-child ul li a {
-        color: #fff; }
-        nav li.has-child ul li a:hover, nav li.has-child ul li a:active {
-          background: #3577CA; }
-
-@media screen and (max-width: 1200px) {
-  nav ul li.has-child dt {
-    height: 12vh; } }
-
 h1 {
   font-size: 2rem;
   text-align: center;
@@ -107,9 +30,122 @@ section {
 section:nth-child(2n) {
   background: #f3f3f3; }
 
+/*========= ドロップダウンのためのCSS ===============*/
+/*==ナビゲーション全体の設定*/
+nav {
+  background: #333;
+  color: #fff;
+  text-align: center; }
+  nav ul {
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: center; }
+    nav ul li a {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: #999;
+      padding: 20px 45px;
+      transition: all .3s; }
+    nav ul li.has-child > a::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 25px;
+      width: 6px;
+      height: 6px;
+      border-top: 2px solid #999;
+      border-right: 2px solid #999;
+      transform: rotate(135deg); }
+    nav ul li.has-child:hover > ul {
+      visibility: visible;
+      opacity: 1; }
+    nav ul li.has-child ul {
+      /*絶対配置で位置を指定*/
+      position: absolute;
+      left: 5%;
+      top: 58px;
+      z-index: 4;
+      /*子要素を横並びに*/
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      /*形状を指定*/
+      background: #888;
+      width: 90%;
+      /*はじめは非表示*/
+      visibility: hidden;
+      opacity: 0;
+      /*アニメーション設定*/
+      transition: all .3s; }
+      nav ul li.has-child ul li {
+        width: 20%; }
+        nav ul li.has-child ul li a {
+          padding: 20px;
+          color: #fff; }
+          nav ul li.has-child ul li a:hover, nav ul li.has-child ul li a:active {
+            background: #3577CA; }
+    nav ul li.has-child dt {
+      overflow: hidden;
+      height: 20vh;
+      margin: 0 0 20px 0; }
+      nav ul li.has-child dt img {
+        max-width: 100%;
+        height: auto;
+        transition: all .5s;
+        vertical-align: bottom; }
+        nav ul li.has-child dt img:hover {
+          transform: scale(1.2); }
+    nav ul li.has-child li a {
+      padding: 20px; }
+      nav ul li.has-child li a:hover {
+        color: #fff; }
+
+@media screen and (max-width: 1200px) {
+  nav ul li.has-child dt {
+    height: 12vh; } }
+
 @media screen and (max-width: 768px) {
   nav ul {
     display: block; }
+    nav ul li a {
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc; }
+    nav ul li li a {
+      padding: 0; }
+    nav ul li.has-child > a::before {
+      top: 17px;
+      left: 20px;
+      transform: rotate(135deg); }
+    nav ul li.has-child.active > a::before {
+      transform: rotate(-45deg); }
+    nav ul li.has-child ul {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      visibility: visible;
+      /*JSで制御するため一旦表示*/
+      opacity: 1;
+      /*JSで制御するため一旦表示*/
+      display: none;
+      /*JSのslidetoggleで表示させるため非表示に*/
+      transition: none;
+      /*JSで制御するためCSSのアニメーションを切る*/ }
+      nav ul li.has-child ul li {
+        width: 100%;
+        text-align: left; }
+        nav ul li.has-child ul li dl {
+          display: flex;
+          justify-content: space-between;
+          align-items: center; }
+        nav ul li.has-child ul li dt {
+          width: 30%;
+          height: auto;
+          margin: 0; }
+        nav ul li.has-child ul li dd {
+          width: 64%; }
   nav li.has-child ul {
     position: relative;
     left: 0;
