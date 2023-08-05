@@ -62,17 +62,17 @@ document.querySelectorAll('#g-nav a').forEach(function(aElement) {
 
 // 画面をスクロールをしたら動かしたい場合の記述
 window.addEventListener('scroll', function() {
-	PositionCheck();/* 現在地を取得する関数を呼ぶ*/
-	ScrollAnime();/* ナビゲーションに現在地のクラスをつけるための関数を呼ぶ*/
-});
+	PositionCheck()
+  ScrollAnime()
+})
 
 // ページが読み込まれたらすぐに動かしたい場合の記述
 window.addEventListener('load', function () {
-	PositionCheck();/* 現在地を取得する関数を呼ぶ*/
-	ScrollAnime();/* ナビゲーションに現在地のクラスをつけるための関数を呼ぶ*/
-});
+	PositionCheck()
+	ScrollAnime()
+})
 
 window.addEventListener('resize', function() {
   //リサイズされたときの処理
   PositionCheck()
-});
+})
