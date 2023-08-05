@@ -1,46 +1,49 @@
+// 実装内容
+// セクションごとにscroll-pointクラスとidを設定
+// scroll-pointクラスが付与されている座標のリストを設定(elemTopValues)
+// elemTopValuesとナビゲーションのリストを対応させる
+// スクロールイベントが発生したら、
+// スクロールの座標を取得し、
+// 座標上のナビゲーションのリストにcurrentクラスを付与する
+// 画面が読み込まれたり、画面の幅が変更された場合、elemTopValuesを再設定する
+// ナビゲーションを行う処理
+// ヘッダーが固定されている場合、ナビゲーション先の上部はヘッダーに隠れてしまう。
+// よって、クリックしたhrefのセクションを取得
+// ヘッダーの高さを取得
+// セクションションからヘッダーの高さを引いた値に、スクロールする
+
+
 //基準点の準備
-let elemTop = [];
+let elemTopValues = [];
 
 //現在地を取得するための設定を関数でまとめる
 function PositionCheck(){
-    //headerの高さを取得
   const headerH = document.getElementById("header").offsetHeight
-    //.scroll-pointというクラス名がついたエリアの位置を取得する設定
   const scrollPoints = document.querySelectorAll(".scroll-point")
-  scrollPoints.forEach(function(elem, i) { elemTop[i] = Math.round(parseInt(elem.offsetTop - headerH)) })
-  console.log(elemTop)
+  scrollPoints.forEach(function(elem, i) { elemTopValues[i] = Math.round(parseInt(elem.offsetTop - headerH)) })
 }
 
 //ナビゲーションに現在地のクラスをつけるための設定
-function ScrollAnime() {//スクロールした際のナビゲーションの関数にまとめる
+function ScrollAnime() {
   let scroll = Math.round(window.scrollY)
   //ナビゲーションのliの何番目かを定義するための準備
 	let NavElem = document.querySelectorAll("#g-nav li")
   NavElem.forEach(function(element) {
     element.classList.remove('current');
   })
-	if(scroll >= 0 && scroll < elemTop[1]) {
+	if(scroll >= 0 && scroll < elemTopValues[1]) {
       NavElem[0].classList.add('current')
     }
-	else if(scroll >= elemTop[1] && scroll < elemTop[2]) {
+	else if(scroll >= elemTopValues[1] && scroll < elemTopValues[2]) {
     NavElem[1].classList.add('current')
     } 
-  else if(scroll >= elemTop[2] && scroll < elemTop[3]) { 
+  else if(scroll >= elemTopValues[2] && scroll < elemTopValues[3]) { 
     NavElem[2].classList.add('current')
   } 
-  else if(scroll >= elemTop[3]) {// .scroll-point 3つめ（area-3）以上
+  else if(scroll >= elemTopValues[3]) {
     NavElem[3].classList.add('current')
   } 
 }
-
-// ナビゲーションをクリックした際のスムーススクロール
-// $('#g-nav a').click(function () {
-// 	var elmHash = $(this).attr('href'); //hrefの内容を取得
-// 	var headerH = $("#header").outerHeight(true);//追従するheader分の高さ（70px）を引く
-// 	var pos = Math.round($(elmHash).offset().top-headerH);	//headerの高さを引き小数点を四捨五入
-// 	$('body,html').animate({scrollTop: pos}, 500);//取得した位置にスクロール※数値が大きいほどゆっくりスクロール
-// 	return false;//リンクの無効化
-// });
 
 document.querySelectorAll('#g-nav a').forEach(function(aElement) {
   aElement.addEventListener('click', function(e) {
@@ -50,7 +53,6 @@ document.querySelectorAll('#g-nav a').forEach(function(aElement) {
     const headerH = document.querySelector("#header").offsetHeight
     const pos = Math.round(targetElement.offsetTop - headerH)
 
-    console.log(pos)
     window.scrollTo({
       top: pos,
       behavior: 'smooth'

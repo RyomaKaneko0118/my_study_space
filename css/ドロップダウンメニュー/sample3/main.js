@@ -1,27 +1,53 @@
 //ドロップダウンの設定を関数でまとめる
 function mediaQueriesWin(){
-	var width = $(window).width();
+	let width = window.innerWidth
 	if(width <= 768) {//横幅が768px以下の場合
-		$(".has-child>a").off('click');	//has-childクラスがついたaタグのonイベントを複数登録を避ける為offにして一旦初期状態へ
-		$(".has-child>a").on('click', function() {//has-childクラスがついたaタグをクリックしたら
-			var parentElem =  $(this).parent();// aタグから見た親要素の<li>を取得し
-			$(parentElem).toggleClass('active');//矢印方向を変えるためのクラス名を付与して
-			$(parentElem).children('ul').stop().slideToggle(500);//liの子要素のスライドを開閉させる※数字が大きくなるほどゆっくり開く
-			return false;//リンクの無効化
-		});
-	}else{//横幅が768px以上の場合
-		$(".has-child>a").off('click');//has-childクラスがついたaタグのonイベントをoff(無効)にし
-		$(".has-child").removeClass('active');//activeクラスを削除
-		$('.has-child').children('ul').css("display","");//スライドトグルで動作したdisplayも無効化にする
+
+		const elements = document.querySelectorAll('.has-child > a')
+		elements.forEach(element => {
+			element.removeEventListener('click', {})
+		})
+
+		const anchors = document.querySelectorAll('.has-child > a')
+		anchors.forEach(anchor => {
+			anchor.addEventListener('click', (event) =>  {
+				event.preventDefault() // リンクの無効化
+				const parentElem = anchor.parentElement // aタグから見た親要素の<li>を取得
+				console.log(parentElem)
+				parentElem.classList.toggle('active'); // 矢印方向を変えるためのクラス名を付与
+				const childUl = parentElem.querySelector('ul'); // liの子要素の<ul>を取得
+				if (childUl) {
+					const isExpanded = window.getComputedStyle(childUl).display === 'block'
+					if (isExpanded) {
+						childUl.style.display = 'none'; // スライドを閉じる
+					} else {
+						childUl.style.display = 'block'; // スライドを開く
+					}
+				}
+			})
+		})
+	} 
+	else {
+		const aTagElementsInHasChild = document.querySelectorAll('.has-child > a')
+		aTagElementsInHasChild.forEach(element => {
+			element.removeEventListener('click', {})
+		})
+		const elementsHasChild = document.querySelectorAll('.has-child')
+		elementsHasChild.forEach(element => {
+			element.classList.remove('active')
+		})
+		const ulElementsInHasChild = document.querySelectorAll('.has-child > ul')
+		ulElementsInHasChild.forEach(element => {
+			element.style.display = ''
+		})
 	}
 }
 
-// ページがリサイズされたら動かしたい場合の記述
-$(window).resize(function() {
-	mediaQueriesWin();/* ドロップダウンの関数を呼ぶ*/
-});
-
 // ページが読み込まれたらすぐに動かしたい場合の記述
-$(window).on('load',function(){
-	mediaQueriesWin();/* ドロップダウンの関数を呼ぶ*/
-});
+window.addEventListener('load', () => {
+	mediaQueriesWin()	
+})
+
+window.addEventListener('resize', () => {
+	mediaQueriesWin()	
+})

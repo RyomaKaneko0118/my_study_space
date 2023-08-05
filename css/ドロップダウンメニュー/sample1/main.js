@@ -1,6 +1,10 @@
+// 子を持つリストにhas-childクラスを設定する
+// クリックイベントが発生すると、activeクラスを付与し矢印の方向を変える
+// 子要素のulを取得し、表示、非表示のトグルを行う
+
+
 //ドロップダウンの設定を関数でまとめる
 function mediaQueriesWin(){
-	// var width = $(window).width();
 	let width = window.innerWidth
 	if(width <= 768) {//横幅が768px以下の場合
 
@@ -14,6 +18,7 @@ function mediaQueriesWin(){
 			anchor.addEventListener('click', (event) =>  {
 				event.preventDefault() // リンクの無効化
 				const parentElem = anchor.parentElement // aタグから見た親要素の<li>を取得
+				console.log(parentElem)
 				parentElem.classList.toggle('active'); // 矢印方向を変えるためのクラス名を付与
 				const childUl = parentElem.querySelector('ul'); // liの子要素の<ul>を取得
 				if (childUl) {
