@@ -1,3 +1,4 @@
+// readlineモジュールを用いてユーザーに質問する
 export {}
 import * as readline from 'readline';
 
