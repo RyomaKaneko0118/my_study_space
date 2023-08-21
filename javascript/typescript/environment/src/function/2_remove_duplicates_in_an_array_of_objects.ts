@@ -10,9 +10,7 @@ const uniqueObjects = Array.from(
   )
 ).map(JSON.parse as any)
 
-console.log("------------- 2 -------------------------")
-console.log(uniqueObjects);
-
-console.log("------------- 2_1 -------------------------")
-const uniqueObjects2 = Array.from(new Set(arr.map(JSON.stringify as any)))
-console.log(uniqueObjects2)
+console.log((uniqueObjects))
+console.log(arr.map(JSON.stringify as any))
+console.log(new Set(arr.map(JSON.stringify as any)))
+console.log(Array.from(new Set(arr.map(JSON.stringify as any))))

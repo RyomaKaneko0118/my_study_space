@@ -10,6 +10,3 @@ const occurrenceCount = Object.fromEntries(
     return [char, occurrenceCount]
   })
 )
-
-console.log("---------- 8 -------------------")
-console.log(occurrenceCount); // { a: 3, b: 1, c: 2, ... }
