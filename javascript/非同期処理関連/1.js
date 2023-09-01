@@ -1,4 +1,4 @@
-function resolveAfter2Seconds() {
+function resolveAfter10Seconds() {
   console.log("starting slow promise");
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -8,7 +8,7 @@ function resolveAfter2Seconds() {
   });
 }
 
-function resolveAfter1Second() {
+function resolveAfter5Second() {
   console.log("starting fast promise");
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -21,17 +21,17 @@ async function sequentialStart() {
   console.log("==SEQUENTIAL START==");
 
   // 1. これは即時実行される
-  const slow = await resolveAfter2Seconds();
+  const slow = await resolveAfter10Seconds();
   console.log(slow); // 2. これは 1. の 2 秒後に実行される
 
-  const fast = await resolveAfter1Second();
+  const fast = await resolveAfter5Second();
   console.log(fast); // 3. これは 1. の 3 秒後に実行される
 }
 
 async function concurrentStart() {
   console.log("==CONCURRENT START with await==");
-  const slow = resolveAfter2Seconds(); // ただちにタイマーを起動
-  const fast = resolveAfter1Second(); // ただちにタイマーを起動
+  const slow = resolveAfter10Seconds(); // ただちにタイマーを起動
+  const fast = resolveAfter5Second(); // ただちにタイマーを起動
 
   // 1. これは即時実行される
   console.log(await slow); // 2. これは 1. の 2 秒後に実行される
@@ -40,7 +40,7 @@ async function concurrentStart() {
 
 function concurrentPromise() {
   console.log("==CONCURRENT START with Promise.all==");
-  return Promise.all([resolveAfter2Seconds(), resolveAfter1Second()]).then(
+  return Promise.all([resolveAfter10Seconds(), resolveAfter5Second()]).then(
     (messages) => {
       console.log(messages[0]); // slow
       console.log(messages[1]); // fast
@@ -53,7 +53,7 @@ async function parallel() {
 
   // 2 つの jobs を並列に実行し両方が完了するのを待つ
   await Promise.all([
-    (async () => console.log(await resolveAfter2Seconds()))(),
-    (async () => console.log(await resolveAfter1Second()))(),
+    (async () => console.log(await resolveAfter10Seconds()))(),
+    (async () => console.log(await resolveAfter5Second()))(),
   ]);
 }

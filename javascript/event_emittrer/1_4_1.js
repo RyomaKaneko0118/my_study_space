@@ -1,5 +1,5 @@
 class FizzBuzzEventEmitter extends events.EventEmitter {
-   async start(until) {
+  async start(until) {
     this.emit("start")
     let count = 1
     while (true) {
