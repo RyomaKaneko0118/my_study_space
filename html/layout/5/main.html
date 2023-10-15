@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>サイドバーの設定</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <header class="header">
+    <a href="">
+      <img src="./assets/images/board-logo.svg" alt="company logo">
+    </a>
+    <div>要素２</div>
+    <div>要素３</div>
+  </header>
+  <aside class="aside">
+    <nav class="flex-1 nav">
+      <ul>
+        <li>
+          <a href="" class="menu">
+            <div class="icon-wrapper">
+              <img src="" alt="icon">
+            </div>
+            <span>ダッシュボード</span>
+          </a>
+        </li>
+        <li id="item-1">
+          <a href="" class="menu">
+            <div class="icon-wrapper">
+              <img src="" alt="icon">
+            </div>
+            <span>顧客一覧</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <main>
+    <h1>mainの設定</h1>
+    <div>要素1</div>
+    <div>要素2</div>
+    <div>要素3</div>
+    <span id="span-item-1"></span>
+  </main>
+</body>
+</html>
+<script>
+  const spanElement = document.getElementById('span-item-1')
+  if (spanElement) {
+    const text = "あ".repeat(1000)
+    spanElement.textContent = text
+  }
+</script>
+

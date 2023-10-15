@@ -6522,6 +6522,45 @@ form.form .error {
   }
 }
 
+.nav {
+  width: 100%;
+}
+.nav ul {
+  list-style: none;
+}
+.nav ul li {
+  position: relative;
+}
+.nav ul li .menu {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 992px) {
+  .nav ul li .menu {
+    justify-content: flex-start;
+    flex-shrink: 0;
+  }
+}
+.nav ul li .menu .icon-wrapper {
+  width: 20px;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #ffa000;
+}
+.nav ul li .menu span {
+  margin: 0 10px;
+  display: none;
+}
+@media screen and (min-width: 992px) {
+  .nav ul li .menu span {
+    display: block;
+  }
+}
+
 html,
 body {
   height: 100%;
