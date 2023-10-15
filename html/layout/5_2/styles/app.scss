@@ -1,0 +1,37 @@
+@import './mediaquery.scss';
+@import './variables.scss';
+@import './reset.scss';
+@import './utility.scss';
+@import './common.scss';
+
+html,
+body {
+  height: 100%;
+}
+
+// NOTE
+// mdは15px
+// font-weight-normalは400
+// font-weight-boldは700
+body {
+  font-size: $font-size-md;
+  font-weight: $font-weight-normal;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Helvetica Neue',
+  Arial, Meiryo, sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  // NOTE
+  // positionがstaticの場合は、
+  // top、right、bottom、left、z-indexの効果がない
+  position: relative;
+  color: $color-primary;
+  background-color: $color-background;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
