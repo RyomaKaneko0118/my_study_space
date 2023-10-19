@@ -6669,6 +6669,12 @@ form.form .error {
   text-align: center;
   cursor: pointer;
 }
+@media (hover: hover) {
+  .button:hover {
+    transition: box-shadow 0.3s;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  }
+}
 .button.btn-sm {
   height: 36px;
   font-size: 13px;

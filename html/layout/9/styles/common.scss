@@ -523,6 +523,14 @@ form.form {
   text-align: center;
   cursor: pointer;
 
+  @media (hover: hover) {
+    &:hover {
+      transition: box-shadow 0.3s;
+      box-shadow: 0 5px 11px 0 rgba($color: $color-black, $alpha: 0.18),
+        0 4px 15px 0 rgba($color: $color-black, $alpha: 0.15);
+    }
+  }
+
   &.btn-sm {
     height: 36px;
     font-size: $font-size-sm;
