@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>サイドバーにactive要素をつける</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <header class="header">
+    <a href="" class="logo">
+      <img src="./assets/images/board-logo.svg" alt="company logo">
+    </a>
+    <div>要素２</div>
+    <div>要素３</div>
+  </header>
+  <aside class="aside with-sub-navigation">
+    <nav class="flex-1 nav">
+      <ul>
+        <li id="item-1">
+          <a href="" class="menu">
+            <div class="icon-wrapper">
+              <img src="" alt="icon">
+            </div>
+            <span>ダッシュボード</span>
+          </a>
+        </li>
+        <li id="item-2">
+          <a href="" class="menu">
+            <div class="icon-wrapper">
+              <img src="" alt="icon">
+            </div>
+            <span>顧客一覧</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <aside class="sub-navigation">
+    <nav class="flex-1">
+      <ul>
+        <li id="sub-item-1">
+          <a href="" class="menu">基本情報</a>
+        </li>
+        <li id="sub-item-2">
+          <a href="" class="menu">部門</a>
+        </li>
+        <li id="sub-item-3">
+          <a href="" class="menu">担当者</a>
+        </li>
+        <li id="sub-item-4">
+          <a href="" class="menu">研修分類</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="breadcrumb with-sub-navigation">
+    <div>
+      <a href="">顧客一覧</a>
+      <span class="separator"></span>
+    </div>
+    <div>
+      <a href="">基本情報</a>
+      <span class="separator"></span>
+    </div>
+    <div>
+      <a href="">編集</a>
+      <span class="separator"></span>
+    </div>
+    <div>
+      <span class="fw-bold text-primary">現在</span>
+    </div>
+  </div>
+  <main class="with-navigation with-sub-navigation">
+    <section class="content">
+      <h1>mainの設定</h1>
+      <div>要素1</div>
+      <div>要素2</div>
+      <div>要素3</div>
+      <span id="span-item-1"></span>
+    </section>
+  </main>
+</body>
+</html>
+<script>
+  const spanElement = document.getElementById('span-item-1')
+  if (spanElement) {
+    const text = "happy".repeat(10)
+    spanElement.textContent = text
+  }
+
+  const specificNavLiElement = document.getElementById('item-1')
+  const isActive = true
+  if (isActive) {
+    specificNavLiElement.classList.add("active")
+  } else {
+    specificNavLiElement.classList.remove("active")
+  }
+
+  const specificSubNavLiElement = document.getElementById('sub-item-1')
+  if (isActive) {
+    specificSubNavLiElement.classList.add("active")
+  } else {
+    specificSubNavLiElement.classList.remove("active")
+  }
+</script>
+
