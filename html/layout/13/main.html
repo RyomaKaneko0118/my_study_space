@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>サイドバーにactive要素をつける</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <header class="header">
+    <a href="" class="logo">
+      <img src="./assets/images/board-logo.svg" alt="company logo">
+    </a>
+    <div>要素２</div>
+    <div>要素３</div>
+  </header>
+  <aside class="aside with-sub-navigation">
+    <nav class="flex-1 nav">
+      <ul>
+        <li id="item-1">
+          <a href="" class="menu">
+            <div class="icon-wrapper">
+              <img src="" alt="icon">
+            </div>
+            <span>ダッシュボード</span>
+          </a>
+        </li>
+        <li id="item-2">
+          <a href="" class="menu">
+            <div class="icon-wrapper">
+              <img src="" alt="icon">
+            </div>
+            <span>顧客一覧</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <aside class="sub-navigation">
+    <nav class="flex-1">
+      <ul>
+        <li id="sub-item-1">
+          <a href="" class="menu">基本情報</a>
+        </li>
+        <li id="sub-item-2">
+          <a href="" class="menu">部門</a>
+        </li>
+        <li id="sub-item-3">
+          <a href="" class="menu">担当者</a>
+        </li>
+        <li id="sub-item-4">
+          <a href="" class="menu">研修分類</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="breadcrumb with-sub-navigation">
+    <div>
+      <a href="">顧客一覧</a>
+      <span class="separator"></span>
+    </div>
+    <div>
+      <a href="">基本情報</a>
+      <span class="separator"></span>
+    </div>
+    <div>
+      <a href="">編集</a>
+      <span class="separator"></span>
+    </div>
+    <div>
+      <span class="fw-bold text-primary">現在</span>
+    </div>
+  </div>
+  <main class="with-navigation with-sub-navigation">
+    <section class="content">
+      <h1>mainの設定</h1>
+      <div class="card p-md mt-md">
+        <div>要素1</div>
+        <div>要素2</div>
+        <div>要素3</div>
+        <span id="span-item-1"></span>
+      </div>
+      <div class="card p-md mt-md">要素1</div>
+      <div class="card p-md mt-md">
+        <ul class="applications">
+          <li>
+            <a href="">
+              <p>要素a-1</p>
+              <p>要素a-2</p>
+              <div>
+                <img src="" alt="sample">
+              </div>
+              <p class="app-name">要素a-3</p>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <p>要素b-1</p>
+              <p>要素b-2</p>
+              <div>
+                <img src="" alt="sample">
+              </div>
+              <p class="app-name">要素b-3</p>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <p>要素c-1</p>
+              <p>要素c-2</p>
+              <div>
+                <img src="" alt="sample">
+              </div>
+              <p class="app-name">要素c-3</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="card p-md mt-md">
+        <div class="d-flex justify-content-space-between">
+          <h1>
+            <span>🤣</span>
+            <span>Test</span>
+          </h1>
+          <div>
+            <button class="button btn-sm btn-primary">
+              <span>🤣</span>
+              <span class="ml-xs">登録</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card p-md mt-md">
+        <div class="search-form">
+          <div class="search-row-wrapper">
+            <div class="search-row">
+              <div>要素1</div>
+              <div>要素2</div>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="mr-xs">
+              <button class="button btn-sm btn-primary">
+                <span>🤣</span>
+                <span class="ml-xs">登録</span>
+              </button>
+            </div>
+            <div class="ml-xs">
+              <button class="button btn-sm btn-primary">
+                <span>🤣</span>
+                <span class="ml-xs">登録</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="card p-md mt-md">
+        <div class="d-flex justify-content-center">
+          <div class="rectangle-wrapper">
+            <div class="rectangle">
+              <div class="rectangle-item">
+
+              </div>
+            </div> 
+            <div class="circle">
+              <div class="text-white">
+                10
+              </div>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+      <div class="card p-md mt-md">
+        <div class="d-flex justify-content-center">
+          <div class="rectangle-wrapper">
+            <div class="rectangle-title-wrapper">
+              <span>item</span>
+              <span class="mt-xs">item</span>
+            </div>
+            <div class="rectangle-2">
+              <div class="circle-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content parts">
+      <div class="card p-md mt-md">
+        <div class="d-flex justify-content-center">
+          <div class="mr-xs">
+            <button type="button">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              送信
+            </button>
+          </div>    
+        </div>
+        <div class="d-flex justify-content-center mt-md">
+          <div class="mr-xs">
+            <button type="button" class="btn-light">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-primary">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-secondary">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-warning">
+              送信
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-danger">
+              送信
+            </button>
+          </div>     
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="mr-xs">
+            <button type="button">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              送信
+            </button>
+          </div>    
+        </div>
+        <div class="d-flex justify-content-center mt-md">
+          <div class="mr-xs">
+            <button type="button" class="btn-light btn-md">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-primary btn-sm">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-secondary btn-xs">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-warning btn-md">
+              送信
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-danger btn-sm">
+              送信
+            </button>
+          </div>     
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="mr-xs">
+            <button type="button">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button">
+              送信
+            </button>
+          </div>    
+        </div>
+        <div class="d-flex justify-content-center mt-md">
+          <div class="mr-xs">
+            <button type="button" class="btn-light btn-md">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-primary btn-sm outline">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-secondary btn-xs outline">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-warning btn-md outline">
+              送信
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" class="btn-danger btn-sm outline">
+              送信
+            </button>
+          </div>     
+        </div>        
+      </div>  
+    </section>
+  </main>
+</body>
+</html>
+<script>
+  const spanElement = document.getElementById('span-item-1')
+  if (spanElement) {
+    const text = "happy".repeat(10)
+    spanElement.textContent = text
+  }
+
+  const specificNavLiElement = document.getElementById('item-1')
+  const isActive = true
+  if (isActive) {
+    specificNavLiElement.classList.add("active")
+  } else {
+    specificNavLiElement.classList.remove("active")
+  }
+
+  const specificSubNavLiElement = document.getElementById('sub-item-1')
+  if (isActive) {
+    specificSubNavLiElement.classList.add("active")
+  } else {
+    specificSubNavLiElement.classList.remove("active")
+  }
+</script>
+
