@@ -668,4 +668,70 @@ form.form {
       opacity: 0.5;
     }
   }
+
+  .checkbox-wrapper {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.disabled {
+      cursor: auto;
+      opacity: 0.5;
+    }
+
+    input[type='checkbox'] {
+      display: none;
+    }
+
+    .checkbox {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      background-color: $color-white;
+      border: 1px solid $color-border;
+      border-radius: 2px;
+      transition: all 0.3s;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 12px;
+        height: 8px;
+        border-left: 2px solid $color-white;
+        border-bottom: 2px solid $color-white;
+        transition: all 0.3s;
+        transform: rotate(0) scale(0);
+      }
+    }
+
+    input:checked + .checkbox {
+      background-color: $color-primary;
+      border-color: $color-primary;
+      &::after {
+        transform: rotate(-45deg) scale(1);
+      }
+    }
+  }
+  .fruts{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+
+    &.w-300 {
+      width: 300px;
+      border: 1px solid;
+    }
+  }
+}
+.default-btn-wrapper {
+  width: 100%;
+  max-width: 140px;
+
+  @include mq(lg) {
+    max-width: 180px;
+  }
 }

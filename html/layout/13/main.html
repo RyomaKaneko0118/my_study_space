@@ -333,7 +333,103 @@
               送信
             </button>
           </div>     
-        </div>        
+        </div>
+        <div class="d-flex justify-content-center mt-md">
+          <div class="mr-xs">
+            <button type="button" disabled class="btn-light btn-md disabled">
+              閉じる
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" disabled class="btn-primary btn-sm outline disabled">
+              ダウンロード
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" disabled class="btn-secondary btn-xs outline disabled">
+              キャンセル
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" disabled class="btn-warning btn-md outline disabled">
+              送信
+            </button>
+          </div>
+          <div class="mr-xs">
+            <button type="button" disabled class="btn-danger btn-sm outline">
+              送信
+            </button>
+          </div>     
+        </div>
+        <div class="card p-md mt-md">
+          <div class="d-flex justify-content-center">
+            <div class="fruts">
+              <span class="checkbox-wrapper mr-xs">
+                <input id="selectFruts" name="fruts" value="strawberry" type="checkbox">
+                <span class="checkbox"></span>
+                <span class="ml-sm">いちご</span>
+              </span>
+              <span class="checkbox-wrapper">
+                <input id="selectFruts" name="fruts" value="grape" type="checkbox">
+                <span class="checkbox"></span>
+                <span class="ml-sm">ぶどう</span>
+              </span>
+              <span class="checkbox-wrapper">
+                <input id="selectFruts" name="fruts" value="pear" type="checkbox">
+                <span class="checkbox"></span>
+                <span class="ml-sm">なし</span>
+              </span>
+            </div>
+          </div>
+          <div class="d-flex flex-direction-column mt-md">
+            <div class="d-flex justify-content-center">
+              <div class="fruts w-300">
+                <span class="checkbox-wrapper mr-xs">
+                  <input id="selectFruts" name="secondary-fruts" value="strawberry" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">いちご</span>
+                </span>
+                <span class="checkbox-wrapper">
+                  <input id="selectFruts" name="secondary-fruts" value="grape" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">ぶどう</span>
+                </span>
+                <span class="checkbox-wrapper">
+                  <input id="selectFruts" name="secondary-fruts" value="pear" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">なし</span>
+                </span>
+                <span class="checkbox-wrapper mr-xs">
+                  <input id="selectFruts" name="secondary-fruts" value="strawberry" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">いちご</span>
+                </span>
+                <span class="checkbox-wrapper">
+                  <input id="selectFruts" name="secondary-fruts" value="grape" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">ぶどう</span>
+                </span>
+                <span class="checkbox-wrapper">
+                  <input id="selectFruts" name="secondary-fruts" value="pear" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">なし</span>
+                </span>
+                <span class="checkbox-wrapper">
+                  <input id="selectFruts" name="secondary-fruts" value="fig" type="checkbox">
+                  <span class="checkbox"></span>
+                  <span class="ml-sm">いちじく</span>
+                </span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="default-btn-wrapper mt-md">
+                <button id="submitFruts" type="submit" class="btn-warning btn-md outline">
+                  送信
+                </button>
+              </div> 
+            </div> 
+          </div>
+        </div>                
       </div>  
     </section>
   </main>
@@ -360,5 +456,29 @@
   } else {
     specificSubNavLiElement.classList.remove("active")
   }
+
+  const frutsCheckBoxElements = document.querySelectorAll('.checkbox-wrapper')
+  console.log("check")
+  for (const frutsCheckBoxElement of frutsCheckBoxElements) {
+    frutsCheckBoxElement.addEventListener("click", () => {
+      const input = frutsCheckBoxElement.querySelector("input")
+      if (input.checked === true) {
+        input.checked = false
+      } else {
+        input.checked = true
+      }
+    })
+  }
+  const submitFrutsButton = document.getElementById('submitFruts')
+  submitFrutsButton.addEventListener("click", () => {
+    const frutsCheckBoxElements = document.querySelectorAll('input[name="secondary-fruts"]')
+    const result = []
+    for (const frutsCheckBoxElement of frutsCheckBoxElements) {
+      if (frutsCheckBoxElement.checked) {
+        result.push(frutsCheckBoxElement.value)
+      }
+    }
+    console.log(result)
+  })
 </script>
 
