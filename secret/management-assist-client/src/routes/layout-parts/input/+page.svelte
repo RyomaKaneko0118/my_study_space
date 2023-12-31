@@ -41,6 +41,17 @@
       {/if}
     </div>
   </div>
+  <div class="d-flex justify-content-center parts">
+    <div class="input-group mt-sm">
+      <input
+        id="correctId"
+        placeholder="IDを入力してください"
+        bind:value={inputCorrectId}
+        on:input={() => (invalidCorrectId = false)}
+        class="input-light"
+      />
+    </div>
+  </div>
 </section>
 
 <style lang="scss">
@@ -49,5 +60,34 @@
     max-width: 660px;
     display: flex;
     align-items: center;
+  }
+
+  .parts {
+    input {
+      width: 100%;
+      height: 40px;
+      padding: 0 15px;
+      border: 1px solid $color-border;
+      border-radius: 3px;
+      outline: none;
+      display: flex;
+      align-items: center;
+
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      &.input-light {
+        background-color: $color-white;
+      }
+
+      &.invalid {
+        border-color: $color-error;
+      }
+
+      &::placeholder {
+        color: $color-gray;
+      }
+    }
   }
 </style>
