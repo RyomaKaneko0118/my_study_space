@@ -1,7 +1,10 @@
 スワップファイルの作成
 sudo fallocate -l 1G /swapfile
+他のユーザーが読み取り不可にする
 sudo chmod 600 /swapfile
+作成したスワップファイルのフォーマットを変換
 sudo mkswap /swapfile
+スワップファイルを有効にする
 sudo swapon /swapfile
 sudo vim /etc/fstab
 <swapfileパス> none swap sw 0 0
