@@ -90,13 +90,13 @@
       </div>
       <div class="card form parts p-md mt-md">
         <div class="d-flex justify-content-center">
-          <form>
+          <form action="http://example.com/" method="post">
             <div class="input-group">
               <label for="name">
                 <p>部門</p>
                 <p class="fs-xs fw-bold text-error">【必須】</p>
               </label>
-              <input type="text" id="name" class="input-default">
+              <input type="text" id="name" class="input-default" value="text">
             </div>
             <div class="input-group mt-md">
               <label for="email">
@@ -177,7 +177,6 @@
     const dateInputElement = document.querySelector('input[name="date"]')
     const numberInputElement = document.querySelector('input[name="number"]')
     result.push({ nameInputElement }, { emailInputElement }, { dateInputElement }, { numberInputElement })
-    console.log(result)
   })
 </script>
 

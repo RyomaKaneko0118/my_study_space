@@ -1,0 +1,15 @@
+//host n0253として名前解決を行うことが目的
+host n0523
+
+//aptコマンドでbindのインストール
+sudo apt install -y bind9 bind9utils
+ls /etc/bind
+//自身のホスト名を表示
+hostname
+//自身のIPアドレスを表示
+ip address
+//設定ファイルの確認
+named-checkconf -z
+//ファイヤーウォールの設定
+sudo ufw allow 53
+sudo ufw reload
