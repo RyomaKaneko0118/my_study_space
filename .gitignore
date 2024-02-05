@@ -227,3 +227,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 ./secret/**/*
 /secret/**/*
+secret/
