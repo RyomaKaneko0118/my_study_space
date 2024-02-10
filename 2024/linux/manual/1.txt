@@ -1,0 +1,34 @@
+【ユーティリティ】
+systemctl restart sshd
+
+【rootユーザーの作成】
+passwd root
+
+【userの作成】
+sudo adduser bld2022
+【userの確認】
+ls /home
+【デフォルトユーザーの削除】
+sudo deluser ubuntu --remove-home
+
+【editorの変更】
+update-alternatives --config editor
+
+【管理者権限】
+visudo
+# User privilege specification
+bld2022 ALL=(ALL:ALL) ALL
+
+【ルートユーザーをログインできないようにする】
+cd /etc/ssh
+cp ssh_config backup/sshd_config.bak
+sudo vim sshd_config
+PasswordAuthentication yes
+PermitRootLogin no
+systemctl restart sshd
+
+【ubuntuユーザーのロック】
+usermod -L ubuntu
+
+【ロックされたユーザーの確認】
+/etc/shadow
