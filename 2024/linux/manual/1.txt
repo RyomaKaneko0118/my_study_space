@@ -32,3 +32,70 @@ usermod -L ubuntu
 
 【ロックされたユーザーの確認】
 /etc/shadow
+
+【鍵の作成】
+ssh-keygen -t ed25519 -b 4096
+
+ssh-copy-id -i ~/.ssh/id_ed25519_my_key_1.pub bld2022@os3-384-25300.vs.sakura.ne.jp
+ssh -i ~/.ssh/id_ed25519_my_key_1 bld2022@os3-384-25300.vs.sakura.ne.jp
+
+PasswordAuthentication no
+上記以外に不要な設定が含まれているとパスワード認証ができてしまう??
+
+【zshに切り替える】
+sudo apt update
+sudo apt install zsh
+chsh -s $(which zsh)
+
+【簡単な方法でログインできるようにする】
+ローカル環境
+sudo vim ~/.ssh/config
+ssh myServer
+
+Host myServer
+HostName os3-384-25300.vs.sakura.ne.jp
+User bld2022
+Port 22
+IdentityFile ~/.ssh/id_ed25519_my_key_1
+ServerAliveInterval 60
+ServerAliveCountMax 120
+
+【packcage関連】
+sudo apt update
+sudo apt upgrade
+sudo apt autoremove
+sudo reboot
+
+【ufwについて】
+sudo ufw status verbose
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https/tcp
+sudo ufw default deny incoming
+sudo ufw enable
+
+【fail2ban】
+sudo apt install fail2ban
+sudo systemctl status fail2ban
+sudo systemctl enable fail2ban
+cd /etc/fail2ban
+sudo cp jail.conf jail.local.bak
+ブロックしたユーザーのアクセス不可期間を1週間にする。
+不正なアクセスを検出する時間を3時間。
+3回を超えて連続したログインの失敗があった場合、一時的にブロックする。
+[DEFAULT]
+ignorecommand =
+bantime  = 604800s
+findtime  = 10800s
+maxretry = 3
+[sshd]
+mode = aggressive
+port    = ssh
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+enabled = true
+
+sudo systemctl restart fail2ban
+【banされたユーザーの解除】
+sudo fail2ban-client set sshd unbanip 60.87.115.46
+sudo cat /var/log/fail2ban.log 
