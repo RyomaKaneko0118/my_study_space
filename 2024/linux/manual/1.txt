@@ -1,8 +1,36 @@
 【ユーティリティ】
 systemctl restart sshd
 
+【swap】
+htop
+sudo cat /etc/sysctl.conf
+sudo cp /etc/sysctl.conf ~/backup/sysctl.conf.bak
+sudo vim /etc/sysctl.conf
+-------------------------
+vm.swappiness = 1
+vm.vfs_cache_pressure = 50
+-------------------------
+sudo sysctl -p
+sudo ls -l / 
+sudo fallocate -l 1G /swapfile
+sudo ls -l /
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+htop
+sudo cat /etc/fstab
+sudo cp /etc/fstab ~/backup/fstab.bak
+-------------------------
+/swapfile swap swap defaults 0 0
+
+【zshに切り替える】
+sudo apt update
+sudo apt -y install zsh
+chsh -s $(which zsh)
+sudo touch ~/.zshrc
+
 【rootユーザーの作成】
-passwd root
+sudo passwd root
 
 【userの作成】
 sudo adduser bld2022
@@ -12,41 +40,46 @@ ls /home
 sudo deluser ubuntu --remove-home
 
 【editorの変更】
-update-alternatives --config editor
+sudo update-alternatives --config editor
 
 【管理者権限】
-visudo
+sudo visudo
+-------------------------
 # User privilege specification
 bld2022 ALL=(ALL:ALL) ALL
-
+-------------------------
 【ルートユーザーをログインできないようにする】
 cd /etc/ssh
-cp ssh_config backup/sshd_config.bak
+cp sshd_config /backup/sshd_config.bak
 sudo vim sshd_config
+-------------------------
 PasswordAuthentication yes
 PermitRootLogin no
+-------------------------
 systemctl restart sshd
 
 【ubuntuユーザーのロック】
+su -
 usermod -L ubuntu
 
 【ロックされたユーザーの確認】
-/etc/shadow
+cat /etc/shadow
 
 【鍵の作成】
 ssh-keygen -t ed25519 -b 4096
 
 ssh-copy-id -i ~/.ssh/id_ed25519_my_key_1.pub bld2022@os3-384-25300.vs.sakura.ne.jp
 ssh -i ~/.ssh/id_ed25519_my_key_1 bld2022@os3-384-25300.vs.sakura.ne.jp
-
+sudo vim /etc/ssh/sshd_config
+-------------------------
 PasswordAuthentication no
-上記以外に不要な設定が含まれているとパスワード認証ができてしまう??
+-------------------------
 
-【zshに切り替える】
-sudo apt update
-sudo apt install zsh
-chsh -s $(which zsh)
-
+(ハマった箇所)
+-------------------------
+PasswordAuthentication noにしてもパスワード認証できてしまっていた
+不要な記述を削除したら成功
+-------------------------
 【簡単な方法でログインできるようにする】
 ローカル環境
 sudo vim ~/.ssh/config
@@ -75,14 +108,15 @@ sudo ufw default deny incoming
 sudo ufw enable
 
 【fail2ban】
-sudo apt install fail2ban
+sudo apt -y install fail2ban
 sudo systemctl status fail2ban
 sudo systemctl enable fail2ban
 cd /etc/fail2ban
-sudo cp jail.conf jail.local.bak
+sudo cp jail.conf /backup/jail.local.bak
 ブロックしたユーザーのアクセス不可期間を1週間にする。
 不正なアクセスを検出する時間を3時間。
 3回を超えて連続したログインの失敗があった場合、一時的にブロックする。
+-------------------------
 [DEFAULT]
 ignorecommand =
 bantime  = 604800s
@@ -94,8 +128,117 @@ port    = ssh
 logpath = %(sshd_log)s
 backend = %(sshd_backend)s
 enabled = true
-
+-------------------------
 sudo systemctl restart fail2ban
 【banされたユーザーの解除】
 sudo fail2ban-client set sshd unbanip 60.87.115.46
 sudo cat /var/log/fail2ban.log 
+
+【timedateの設定】
+sudo timedatectl
+sudo timedatectl list-timezones | grep -E "As"
+sudo timedatectl set-timezone Asia/Tokyo
+
+【shared memory】
+sudo cd /etc
+sudo vim /etc/fstab
+-------------------------
+none /run/shm tmpfs defaults,ro 0 0
+-------------------------
+sudo reboot
+mount
+【ネットワークセキュリティの向上】
+sudo vim /etc/sysctl.conf
+-------------------------
+# Uncomment the next two lines to enable Spoof protection (reverse-path filter)
+# Turn on Source Address Verification in all interfaces to
+# prevent some spoofing attacks
+net.ipv4.conf.default.rp_filter=1
+net.ipv4.conf.all.rp_filter=1
+net.ipv4.tcp_syncookies=1
+net.ipv4.tcp_max_syn_backlog=2048
+net.ipv4.tcp_synack_retries=2
+net.ipv4.tcp_syn_retries=5
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+net.ipv4.ip_local_port_range = 1024 65535
+fs.file-max = 2097152
+fs.suid_dumpable = 0
+net.core.somaxconn = 65535
+net.core.netdev_max_backlog = 262144
+net.core.optmem_max = 25165824
+net.core.rmem_default = 31457280
+net.core.rmem_max = 67108864
+net.core.wmem_default = 31457280
+net.core.wmem_max = 67108864
+
+
+-------------------------
+sudo reboot
+sudo sysctl -p
+(各項目のデフォルト値の確認)
+sudo sysctl ***
+sudo sysctl net.core.optmem_max
+
+【sudo rebootについて】
+https://teratail.com/questions/56240
+
+【tuned】
+sudo apt update
+sudo apt -y install tuned
+sudo tuned-adm list
+sudo tuned-adm profile throughput-performance 
+sudo tuned-adm active
+(設定内容の確認)
+sudo cat /usr/lib/tuned/throughput-performance/tuned.conf
+
+【ファイルアクセス時の更新を無効にする】
+/dev/disk/by-uuid/860f8109-27cd-4f31-9065-bd8954e2690c / ext4 defaults 0 1
+にnoatimeにする
+/dev/disk/by-uuid/860f8109-27cd-4f31-9065-bd8954e2690c / ext4 defaults,noatime 0 1
+ファイルアクセス時の更新を無効にする。
+sudo vim /etc/fstab
+
+【open file limitを拡張】
+ulimit -Hn
+ulimit -Sn
+cd /etc/security
+sudo cp limits.conf /backup/limits.conf.bak
+sudo vim limits.conf
+-------------------------
+*               soft    nofile            999999
+*               hard    nofile            999999
+root            soft    nofile            999999
+root            hard    nofile            999999
+-------------------------
+
+cd /etc/pam.d
+sudo cp common-session common-session.bak
+sudo vim common-session
+-------------------------
+session required        pam_limits.so
+-------------------------
+sudo cp common-session-noninteractive common-session-noninteractive.bak
+sudo vim common-session-noninteractive
+-------------------------
+session required        pam_limits.so
+-------------------------
+
+【初期重要ファイル】
+sudo apt install -y build-essential
+sudo apt install -y make patch git curl
+sudo apt install -y zlib1g-dev libreadline-dev libyaml-dev
+
+(インストール先の確認方法)
+sudo dpkg -L build-essential
+
+【nginx】
+sudo apt update
+sudo apt install nginx libnginx-mod-http-cache-purge libnginx-mod-http-headers-more-filter
+https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#sources
+sudo apt install libpcre3 libpcre3-dev
+
+
+
