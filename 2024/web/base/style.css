@@ -4501,6 +4501,37 @@ form.form {
 img.crowd-works {
   width: 75px; }
 
+.square {
+  height: 200px;
+  width: 200px; }
+
+.area {
+  width: 100%;
+  gap: 30px; }
+
+.header {
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.16); }
+
+.c-badge {
+  width: fit-content;
+  height: 20px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid;
+  font-size: 11px;
+  color: #949698;
+  background-color: #ffffff;
+  border-color: #949698; }
+  .c-badge.primary {
+    color: #323c46;
+    background-color: #ffffff;
+    border-color: #323c46; }
+
 html,
 body {
   height: 100%; }
