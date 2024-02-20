@@ -4505,6 +4505,21 @@ img.crowd-works {
   height: 200px;
   width: 200px; }
 
+.square-2 {
+  height: 180px;
+  width: 300px; }
+
+.square-3 {
+  width: 100%; }
+
+.square-4 {
+  height: 100%;
+  width: 100%; }
+
+.square-5 {
+  height: 500px;
+  width: 100%; }
+
 .area {
   width: 100%;
   gap: 30px; }
@@ -4532,9 +4547,23 @@ img.crowd-works {
     background-color: #ffffff;
     border-color: #323c46; }
 
+.specific-area {
+  width: 100%; }
+  .specific-area .wrapper {
+    width: 100%;
+    max-width: 1000px;
+    gap: 50px; }
+    .specific-area .wrapper .border {
+      width: 100%;
+      height: 1px;
+      border: 1px solid #323c46; }
+
 html,
 body {
   height: 100%; }
+
+* {
+  box-sizing: border-box; }
 
 body {
   font-size: 15px;
