@@ -1,10 +1,17 @@
 【ユーティリティ】
 systemctl restart sshd
+source ~/.zshrc
+
+【再起動】
+sudo reboot
+sudo shutdown -r now
+【ログインしているユーザーに通知】
+sudo shutdown -hr now
 
 【swap】
 htop
 sudo cat /etc/sysctl.conf
-sudo cp /etc/sysctl.conf ~/backup/sysctl.conf.bak
+sudo cp /etc/sysctl.conf /etc/sysctl.conf.bak
 sudo vim /etc/sysctl.conf
 -------------------------
 vm.swappiness = 1
@@ -19,7 +26,7 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 htop
 sudo cat /etc/fstab
-sudo cp /etc/fstab ~/backup/fstab.bak
+sudo cp /etc/fstab /etc/fstab.bak
 -------------------------
 /swapfile swap swap defaults 0 0
 
@@ -50,7 +57,7 @@ bld2022 ALL=(ALL:ALL) ALL
 -------------------------
 【ルートユーザーをログインできないようにする】
 cd /etc/ssh
-cp sshd_config /backup/sshd_config.bak
+sudo cp sshd_config sshd_config.bak
 sudo vim sshd_config
 -------------------------
 PasswordAuthentication yes
@@ -86,10 +93,10 @@ sudo vim ~/.ssh/config
 ssh myServer
 
 Host myServer
-HostName os3-384-25300.vs.sakura.ne.jp
+HostName 133.167.109.54
 User bld2022
 Port 22
-IdentityFile ~/.ssh/id_ed25519_my_key_1
+IdentityFile ~/.ssh/id_ed25519
 ServerAliveInterval 60
 ServerAliveCountMax 120
 
@@ -112,7 +119,7 @@ sudo apt -y install fail2ban
 sudo systemctl status fail2ban
 sudo systemctl enable fail2ban
 cd /etc/fail2ban
-sudo cp jail.conf /backup/jail.local.bak
+sudo cp jail.conf jail.local.bak
 ブロックしたユーザーのアクセス不可期間を1週間にする。
 不正なアクセスを検出する時間を3時間。
 3回を超えて連続したログインの失敗があった場合、一時的にブロックする。
@@ -140,7 +147,7 @@ sudo timedatectl list-timezones | grep -E "As"
 sudo timedatectl set-timezone Asia/Tokyo
 
 【shared memory】
-sudo cd /etc
+cd /etc
 sudo vim /etc/fstab
 -------------------------
 none /run/shm tmpfs defaults,ro 0 0
@@ -174,6 +181,47 @@ net.core.rmem_max = 67108864
 net.core.wmem_default = 31457280
 net.core.wmem_max = 67108864
 
+【上記の解説】
+net.ipv4.conf.default.rp_filter=1:
+リバースパスフィルタリングを有効にするためのIPv4のデフォルト設定。
+net.ipv4.conf.all.rp_filter=1:
+リバースパスフィルタリングを有効にするためのIPv4の全てのインターフェースに対する設定。
+net.ipv4.tcp_syncookies=1:
+SYN Cookieの有効化。DoS攻撃からシステムを保護するために使用される。
+net.ipv4.tcp_max_syn_backlog=2048:
+SYNキューの最大バックログサイズ。TCPのSYN待ち行列の最大サイズを設定。
+net.ipv4.tcp_synack_retries=2:
+SYN/ACKの再送回数。
+net.ipv4.tcp_syn_retries=5:
+SYNの再送回数。
+net.ipv4.conf.all.accept_source_route = 0:
+IPv4の全てのインターフェースでソースルートオプションを受け入れないように設定。
+net.ipv6.conf.all.accept_source_route = 0:
+IPv6の全てのインターフェースでソースルートオプションを受け入れないように設定。
+net.ipv4.conf.default.accept_source_route = 0:
+IPv4のデフォルトのインターフェースでソースルートオプションを受け入れないように設定。
+net.ipv6.conf.default.accept_source_route = 0:
+IPv6のデフォルトのインターフェースでソースルートオプションを受け入れないように設定。
+net.ipv4.ip_local_port_range = 1024 65535:
+ローカルポートの範囲。
+fs.file-max = 2097152:
+システム全体のオープンファイルの最大数。
+fs.suid_dumpable = 0:
+SUIDプロセスのコアダンプを無効にする。
+net.core.somaxconn = 65535:
+listenキューの最大サイズ。
+net.core.netdev_max_backlog = 262144:
+ネットワークデバイスのバックログの最大サイズ。
+net.core.optmem_max = 25165824:
+ソケットバッファ最大メモリ量。
+net.core.rmem_default = 31457280:
+デフォルトの受信ソケットバッファサイズ。
+net.core.rmem_max = 67108864:
+最大の受信ソケットバッファサイズ。
+net.core.wmem_default = 31457280:
+デフォルトの送信ソケットバッファサイズ。
+net.core.wmem_max = 67108864:
+最大の送信ソケットバッファサイズ。
 
 -------------------------
 sudo reboot
@@ -181,9 +229,6 @@ sudo sysctl -p
 (各項目のデフォルト値の確認)
 sudo sysctl ***
 sudo sysctl net.core.optmem_max
-
-【sudo rebootについて】
-https://teratail.com/questions/56240
 
 【tuned】
 sudo apt update
@@ -205,7 +250,7 @@ sudo vim /etc/fstab
 ulimit -Hn
 ulimit -Sn
 cd /etc/security
-sudo cp limits.conf /backup/limits.conf.bak
+sudo cp limits.conf limits.conf.bak
 sudo vim limits.conf
 -------------------------
 *               soft    nofile            999999
@@ -214,6 +259,7 @@ root            soft    nofile            999999
 root            hard    nofile            999999
 -------------------------
 
+【上記の変更を有効化】
 cd /etc/pam.d
 sudo cp common-session common-session.bak
 sudo vim common-session
