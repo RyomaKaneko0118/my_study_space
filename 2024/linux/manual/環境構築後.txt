@@ -280,6 +280,18 @@ sudo apt install -y zlib1g-dev libreadline-dev libyaml-dev
 (インストール先の確認方法)
 sudo dpkg -L build-essential
 
+【nvmのインストール】
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+sudo vim ~/.zshrc
+---------------------------------------------------------------------------------
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+---------------------------------------------------------------------------------
+source ~/.zshrc
+【nodeのインストール】
+nvm ls-remote
+nvm install v20.11.1
+
 【nginx】
 sudo apt update
 sudo apt install nginx libnginx-mod-http-cache-purge libnginx-mod-http-headers-more-filter
