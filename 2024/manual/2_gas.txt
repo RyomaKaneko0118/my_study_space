@@ -1,0 +1,9 @@
+【AppScripts】
+拡張機能　→　AppScripts
+
+【主要ドキュメント】
+https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app?hl=ja
+https://developers.google.com/apps-script/reference/content/content-service?hl=ja
+
+【slackとの連携】
+app directory　→　カスタムインテグレーション　→　Incoming Webhook
