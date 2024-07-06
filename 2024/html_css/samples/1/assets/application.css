@@ -88,10 +88,48 @@ meter {
   -webkit-user-drag: element;
 }
 
+.header__title {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-out;
+}
+.header__title:hover {
+  opacity: 0.8;
+}
+
+.a-user-role-badge {
+  border: solid 1px hsl(242, 51%, 51%);
+  padding-inline: 12px;
+  height: 28px;
+  font-size: 10px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  border-radius: 16px;
+  color: hsl(242, 51%, 51%);
+  transform: scale(0.9375, 0.9375);
+}
+.a-user-role-badge.is-header {
+  margin-left: 3px;
+  margin-right: 0;
+}
+
+.a-user-role-badge__label {
+  display: inline-block;
+}
+.a-user-role-badge__label + .a-user-role-badge__label::before {
+  content: "/";
+  display: inline-block;
+  margin-inline: 4px;
+}
+
 html,
 body {
   height: 100%;
-  background-color: #53aac2;
 }
 
 * {
