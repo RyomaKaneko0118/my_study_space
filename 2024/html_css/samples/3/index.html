@@ -8,8 +8,18 @@
 </head>
 
 <body>
-	<input type="checkbox" id="modal-mentor-mode" class="a-toggle-checkbox">
+
 	<div class="container is-xl">
+		<div class="a-switch is-hidden-sm-down">
+			<label class="a-switch__label" for="modal-mentor-mode">
+				<span class="a-switch__label-text">メンターモード</span>
+				<div class="a-help">
+					<i class="fa-solid fa-question"></i>
+				</div>
+			</label>
+		</div>
+		<input type="checkbox" id="modal-mentor-mode" class="a-toggle-checkbox">
+
 		<div class="modal">
 			<label class="modal__overlay" for="modal-mentor-mode"></label>
 			<div class="modal__content">

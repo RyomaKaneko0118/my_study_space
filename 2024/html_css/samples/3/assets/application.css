@@ -102,6 +102,118 @@ meter {
   width: 1280px;
 }
 
+.modal {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 16px;
+}
+input:checked + .modal {
+  display: block;
+}
+
+.modal__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal__title {
+  font-weight: 600;
+  font-size: 20px;
+}
+@media screen and (max-width: 575px) {
+  .modal__title {
+    font-size: 16px;
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+  padding: 4px 24px;
+}
+@media screen and (max-width: 575px) {
+  .modal__header {
+    padding: 4px 16px;
+  }
+}
+
+.modal-header__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.2s ease-out;
+  position: relative;
+  margin-right: -24px;
+}
+@media screen and (max-width: 575px) {
+  .modal-header__close {
+    margin-right: -16px;
+  }
+}
+.modal-header__close::before, .modal-header__close::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  background-color: hsl(242, 12%, 35%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 2px;
+}
+.modal-header__close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal-header__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal-header__close:hover {
+  opacity: 1;
+}
+
+.modal__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 4px;
+  width: 640px;
+  max-width: calc(100% - 32px);
+}
+
+.modal__body {
+  max-height: calc(100vh - 184px);
+  overflow: auto;
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+  padding: 24px;
+}
+@media screen and (max-width: 575px) {
+  .modal__body {
+    padding: 16px;
+  }
+}
+
+.modal__description.is-md {
+  font-size: 14px;
+}
+
 .welcome-child-section.is-unlimited .welcome-small-sections {
   margin-top: 56px;
   margin-bottom: 0;
