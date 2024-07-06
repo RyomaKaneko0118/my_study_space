@@ -1,0 +1,120 @@
+.welcome-child-section {
+  margin-top: 50px;
+  padding: 0 16px;
+
+  &.is-unlimited {
+
+    position: relative;
+    
+    .welcome-small-sections__title {
+      $height: 52px;
+      $width: 320px;
+
+      line-height: 1.4;
+      margin-top: 0;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+
+      font-size: 20px;
+      background-size: 28px;
+      margin-bottom: 0;
+      height: $height;
+      width: $width;
+      margin-left: calc(320px / 2);
+      left: 50%;
+      position: absolute;
+      top: calc(52px / -2);
+  
+
+      &.a-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: 4px;
+        margin-inline: auto;
+        background-color: $base;
+        border: solid 1px $border; 
+      }
+
+  }}
+}
+
+
+.welcome-small-section-wrapper {
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+}
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  
+  @media screen and (max-width: 575px) {
+    flex-direction: column;
+  }
+}
+
+.welcome-small-section {
+  height: 100%;
+}
+
+.welcome-small-section__icon {
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 112px;
+  height: 112px;
+  font-size: 80px;
+
+  @media screen and (max-width: 575px) {
+    width: 64px;
+    height: 64px;
+    font-size: 48px; 
+  }
+}
+
+.welcome-small-section__inner {
+  padding: 20px 24px 24px;
+  height: 100%;
+  padding-bottom: 16px;
+}
+
+.welcome-small-section__title {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 11.2px;
+  font-weight: 600;
+  text-align: center;
+  font-feature-settings: "palt";
+
+  @media screen and (max-width: 575px) {
+    font-size: 16px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.welcome-small-section__description {
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 19.2px;
+
+    &:last-child {
+      margin-bottom: 0;
+    } 
+  }
+}
