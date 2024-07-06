@@ -102,8 +102,79 @@ meter {
   width: 1280px;
 }
 
-.modal {
+@media screen and (max-width: 575px) {
+  .is-hidden-sm-down {
+    display: none;
+  }
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.a-switch {
+  display: flex;
+  align-self: center;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.a-switch__label {
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  color: hsl(242, 5%, 64%);
+  margin-right: 8px;
+}
+.a-switch__label .a-help {
+  position: relative;
+  top: -1px;
+}
+.a-switch__label:hover .a-switch__label-text {
+  color: #37339e;
+  text-decoration: underline;
+}
+.a-switch__label:hover .a-help {
+  background-color: hsl(242, 51%, 51%);
+}
+
+.a-toggle-checkbox {
+  height: 0;
+  width: 0;
   display: block;
+  position: fixed;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.a-help {
+  font-size: 12px;
+  line-height: 1;
+  display: inline-flex;
+  color: white;
+  width: 28px;
+  height: 28px;
+  text-decoration: none;
+  background-color: hsl(242, 5%, 64%);
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.a-help:hover {
+  background-color: hsl(242, 51%, 51%);
+  color: white;
+}
+.a-help:last-child {
+  margin-left: 4px;
+}
+
+.modal {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;

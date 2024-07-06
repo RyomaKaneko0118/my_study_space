@@ -12,8 +12,88 @@
   }
 }
 
-.modal {
+.is-hidden-sm-down {
+  @media screen and (max-width: 575px) {
+    display: none;
+  }
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.a-switch {
+  display: flex;
+  align-self: center;
+  cursor: pointer;
+  transition: all .2s ease-out;
+
+}
+
+.a-switch__label {
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  color: $muted-text;
+  margin-right: 8px;
+
+  .a-help {
+    position: relative;
+    top: -1px;
+  }
+
+  &:hover {
+    .a-switch__label-text {
+      color: $main-text;
+      text-decoration: underline;
+    }
+
+    .a-help {
+      background-color: $main;
+    }
+  }
+}
+
+.a-toggle-checkbox {
+  height: 0;
+  width: 0;
   display: block;
+  position: fixed;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.a-help {
+  font-size: 12px;
+  line-height: 1;
+  display: inline-flex;
+  color: $reversal-text;
+  width: 28px;
+  height: 28px;
+  text-decoration: none;
+  background-color: $muted-text;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .2s ease-out;
+
+  &:hover {
+    background-color: $main;
+    color: $reversal-text;
+  }
+
+  &:last-child {
+    margin-left: 4px;
+  }
+
+}
+
+.modal {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;

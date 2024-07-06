@@ -1,9 +1,16 @@
-$main: red;
+$main: hsl(242, 51%, 51%);
 $color-primary: hsl(242, 51%, 51%);
+
 $base: white;
 $border: hsl(242, 7%, 89%);
+$border-tint: hsl(242, 14%, 95%);
+
 $default-text: hsl(242, 12%, 35%);
-$border-tint: hsl(242, 14%, 95%)
+$muted-text: hsl(242, 5%, 64%);
+$reversal-text: white;
+$main-text: darken($main, 10%);
+
+
 // $color-primary: #53aac2;
 // $color-secondary: #53aac2;
 // $color-tertiary: #ffa000;
