@@ -1,0 +1,122 @@
+.container {
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  @media screen and (min-width: 576px) {
+    padding-inline: 16px; 
+  }
+
+  &.is-xl {
+    width: 1280px;
+  }
+}
+
+.is-hidden-sm-down {
+  @media screen and (max-width: 575px) {
+    display: none;
+  }
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.a-switch {
+  display: flex;
+  align-self: center;
+  cursor: pointer;
+  transition: all .2s ease-out;
+}
+
+.a-on-off-checkbox {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  padding-block: 8px;
+  margin-block: -8px;
+
+  input {
+    opacity: 0;
+    position: absolute;
+    left: -16px;
+    top: 0;
+    width: 0;
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
+
+  &.is-sm {
+    $height: 18px;
+    $border-width: 1px;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $background;
+      position: relative;
+      transition: all .2s ease-out;
+      width: 56px;
+      height: calc(#{$height} + #{$border-width} * 2);
+      border: solid $border-width $border-shade;
+      border-radius: $height;
+      font-size: 12px;
+
+      &::before {
+        content: '';
+        display: block;
+        border-radius: 50%;
+        background-color: $base;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: solid 1px $border-shade;
+        width: $height;
+        height: $height;
+      }
+  
+      &::after {
+        content: 'OFF';
+        font-size: 12px;
+        line-height: 1;
+        display: flex;
+        text-align: center;
+        font-weight: 600;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100% - #{$border-width} * 2);
+        padding-left: 26px;
+        padding-right: 12px;
+      }
+    }
+
+    input:checked + span {
+      background-color: $danger;
+      border-color: $danger;
+  
+      &::before {
+        position: absolute;
+        left: auto;
+        right: 0;
+      }
+  
+      &::after {
+        content: 'ON';
+        color: $reversal-text;
+        line-height: 1;
+        display: flex;
+        text-align: center;
+        font-weight: 600;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100% - #{$border-width} * 2);
+        padding-left: 12px;
+        padding-right: 22px;
+      }
+    }
+  }
+}
