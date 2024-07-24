@@ -130,6 +130,134 @@ body .no-global-nav .wrappper {
   flex: 1;
 }
 
+.container.is-md {
+  max-width: 100%;
+  width: 768px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.card-list.a-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  width: 100%;
+  margin-inline: auto;
+  border: solid 1px hsl(242, 7%, 89%);
+  background-color: white;
+}
+.card-list .card-list-item__inner {
+  position: relative;
+  display: flex;
+  gap: 16px;
+}
+.card-list .card-list-item__user {
+  min-width: 48px;
+}
+.card-list .card-list-item__user-icon {
+  height: 45px;
+  width: 45px;
+}
+
+.card-list-item-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-list-item-title__start {
+  display: flex;
+  align-items: center;
+  flex: 1 1;
+}
+.card-list-item-title__title {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  width: 100%;
+  flex-basis: 100%;
+  word-break: break-all;
+}
+.card-list-item-title__link {
+  word-break: break-all;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.card-list-item-title__emotion-image {
+  height: 18px;
+  width: 18px;
+  margin-right: 6px;
+  translate: 0, -1px;
+}
+
+.a-user-role.is-admin {
+  display: inline-block;
+  border-radius: 50%;
+  background-color: white;
+  border: solid 2px rgba(245, 71, 103, 0.7);
+}
+
+.a-user-icon {
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.a-text-link {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease-in;
+}
+.a-text-link:link {
+  color: hsl(242, 62%, 33%);
+}
+
+.stamp.stamp-approve {
+  border: solid 1px hsl(0, 80%, 62%);
+  border-radius: 12px;
+  pointer-events: none;
+  height: 56px;
+  width: 64px;
+  position: absolute;
+  right: -4px;
+  top: 0;
+  transform: rotate(25deg);
+  font-size: 10px;
+  line-height: 1;
+  display: block;
+  text-align: center;
+  font-weight: 400;
+  font-feature-settings: "palt";
+  letter-spacing: 0;
+  color: hsl(0, 80%, 62%);
+}
+.stamp__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32%;
+  width: 100%;
+}
+.stamp__content.is-created-at {
+  height: 36%;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: hsl(0, 80%, 62%);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: hsl(0, 80%, 62%);
+}
+.stamp__content .stamp__content-inner {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-inline: 4px;
+  height: 100%;
+  line-height: 1.55;
+}
+
 .modal {
   display: none;
   position: fixed;
