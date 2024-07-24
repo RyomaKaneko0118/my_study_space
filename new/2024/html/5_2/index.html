@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ベースのhtml</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="assets/application.css">
+<script src="https://kit.fontawesome.com/3dfd965499.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="is-application no-global-nav no-header">
+	<div class="wrapper is-application">
+		<main class="page">
+			<img src="assets/images/logo-lg.svg" alt="ロゴ" class="auth-form-logo-image">
+			<div class="auth-form">
+				<div class="a-card">
+					<div class="auth-form__body">
+						<form id="sign-in-form" 
+						      class="form" 
+									name="user_session" 
+									action="index.html"
+									accept-charset="UTF-8" 
+									method="post">
+							<input type="hidden" name="authenticity_token" value="...">
+							<div class="form__items">
+								<div class="form-item">
+									<label for="user_login" class="a-form-label">
+										ユーザー名orメールアドレス
+									</label>
+									<input type="text" 
+									       name="user[login]" 
+											   id="user_login" 
+											   class="a-text-input">
+								</div>
+								<div class="form-item">
+									<label for="user_password" class="a-form-label">
+										パスワード
+									</label>
+									<input type="password" 
+									       name="user[password]" 
+											   id="user_password" 
+											   class="a-text-input">
+									<div class="a-form-help is-text-align-right">
+										<label class="a-form-help-link" for="forgot-password-modal">
+											パスワードを忘れた
+										</label>
+
+									</div>
+								</div>
+								<div class="form-item">
+									<label class="form-item__one-checkbox a-checkbox">
+										<input type="checkbox"
+										       name="remember" 
+										       id="remenber" 
+										       class="form-item__remember-me-input">
+										<span>次回から自動的にログイン</span>
+									</label>
+
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="form-actions__item is-main">
+									<button type="submit" 
+									        name="button" 
+												  class="a-button is-lg is-primary is-block">
+										ログイン
+									</button>
+							</div>
+						</form>
+					</div>	
+				</div>
+			</div>
+
+			<input type="checkbox" id="forgot-password-modal" class="a-toggle-checkbox">
+			<div class="modal">
+				<label class="modal__overlay" for="forgot-password-modal"></label>
+				<div class="modal__content is-sm">
+					<div class="modal__header">
+						<h2 class="modal__title">パスワードの再設定</h2>
+						<label class="modal-header__close" for="forgot-password-modal"></label>
+					</div>
+					<div class="modal__body">
+						<from id="password_reset_form"
+						      class="form"
+									action=""
+									accept-charset="UTF-8"
+									method="post">
+							<input type="hidden"
+							       name="authenticity_token" 
+										 value="hoge">
+							<div class="form__items">
+								<div class="form-item">
+									<label for="email" class="a-form-label">
+										<span class="translation_missing" title="translation missing:ja.email">
+											Email
+										</span>
+									</label>
+									<input type="text"
+									       name="email"
+												 id="email"
+												 class="a-text-input">
+								</div>
+							</div>
+							<div class="form-actions">
+								<ul class="formt-actions__items">
+									<li class="form-actions__item is-main">
+										<input type="text"
+										       name="commit"
+													 value="パスワード再設定"
+													 class="a-button is-lg is-primary is-block"
+													 data-disable-with="パスワード再設定">
+									</li>
+								</ul>
+							</div>
+						</from>	
+					</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>
