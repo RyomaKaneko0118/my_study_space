@@ -146,6 +146,13 @@ body .no-global-nav .wrappper {
   border: solid 1px hsl(242, 7%, 89%);
   background-color: white;
 }
+.card-list .card-list-item {
+  position: relative;
+  padding: 12px 16px;
+}
+.card-list .card-list-item:not(:last-child) {
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+}
 .card-list .card-list-item__inner {
   position: relative;
   display: flex;
@@ -256,6 +263,39 @@ body .no-global-nav .wrappper {
   padding-inline: 4px;
   height: 100%;
   line-height: 1.55;
+}
+
+.card-list-item-meta__items {
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+.card-list-item-meta__item {
+  overflow: hidden;
+}
+.card-list-item-meta__item a.a-user-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  max-width: 100%;
+  color: hsl(242, 5%, 64%);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.card-list-item-meta__item .a-meta {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: hsl(242, 5%, 64%);
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
 }
 
 .modal {
