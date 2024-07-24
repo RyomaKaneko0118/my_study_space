@@ -65,6 +65,12 @@ body {
     background-color: $base;
   }
 
+  .card-list__row-separator {
+    margin-block: 8px;
+    border-top: dashed 1px $border;
+    height: 1px;
+  }
+
   .card-list-item {
     position: relative;
     padding: 12px 16px;
@@ -83,9 +89,20 @@ body {
       min-width: 48px;
     }
 
+    &__user-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
     &__user-icon {
       height: 45px;
       width: 45px;
+    }
+
+    &__rows {
+      flex: 1 1;
+      min-width: 0;
     }
   }
 }
@@ -128,6 +145,19 @@ body {
   }
 }
 
+.card-list-item-meta {
+  &__items {
+    font-size: 14px;
+    line-height: 1.4;
+    display: flex;
+    flex-wrap: wrap;
+    gap:0 8px;
+  }
+
+  &__item {
+    overflow: hidden;
+  }
+}
 .a-user-role {
   &.is-admin {
     display: inline-block;
@@ -215,6 +245,15 @@ body {
 
   &__item {
     overflow: hidden;
+
+    .a-user-icon {
+      height: 16px;
+      width: 16px;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
+      background-color: $base;
+    }
 
     a {
       &.a-user-name {

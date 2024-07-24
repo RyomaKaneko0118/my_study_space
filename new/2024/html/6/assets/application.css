@@ -146,6 +146,11 @@ body .no-global-nav .wrappper {
   border: solid 1px hsl(242, 7%, 89%);
   background-color: white;
 }
+.card-list .card-list__row-separator {
+  margin-block: 8px;
+  border-top: dashed 1px hsl(242, 7%, 89%);
+  height: 1px;
+}
 .card-list .card-list-item {
   position: relative;
   padding: 12px 16px;
@@ -161,9 +166,18 @@ body .no-global-nav .wrappper {
 .card-list .card-list-item__user {
   min-width: 48px;
 }
+.card-list .card-list-item__user-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
 .card-list .card-list-item__user-icon {
   height: 45px;
   width: 45px;
+}
+.card-list .card-list-item__rows {
+  flex: 1 1;
+  min-width: 0;
 }
 
 .card-list-item-title {
@@ -195,6 +209,17 @@ body .no-global-nav .wrappper {
   width: 18px;
   margin-right: 6px;
   translate: 0, -1px;
+}
+
+.card-list-item-meta__items {
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+.card-list-item-meta__item {
+  overflow: hidden;
 }
 
 .a-user-role.is-admin {
@@ -274,6 +299,14 @@ body .no-global-nav .wrappper {
 }
 .card-list-item-meta__item {
   overflow: hidden;
+}
+.card-list-item-meta__item .a-user-icon {
+  height: 16px;
+  width: 16px;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: white;
 }
 .card-list-item-meta__item a.a-user-name {
   overflow: hidden;
