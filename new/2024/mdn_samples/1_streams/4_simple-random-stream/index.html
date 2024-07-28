@@ -26,34 +26,30 @@
 <body>
 <h1>Simple random stream</h1>
 
-<button>Stop string generation</button>
+<button id="stopStringGenerationBtn">Stop string generation</button>
 
 <div class="input">
   <h2>Custom stream input</h2>
-  <ul>
-
-  </ul>
+  <ul id="customStreamInputUl"></ul>
 </div>
 
 <div class="output">
   <h2>Reading custom stream</h2>
-  <ul>
-
-  </ul>
+  <ul id="readingCustomStreamUl"></ul>
 </div>
 
 <hr>
 
 <h2>Final result</h2>
 
-<p></p>
+<p id="outputParamsTag"></p>
 
 <script>
   // Store reference to lists, paragraph and button
-  const list1 = document.querySelector('.input ul');
-  const list2 = document.querySelector('.output ul');
-  const para = document.querySelector('p');
-  const button = document.querySelector('button');
+  const list1 = document.querySelector('#customStreamInputUl');
+  const list2 = document.querySelector('#readingCustomStreamUl');
+  const para = document.querySelector('#outputParamsTag');
+  const button = document.querySelector('stopStringGenerationBtn');
 
   // create empty string in which to store result
   let result = "";
@@ -70,6 +66,8 @@
   }
 
   const stream = new ReadableStream({
+    // NOTE:
+    // startメソッドはReadableStreamが読み出されたときに1回だけ呼び出される
     start(controller) {
       interval = setInterval(() => {
         let string = randomChars();
@@ -99,9 +97,9 @@
     }
   });
 
-  function readStream() {
-    const reader = stream.getReader();
-    let charsReceived = 0;
+  const readStream = () => {
+    const reader = stream.getReader()
+    let charsReceived = 0
 
     // read() returns a promise that resolves
     // when a value has been received
@@ -113,18 +111,21 @@
         if (done) {
           console.log("Stream complete");
           para.textContent = result;
-          return;
+          return
         }
 
-        charsReceived += value.length;
-        const chunk = value;
-        let listItem = document.createElement('li');
+        charsReceived += value.length
+        const chunk = value
+        let listItem = document.createElement('li')
         listItem.textContent = 'Read ' + charsReceived + ' characters so far. Current chunk = ' + chunk;
-        list2.appendChild(listItem);
+        list2.appendChild(listItem)
 
-        result += chunk;
+        result += chunk
 
         // Read some more, and call this function again
+        // 1_の事例ではwhileを使った。
+        // ここでは作成したメソッドを再帰的に呼び出す。
+        // 1_の事例と比較するとよい。
         return reader.read().then(processText);
       });
   }

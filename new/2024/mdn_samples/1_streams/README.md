@@ -1,3 +1,18 @@
+処理の流れ
+1. フェッチした後、streamを取り出す(response.body)
+2. 取り出したストリームからリーダーを取り付ける(rs.getReader())
+3. リーダーからストリームを読み込む(ReadableStream)、または書き込む
+
+ストリームを読み込む処理(ReadableStream)
+1. ストリームを読み込む関数を作成
+2. 読み込むストリームがない場合は関数から戻る
+3. 読み込むストリームがある場合は、現在のチャンクを処理し、関数を再度実行する。
+4. 読み取るストリームがなくなるまで、関数を再帰的に実行し続ける。
+
+ポイント
+* 一つのストリームに対して、リーダーは一つしか取り付けることができない。(ロックが発生する)
+* オリジナルのストリームに複製することは可能(tee)
+
 Examples:
 * [Simple stream pump](http://mdn.github.io/dom-examples/streams/simple-pump/): This example shows how to consume a ReadableStream and pass its data to another.
 * [Grayscale a PNG](http://mdn.github.io/dom-examples/streams/grayscale-png/): This example shows how a ReadableStream of a PNG can be turned into grayscale.
