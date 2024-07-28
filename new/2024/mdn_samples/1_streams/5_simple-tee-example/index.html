@@ -97,9 +97,13 @@
   });
 
   function teeStream() {
-    const teedOff = stream.tee();
-    readStream(teedOff[0], list2);
-    readStream(teedOff[1], list3);
+    // NOTE:
+    // 別の書き方
+    // const [teed_1, teed_2] = stream.tee()
+
+    const teedOff = stream.tee()
+    readStream(teedOff[0], list2)
+    readStream(teedOff[1], list3)
   }
 
   function readStream(stream, list) {
