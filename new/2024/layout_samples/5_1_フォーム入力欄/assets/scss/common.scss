@@ -60,7 +60,7 @@ body {
 
 .auth-form {
   width: 448px;
-  max-width: calc(100% - 32px);
+  max-width: calc(100vw - 32px);
   margin-bottom: 32px;
   margin-inline: auto;
   @media screen and (max-width: 575px) {

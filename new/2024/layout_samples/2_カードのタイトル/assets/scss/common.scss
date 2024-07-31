@@ -45,10 +45,10 @@
       margin-bottom: 0;
       height: $height;
       width: $width;
-      margin-left: calc(320px / -2);
+      margin-left: calc($width / -2);
       left: 50%;
       position: absolute;
-      top: calc(52px / -2);
+      top: calc($height / -2);
 
       &.a-card {
         border-radius: 4px;
