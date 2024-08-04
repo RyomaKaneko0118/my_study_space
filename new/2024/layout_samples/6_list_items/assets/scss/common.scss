@@ -50,6 +50,7 @@ body {
     max-width: 100%;
     width: 768px;
     margin-inline: auto;
+    margin-top: 30px;
     padding-inline: 24px;
   }
 }
@@ -158,6 +159,7 @@ body {
     overflow: hidden;
   }
 }
+
 .a-user-role {
   &.is-admin {
     display: inline-block;

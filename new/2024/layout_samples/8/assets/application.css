@@ -107,10 +107,10 @@ body {
 body .is-application {
   background-color: hsl(242, 34%, 98%);
 }
-body .no-header .wrappper {
+body .no-header .wrapper {
   padding-top: 0;
 }
-body .no-global-nav .wrappper {
+body .no-global-nav .wrapper {
   margin-left: 0;
 }
 
