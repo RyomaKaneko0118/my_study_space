@@ -49,6 +49,10 @@ section#carousel {
   width: 900px;
   min-width: 900px;
   margin: 50px auto;
+
+  .description {
+    margin-bottom: 20px;
+  }
 }
 
 %animation-default {
