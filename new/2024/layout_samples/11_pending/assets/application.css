@@ -1,0 +1,353 @@
+@charset "UTF-8";
+/***
+    The new CSS reset - version 1.7.3 (last updated 7.8.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  line-break: auto;
+  -webkit-line-break: after-white-space;
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+html {
+  font-family: YakuHanJPs_Narrow, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  color: hsl(242, 12%, 35%);
+  scroll-padding-top: 50px;
+}
+@media screen and (max-width: 575px) {
+  html {
+    scroll-padding-top: 0;
+  }
+}
+
+body {
+  min-height: 100vh;
+  height: 100%;
+}
+body .is-application {
+  background-color: hsl(242, 34%, 98%);
+}
+body .no-header .wrappper {
+  padding-top: 0;
+}
+body .no-global-nav .wrappper {
+  margin-left: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  overflow-y: visible;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.carousel,
+.item,
+.active {
+  height: 100%;
+}
+
+.carousel-inner {
+  height: 100%;
+  background: #000;
+}
+
+.carousel-caption {
+  padding-bottom: 80px;
+}
+
+h2 {
+  font-size: 60px;
+}
+
+p {
+  padding: 10px;
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  opacity: 0.6;
+}
+.fill.code {
+  background-image: url("../images/code_1.jpg");
+}
+.fill.conference {
+  background-image: url("../images/conference_1.jpg");
+}
+.fill.campus {
+  background-image: url("../images/campus_1.jpg");
+}
+
+.btn-transparent {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.btn-transparent:hover {
+  background-color: #fff;
+}
+
+.btn-rounded {
+  border-radius: 70px;
+}
+
+.btn-large {
+  padding: 11px 45px;
+  font-size: 18px;
+}
+
+.animated {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+.fadeInRight {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 16px;
+}
+input:checked + .modal {
+  display: block;
+}
+
+.modal__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal__title {
+  font-weight: 600;
+  font-size: 20px;
+}
+@media screen and (max-width: 575px) {
+  .modal__title {
+    font-size: 16px;
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+  padding: 4px 24px;
+}
+@media screen and (max-width: 575px) {
+  .modal__header {
+    padding: 4px 16px;
+  }
+}
+
+.modal-header__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.2s ease-out;
+  position: relative;
+  margin-right: -24px;
+}
+@media screen and (max-width: 575px) {
+  .modal-header__close {
+    margin-right: -16px;
+  }
+}
+.modal-header__close::before, .modal-header__close::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  background-color: hsl(242, 12%, 35%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 2px;
+}
+.modal-header__close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal-header__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal-header__close:hover {
+  opacity: 1;
+}
+
+.modal__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 4px;
+  width: 640px;
+  max-width: calc(100% - 32px);
+}
+.modal__content.is-sm {
+  width: 384px;
+}
+
+.modal__body {
+  max-height: calc(100vh - 184px);
+  overflow: auto;
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+  padding: 24px;
+}
+@media screen and (max-width: 575px) {
+  .modal__body {
+    padding: 16px;
+  }
+}
+
+.modal__description.is-md {
+  font-size: 14px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=application.css.map */
