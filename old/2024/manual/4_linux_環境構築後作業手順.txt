@@ -27,14 +27,17 @@ sudo swapon /swapfile
 htop
 sudo cat /etc/fstab
 sudo cp /etc/fstab /etc/fstab.bak
+sudo vim /etc/fstab
 -------------------------
 /swapfile swap swap defaults 0 0
 
 【zshに切り替える】
 sudo apt update
 sudo apt -y install zsh
+ログインシェルの変更
 chsh -s $(which zsh)
 sudo touch ~/.zshrc
+source ~/.zshrc
 
 【rootユーザーの作成】
 sudo passwd root
@@ -43,6 +46,10 @@ sudo passwd root
 sudo adduser bld2022
 【userの確認】
 ls /home
+
+bld2022でログイン
+su root
+
 【デフォルトユーザーの削除】
 sudo deluser ubuntu --remove-home
 
@@ -82,6 +89,8 @@ sudo vim /etc/ssh/sshd_config
 PasswordAuthentication no
 -------------------------
 
+systemctl restart sshd
+リスタートしないと設定が反映されないので注意
 (ハマった箇所)
 -------------------------
 PasswordAuthentication noにしてもパスワード認証できてしまっていた
@@ -97,6 +106,14 @@ HostName 133.167.109.54
 User bld2022
 Port 22
 IdentityFile ~/.ssh/id_ed25519
+ServerAliveInterval 60
+ServerAliveCountMax 120
+
+Host myServer
+HostName 133.167.109.54
+User bld2022
+Port 22
+IdentityFile ~/.ssh/id_ed25519_private_key_0901
 ServerAliveInterval 60
 ServerAliveCountMax 120
 
