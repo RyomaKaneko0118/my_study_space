@@ -388,3 +388,28 @@ end
 
 p Klass.new.a #=> "ok Foo"
 p Klass.b     #=> "ok Bar"
+
+module A
+  module B
+    # クラスメソッドとして定義
+    extend self
+
+    class C
+      class Uncountable < Array; end
+
+      def self.instance
+        @__instance__ ||= new
+      end
+
+      attr_accessor :uncountables, :any_data
+
+      def initialize
+        @uncountables , @any_data = Uncountable.new, []
+      end
+    end
+
+    def run
+      C.instance
+    end
+  end
+end
