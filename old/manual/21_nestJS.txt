@@ -1,0 +1,10 @@
+npm init -y
+npm install @nestjs/common @nestjs/core @nestjs/platform-express reflect-metadata typescript
+touch tsconfig.json
+npx ts-node-dev src/main.ts
+-------------------------------------
+sudo npm install -g @nestjs/cli
+nest new messages
+nest generate module messages
+nest generate controller messages/messages --flat
+npm install class-validator class-transformer

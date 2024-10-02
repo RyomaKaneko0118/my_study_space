@@ -1,0 +1,12 @@
+【ログイン】
+psql -U name -d database_name
+【現在のデータベース内のテーブル一覧を表示します】
+\dt
+【データベースに接続します】
+\c database_name 
+【特定のテーブルの詳細情報を表示します】
+\d table_name:
+【ユーザー一覧を表示します】
+\du
+【PostgreSQLセッションを終了します】
+\q

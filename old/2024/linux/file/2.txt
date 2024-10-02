@@ -1,0 +1,244 @@
+ubuntu@os3-384-25300:/$ client_loop: send disconnect: Broken pipe
+
+~/workspace/git_clone/my_study_space/2024/linux development* 11m 16s
+~/workspace/git_clone/my_study_space/2024/linux % ssh ubuntu@os3-384-25300.vs.sakura.ne.jp
+ubuntu@os3-384-25300.vs.sakura.ne.jp's password: 
+Welcome to Ubuntu 20.04.5 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Feb 10 08:40:10 JST 2024
+
+  System load:  0.0               Processes:             101
+  Usage of /:   8.3% of 24.52GB   Users logged in:       1
+  Memory usage: 35%               IPv4 address for ens3: 133.167.109.54
+  Swap usage:   0%
+
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+
+SAKURA internet [Virtual Private Server SERVICE]
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Last login: Sat Feb 10 08:28:52 2024 from 60.87.115.46
+Could not chdir to home directory /home/ubuntu: No such file or directory
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@os3-384-25300:/$ visudo
+visudo: /etc/sudoers: Permission denied
+ubuntu@os3-384-25300:/$ sudo visudo
+[sudo] password for ubuntu: 
+ubuntu@os3-384-25300:/$ sudo visudo
+visudo: /etc/sudoers.tmp unchanged
+ubuntu@os3-384-25300:/$ cd /etc/ssh
+ubuntu@os3-384-25300:/etc/ssh$ ls
+moduli	    ssh_config.d	ssh_host_ecdsa_key.pub	ssh_host_ed25519_key.pub  ssh_host_rsa_key.pub	sshd_config
+ssh_config  ssh_host_ecdsa_key	ssh_host_ed25519_key	ssh_host_rsa_key	  ssh_import_id		sshd_config.d
+ubuntu@os3-384-25300:/etc/ssh$ vim ssh
+ssh_config                ssh_host_ecdsa_key.pub    ssh_host_rsa_key          sshd_config
+ssh_config.d/             ssh_host_ed25519_key      ssh_host_rsa_key.pub      sshd_config.d/
+ssh_host_ecdsa_key        ssh_host_ed25519_key.pub  ssh_import_id             
+ubuntu@os3-384-25300:/etc/ssh$ vim ssh_config
+ubuntu@os3-384-25300:/etc/ssh$ sudo vim ssh_config
+ubuntu@os3-384-25300:/etc/ssh$ systemctl restart ssh
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to restart 'ssh.service'.
+Authenticating as: ubuntu
+Password: 
+==== AUTHENTICATION COMPLETE ===
+ubuntu@os3-384-25300:/etc/ssh$ exit
+logout
+Connection to os3-384-25300.vs.sakura.ne.jp closed.
+
+~/workspace/git_clone/my_study_space/2024/linux development* 12m 51s
+~/workspace/git_clone/my_study_space/2024/linux % ssh ubuntu@os3-384-25300.vs.sakura.ne.jp
+ubuntu@os3-384-25300.vs.sakura.ne.jp's password: 
+Welcome to Ubuntu 20.04.5 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Feb 10 08:53:04 JST 2024
+
+  System load:  0.15              Processes:             102
+  Usage of /:   8.3% of 24.52GB   Users logged in:       1
+  Memory usage: 35%               IPv4 address for ens3: 133.167.109.54
+  Swap usage:   0%
+
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+
+SAKURA internet [Virtual Private Server SERVICE]
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Last login: Sat Feb 10 08:40:10 2024 from 60.87.115.46
+Could not chdir to home directory /home/ubuntu: No such file or directory
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@os3-384-25300:/$ cat /etc/ssh/
+moduli                    ssh_host_ecdsa_key        ssh_host_ed25519_key.pub  ssh_import_id
+ssh_config                ssh_host_ecdsa_key.pub    ssh_host_rsa_key          sshd_config
+ssh_config.d/             ssh_host_ed25519_key      ssh_host_rsa_key.pub      sshd_config.d/
+ubuntu@os3-384-25300:/$ cat /etc/ssh/
+moduli                    ssh_host_ecdsa_key        ssh_host_ed25519_key.pub  ssh_import_id
+ssh_config                ssh_host_ecdsa_key.pub    ssh_host_rsa_key          sshd_config
+ssh_config.d/             ssh_host_ed25519_key      ssh_host_rsa_key.pub      sshd_config.d/
+ubuntu@os3-384-25300:/$ cat /etc/ssh/ssh_config
+
+# This is the ssh client system-wide configuration file.  See
+# ssh_config(5) for more information.  This file provides defaults for
+# users, and the values can be changed in per-user configuration files
+# or on the command line.
+
+# Configuration data is parsed as follows:
+#  1. command line options
+#  2. user-specific file
+#  3. system-wide file
+# Any configuration value is only changed the first time it is set.
+# Thus, host-specific definitions should be at the beginning of the
+# configuration file, and defaults at the end.
+
+# Site-wide defaults for some commonly used options.  For a comprehensive
+# list of available options, their meanings and defaults, please see the
+# ssh_config(5) man page.
+
+Include /etc/ssh/ssh_config.d/*.conf
+
+Host *
+#   ForwardAgent no
+#   ForwardX11 no
+#   ForwardX11Trusted yes
+#   PasswordAuthentication yes
+#   HostbasedAuthentication no
+#   GSSAPIAuthentication no
+#   GSSAPIDelegateCredentials no
+#   GSSAPIKeyExchange no
+#   GSSAPITrustDNS no
+#   BatchMode no
+#   CheckHostIP yes
+#   AddressFamily any
+#   ConnectTimeout 0
+#   StrictHostKeyChecking ask
+#   IdentityFile ~/.ssh/id_rsa
+#   IdentityFile ~/.ssh/id_dsa
+#   IdentityFile ~/.ssh/id_ecdsa
+#   IdentityFile ~/.ssh/id_ed25519
+#   Port 22
+#   Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc
+#   MACs hmac-md5,hmac-sha1,umac-64@openssh.com
+#   EscapeChar ~
+#   Tunnel no
+#   TunnelDevice any:any
+#   PermitLocalCommand no
+#   VisualHostKey no
+#   ProxyCommand ssh -q -W %h:%p gateway.example.com
+#   RekeyLimit 1G 1h
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    PasswordAuthentication yes
+    PermitRootLogin no
+ubuntu@os3-384-25300:/$ vim /etc/ssh/ssh_config
+ubuntu@os3-384-25300:/$ sudo vim /etc/ssh/ssh_config
+[sudo] password for ubuntu: 
+ubuntu@os3-384-25300:/$ ls
+bin   dev  home  lib32	libx32	    media  opt	 root  sbin  sys  usr
+boot  etc  lib	 lib64	lost+found  mnt    proc  run   srv   tmp  var
+ubuntu@os3-384-25300:/$ cd /etc/ssh
+ubuntu@os3-384-25300:/etc/ssh$ ls
+moduli	    ssh_config.d	ssh_host_ecdsa_key.pub	ssh_host_ed25519_key.pub  ssh_host_rsa_key.pub	sshd_config
+ssh_config  ssh_host_ecdsa_key	ssh_host_ed25519_key	ssh_host_rsa_key	  ssh_import_id		sshd_config.d
+ubuntu@os3-384-25300:/etc/ssh$ cp sshd_config sshd_config.bak
+cp: cannot create regular file 'sshd_config.bak': Permission denied
+ubuntu@os3-384-25300:/etc/ssh$ sudo cp sshd_config sshd_config.bak
+ubuntu@os3-384-25300:/etc/ssh$ sudo vim sshd_config
+
+#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+Include /etc/ssh/sshd_config.d/*.conf
+
+#Port 22
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+#HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_ecdsa_key
+#HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Ciphers and keying
+#RekeyLimit default none
+
+# Logging
+#SyslogFacility AUTH
+#LogLevel INFO
+
+# Authentication:
+
+#LoginGraceTime 2m
+#PermitRootLogin prohibit-password
+#StrictModes yes
+                                                                                                    1,1           Top

@@ -1,0 +1,323 @@
+@charset "UTF-8";
+/***
+    The new CSS reset - version 1.7.3 (last updated 7.8.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  line-break: auto;
+  -webkit-line-break: after-white-space;
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+html {
+  font-family: YakuHanJPs_Narrow, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  color: hsl(242, 12%, 35%);
+  scroll-padding-top: 50px;
+}
+@media screen and (max-width: 575px) {
+  html {
+    scroll-padding-top: 0;
+  }
+}
+
+body {
+  min-height: 100vh;
+  height: 100%;
+}
+body .is-application {
+  background-color: hsl(242, 34%, 98%);
+}
+body .no-header .wrappper {
+  padding-top: 0;
+}
+body .no-global-nav .wrappper {
+  margin-left: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  overflow-y: visible;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.auth-form-logo-image {
+  max-width: 384px;
+  display: block;
+  margin: 64px auto 32px;
+}
+@media screen and (max-width: 575px) {
+  .auth-form-logo-image {
+    margin-top: 32px;
+    max-width: 100%;
+    padding-inline: 32px;
+  }
+}
+
+.auth-form {
+  width: 448px;
+  max-width: calc(100% - 32px);
+  margin-bottom: 32px;
+  margin-inline: auto;
+}
+@media screen and (max-width: 575px) {
+  .auth-form {
+    margin-inline: 16px;
+  }
+}
+
+.a-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  width: 100%;
+  margin-inline: auto;
+  background-color: white;
+  border: solid 1px hsl(242, 7%, 89%);
+}
+
+.auth-form__body {
+  padding: 24px 28px;
+}
+
+.form {
+  margin-inline: auto;
+}
+
+.form-item:not(:last-child) {
+  margin-bottom: 28px;
+}
+
+.a-form-label {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 600;
+}
+
+.a-text-input {
+  font-size: 14px;
+  line-height: 1.4;
+  display: block;
+  background-color: hsl(242, 8%, 98.5%);
+  width: 100%;
+  padding: 8px;
+  border: solid 1px hsl(242, 7%, 84%);
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in, background-color 0.2s ease-in, box-shadow 0.2s ease-in;
+}
+@media screen and (max-width: 575px) {
+  .a-text-input {
+    font-size: 16px;
+  }
+}
+
+.form-item__one-checkbox {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.a-checkbox {
+  position: relative;
+}
+.a-checkbox input[type=checkbox] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+.a-checkbox span {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  padding-left: 24px;
+  cursor: pointer;
+}
+.a-checkbox span::before {
+  content: "";
+  height: 14px;
+  width: 14px;
+  border: solid 1px hsl(242, 5%, 64%);
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -7px;
+}
+.a-checkbox input:checked + span::before {
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  content: "\f00c";
+  font-family: "Font Awesome 6 Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: hsl(211, 67%, 52%);
+  border-color: #1f4e81;
+}
+
+.form-actions {
+  margin-top: 24px;
+}
+
+.form-actions__items {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  position: relative;
+  max-width: 420px;
+  margin-inline: auto;
+}
+.form-actions__items.is-main {
+  min-width: 50%;
+  max-width: 100%;
+  width: 280px;
+}
+
+.form-actions__item {
+  padding-inline: 6px;
+  position: relative;
+}
+
+.a-button {
+  text-transform: none;
+  font-weight: 600;
+  border: solid 1px;
+  border-radius: 4px;
+  font-family: YakuHanJPs_Narrow, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-out;
+}
+.a-button.is-lg, .a-button.is-lg input[type=submit] {
+  font-size: 16px;
+  padding-inline: 16px;
+  height: 44px;
+}
+.a-button.is-block {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+.a-button.is-primary {
+  background-color: hsl(211, 67%, 52%);
+  color: white;
+  border-color: hsl(211, 67%, 52%);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=application.css.map */

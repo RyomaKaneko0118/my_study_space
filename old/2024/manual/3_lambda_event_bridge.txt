@@ -1,0 +1,20 @@
+【url】
+https://ap-northeast-1.console.aws.amazon.com/lambda/home?region=ap-northeast-1#/discover
+【注意点】
+index.jsが必要
+zipで圧縮してアップロードする必要がある
+
+eventとcontextを引き数とするhandler関数が必要
+export const handler = async (event, context) => {
+  await main()
+}
+
+【EventBridgeの連携】
+トリガーを追加 → EventBridge　
+【EventBridgeのドキュメント】
+https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-cwe-now-eb.html
+https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/services-cloudwatchevents-expressions.html
+
+【cron】
+(毎分)
+* * * * *

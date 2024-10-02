@@ -1,0 +1,38 @@
+.header__title {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all .2s ease-out;
+  &:hover {
+    opacity: .8;
+  }
+}
+.a-user-role-badge {
+  border: solid 1px $color-primary;
+  padding-inline: 12px;
+  height: 28px;
+  font-size: 10px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  border-radius: 16px;
+  color: $color-primary;
+  // transform: scale(.875, .875);
+  transform: scale(.9375, .9375);
+  &.is-header {
+    margin-left: 3px;
+    margin-right: 0;
+  }
+}
+.a-user-role-badge__label {
+  display: inline-block;
+  .a-user-role-badge__label + &::before {
+    content: "/";
+    display: inline-block;
+    margin-inline: 4px;
+  
+  }
+}

@@ -1,0 +1,18 @@
+sudo dnf groupinstall -y "Base"
+sudo dnf groupinstall -y "Office Suite and Productivity" --setopt=group_package_types=mandatory,default,optional
+sudo dnf install -y zlib-devel openssl-devel rpm-build pam-devel
+sudo dnf install -y gcc
+
+sudo wget http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-8.9p1.tar.gz
+sudo tar xzvf openssh-8.9p1.tar.gz
+cd openssh-8.9p1/
+sudo vim contrib/redhat/openssh.spec
+-----------------------------------------
+%global no_x11_askpass 1
+%global no_gnome_askpass 1
+---------------------------------------------
+sudo rm -rf contrib/aix/ contrib/solaris/ contrib/suse/ contrib/hpux/ contrib/cygwin/
+sudo ./configure --without-zlib-version-check
+cd ~/
+sudo tar czvf openssh-8.9p1.cust.tar.gz openssh-8.9p1/
+sudo rpmbuild --tb --clean openssh-8.9p1.cust.tar.gz

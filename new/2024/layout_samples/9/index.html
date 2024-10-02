@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ベースのhtml</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="assets/application.css">
+<script src="https://kit.fontawesome.com/3dfd965499.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="is-application">
+	<div class="wrapper is-application">
+		<main class="page">
+			<section id="css-only-carousel">
+				<h1>CSS-only Carousel</h1>
+				<div class="description">
+					<p >This carousel is created with HTML and CSS only.</p>
+					<p>padding-topでカーソルの高さを設定。heightでも良さそうだが<p>
+					<p>display flexで伸縮しないようにして、2ページ以降を非表示にする<p>
+				</div>
+				<section class="carousel" aria-label="Gallery">
+					<ol class="carousel__viewport">
+						<li id="carousel__slide1"
+								tabindex="0"
+								class="carousel__slide">
+							<div class="carousel__snapper">
+								<a href="#carousel__slide3"class="carousel__prev">Go to last slide</a>
+								<a href="#carousel__slide2"class="carousel__next">Go to next slide</a>
+							</div>
+						</li>
+						<li id="carousel__slide2"
+								tabindex="0"
+								class="carousel__slide">
+							<div class="carousel__snapper">
+								<a href="#carousel__slide1"class="carousel__prev">Go to last slide</a>
+								<a href="#carousel__slide3"class="carousel__next">Go to next slide</a>
+							</div>
+						</li>
+						<li id="carousel__slide3"
+						    tabindex="0"
+						    class="carousel__slide">
+					    <div class="carousel__snapper">
+						    <a href="#carousel__slide2"class="carousel__prev">Go to last slide</a>
+						    <a href="#carousel__slide1"class="carousel__next">Go to next slide</a>
+					    </div>
+				    </li>
+					</ol>
+					<aside class="carousel__navigation">
+						<ol class="carousel__navigation-list">
+							<li class="carousel__navigation-item">
+								<a href="#carousel__slide1"
+									class="carousel__navigation-button">Go to slide 1</a>
+							</li>
+							<li class="carousel__navigation-item">
+								<a href="#carousel__slide2"
+									class="carousel__navigation-button">Go to slide 2</a>
+							</li>
+							<li class="carousel__navigation-item">
+								<a href="#carousel__slide3"
+									class="carousel__navigation-button">Go to slide 3</a>
+							</li>
+						</ol>
+					</aside>
+				</section>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>mainの設定</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+  <main>
+    <h1>mainの設定</h1>
+    <div>要素1</div>
+    <div>要素2</div>
+    <div>要素3</div>
+    <div class="box">
+      <span></span>
+    </div>
+  </main>
+</body>
+</html>
+<script>
+  const spanElement = document.querySelector('span')
+  if (spanElement) {
+    const text = "あ".repeat(1000)
+    spanElement.textContent = text
+  }
+</script>

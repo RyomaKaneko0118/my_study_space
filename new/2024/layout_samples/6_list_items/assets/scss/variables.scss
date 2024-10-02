@@ -1,0 +1,149 @@
+$main: hsl(242, 51%, 51%);
+$color-primary: hsl(242, 51%, 51%);
+$base: white;
+$background: hsl(242, 34%, 98%);
+$input-background: hsl(242, 8%, 98.5%);
+
+$border: hsl(242, 7%, 89%);
+$border-tint: hsl(242, 14%, 95%);
+$border-shade: hsl(242, 7%, 84%);
+$input-border: hsl(242, 7%, 84%);
+
+$default-text: hsl(242, 12%, 35%);
+$muted-text: hsl(242, 5%, 64%);
+$semi-muted-text: hsl(242, 7%, 57%);
+$link-text: hsl(242, 62%, 33%);
+$reversal-text: white;
+$main-text: darken($main, 10%);
+$primary-text: #1f4e81;
+$hover-text: hsl(215, 78%, 50%);
+
+$danger: hsl(349, 90%, 62%);
+$primary: hsl(211, 67%, 52%);
+
+$stamp-color: hsl(0, 80%, 62%);
+
+$sans-serif: YakuHanJPs_Narrow, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "Apple Color Emoji","Segoe UI Emoji", sans-serif;
+
+$header-height__md-up: 50px;
+
+// $color-primary: #53aac2;
+// $color-secondary: #53aac2;
+// $color-tertiary: #ffa000;
+// $color-white: #ffffff;
+// $color-black: #000000;
+// $color-gray: #949698;
+// $color-dark-gray: #5a695f;
+// $color-background: #f7f7fa;
+// $color-border: #d1d1d1;
+// $color-link: #0082ff;
+// $color-warning: #ffcc00;
+// $color-error: #ff466e;
+// $colors: (
+//   'primary': $color-primary,
+//   'secondary': $color-secondary,
+//   'tertiary': $color-tertiary,
+//   'white': $color-white,
+//   'black': $color-black,
+//   'gray': $color-gray,
+//   'dark-gray': $color-dark-gray,
+//   'background': $color-background,
+//   'link': $color-link,
+//   'warning': $color-warning,
+//   'error': $color-error,
+//   'border': $color-border
+// ) !default;
+
+// $font-size-xs: 11px;
+// $font-size-sm: 13px;
+// $font-size-md: 15px;
+// $font-size-lg: 18px;
+// $font-size-xl: 24px;
+// $font-sizes: (
+//   'xs': $font-size-xs,
+//   'sm': $font-size-sm,
+//   'md': $font-size-md,
+//   'lg': $font-size-lg,
+//   'xl': $font-size-xl
+// ) !default;
+
+// $font-weight-normal: 400;
+// $font-weight-bold: 700;
+// $font-weights: (
+//   'normal': $font-weight-normal,
+//   'bold': $font-weight-bold
+// ) !default;
+
+// $text-directions: (
+//   'left': left,
+//   'center': center,
+//   'right': right
+// ) !default;
+
+// $line-height-default: 1;
+// $line-height-sm: 1.4;
+// $line-height-md: 1.6;
+// $line-heights: (
+//   'default': $line-height-default,
+//   'sm': $line-height-sm,
+//   'md': $line-height-md
+// ) !default;
+
+// $visibilities: (
+//   'visible': visible,
+//   'hidden': hidden
+// ) !default;
+
+// $displays: (
+//   'none': none,
+//   'inline': inline,
+//   'inline-block': inline-block,
+//   'block': block,
+//   'flex': flex
+// ) !default;
+
+// $spaces: (
+//   'auto': auto,
+//   'none': 0,
+//   'xs': 5px,
+//   'sm': 10px,
+//   'md': 20px,
+//   'lg': 30px,
+//   'xl': 40px
+// ) !default;
+
+// $white-spaces: (
+//   'pre-wrap': pre-wrap,
+//   'nowrap': nowrap
+// ) !default;
+
+// $flex-directions: (
+//   'row': row,
+//   'row-reverse': row-reverse,
+//   'column': column,
+//   'column-reverse': column-reverse
+// ) !default;
+
+// $justify-content-positions: (
+//   'start': start,
+//   'center': center,
+//   'end': end,
+//   'flex-start': flex-start,
+//   'flex-end': flex-end,
+//   'space-between': space-between,
+//   'space-around': space-around
+// ) !default;
+
+// $align-items-positions: (
+//   'start': start,
+//   'center': center,
+//   'end': end,
+//   'flex-start': flex-start,
+//   'flex-end': flex-end
+// ) !default;
+
+// $box-shadow: 0 0 4px
+//   rgba(
+//     $color: $color-black,
+//     $alpha: 0.16
+//   );

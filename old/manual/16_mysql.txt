@@ -1,0 +1,20 @@
+SHOW DATABASES;
+DROP DATABASE production_name;
+CREATE DATABASE mydatabase;
+SHOW TABLES;
+SHOW COLUMNS FROM company;
+DROP TABLE company;
+DELETE FROM seminar;
+ALTER TABLE sales AUTO_INCREMENT = 1;
+
+START TRANSACTION;
+BEGIN;
+COMMIT;
+ROLLBACK;
+
+csvを出力
+select * from client_pic_download_histories into outfile '/var/lib/mysql-files/output.csv' FIE
+LDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';
+
+アクセス権限の確認
+select user, host from mysql.user;

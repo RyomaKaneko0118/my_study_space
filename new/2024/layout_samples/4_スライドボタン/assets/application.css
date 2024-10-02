@@ -1,0 +1,211 @@
+/***
+    The new CSS reset - version 1.7.3 (last updated 7.8.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  line-break: auto;
+  -webkit-line-break: after-white-space;
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+.container {
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+@media screen and (min-width: 576px) {
+  .container {
+    padding-inline: 16px;
+  }
+}
+.container.is-xl {
+  width: 1280px;
+}
+
+@media screen and (max-width: 575px) {
+  .is-hidden-sm-down {
+    display: none;
+  }
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.a-switch {
+  display: flex;
+  align-self: center;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.a-on-off-checkbox {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  padding-block: 8px;
+  margin-block: -8px;
+}
+.a-on-off-checkbox input {
+  opacity: 0;
+  position: absolute;
+  left: -16px;
+  top: 0;
+  width: 0;
+  height: 0;
+  display: block;
+  overflow: hidden;
+}
+.a-on-off-checkbox.is-sm span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(242, 34%, 98%);
+  position: relative;
+  transition: all 0.2s ease-out;
+  width: 56px;
+  height: calc(18px + 1px * 2);
+  border: solid 1px hsl(242, 7%, 84%);
+  border-radius: 18px;
+  font-size: 12px;
+}
+.a-on-off-checkbox.is-sm span::before {
+  content: "";
+  display: block;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: solid 1px hsl(242, 7%, 84%);
+  width: 18px;
+  height: 18px;
+}
+.a-on-off-checkbox.is-sm span::after {
+  content: "OFF";
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  text-align: center;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 1px * 2);
+  padding-left: 26px;
+  padding-right: 12px;
+}
+.a-on-off-checkbox.is-sm input:checked + span {
+  background-color: hsl(349, 90%, 62%);
+  border-color: hsl(349, 90%, 62%);
+}
+.a-on-off-checkbox.is-sm input:checked + span::before {
+  position: absolute;
+  left: auto;
+  right: 0;
+}
+.a-on-off-checkbox.is-sm input:checked + span::after {
+  content: "ON";
+  color: white;
+  line-height: 1;
+  display: flex;
+  text-align: center;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 1px * 2);
+  padding-left: 12px;
+  padding-right: 22px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=application.css.map */

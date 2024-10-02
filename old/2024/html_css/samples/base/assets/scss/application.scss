@@ -1,0 +1,18 @@
+@import 'mediaquery.scss';
+@import 'variables.scss';
+@import 'reset.scss';
+@import 'utility.scss';
+@import 'common.scss';
+@import 'custom.scss';
+
+html,
+body {
+  height: 100%;
+  background-color: $color-primary;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+

@@ -1,0 +1,8 @@
+【updateされる前に何をupdateするのか確認】
+yum check-update
+【updateした後の前のバージョンに戻す】
+yum history list
+yum history info number
+yum history undo 115
+【yumのキャッシュを削除】
+yum clean all

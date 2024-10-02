@@ -1,0 +1,409 @@
+/***
+    The new CSS reset - version 1.7.3 (last updated 7.8.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  line-break: auto;
+  -webkit-line-break: after-white-space;
+  user-select: none;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+.container {
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+@media screen and (min-width: 576px) {
+  .container {
+    padding-inline: 16px;
+  }
+}
+.container.is-xl {
+  width: 1280px;
+}
+
+@media screen and (max-width: 575px) {
+  .is-hidden-sm-down {
+    display: none;
+  }
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.a-switch {
+  display: flex;
+  align-self: center;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.a-switch__label {
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  color: hsl(242, 5%, 64%);
+  margin-right: 8px;
+}
+.a-switch__label .a-help {
+  position: relative;
+  top: -1px;
+}
+.a-switch__label:hover .a-switch__label-text {
+  color: #37339e;
+  text-decoration: underline;
+}
+.a-switch__label:hover .a-help {
+  background-color: hsl(242, 51%, 51%);
+}
+
+.a-toggle-checkbox {
+  height: 0;
+  width: 0;
+  display: block;
+  position: fixed;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.a-help {
+  font-size: 12px;
+  line-height: 1;
+  display: inline-flex;
+  color: white;
+  width: 28px;
+  height: 28px;
+  text-decoration: none;
+  background-color: hsl(242, 5%, 64%);
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.a-help:hover {
+  background-color: hsl(242, 51%, 51%);
+  color: white;
+}
+.a-help:last-child {
+  margin-left: 4px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 16px;
+}
+input:checked + .modal {
+  display: block;
+}
+
+.modal__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal__title {
+  font-weight: 600;
+  font-size: 20px;
+}
+@media screen and (max-width: 575px) {
+  .modal__title {
+    font-size: 16px;
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+  padding: 4px 24px;
+}
+@media screen and (max-width: 575px) {
+  .modal__header {
+    padding: 4px 16px;
+  }
+}
+
+.modal-header__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.2s ease-out;
+  position: relative;
+  margin-right: -24px;
+}
+@media screen and (max-width: 575px) {
+  .modal-header__close {
+    margin-right: -16px;
+  }
+}
+.modal-header__close::before, .modal-header__close::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  background-color: hsl(242, 12%, 35%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 2px;
+}
+.modal-header__close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal-header__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal-header__close:hover {
+  opacity: 1;
+}
+
+.modal__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 4px;
+  width: 640px;
+  max-width: calc(100% - 32px);
+}
+
+.modal__body {
+  max-height: calc(100vh - 184px);
+  overflow: auto;
+  border-bottom: solid 1px hsl(242, 14%, 95%);
+  padding: 24px;
+}
+@media screen and (max-width: 575px) {
+  .modal__body {
+    padding: 16px;
+  }
+}
+
+.modal__description.is-md {
+  font-size: 14px;
+}
+
+.welcome-child-section.is-unlimited .welcome-small-sections {
+  margin-top: 56px;
+  margin-bottom: 0;
+  padding: 48px 24px 16px;
+  position: relative;
+}
+.welcome-child-section.is-unlimited .welcome-small-sections.a-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  width: 100%;
+  margin-inline: auto;
+  background-color: white;
+  border: solid 1px hsl(242, 7%, 89%);
+}
+.welcome-child-section.is-unlimited .welcome-small-sections__title {
+  line-height: 1.4;
+  margin-top: 0;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  font-size: 20px;
+  background-size: 28px;
+  margin-bottom: 0;
+  height: 52px;
+  width: 320px;
+  margin-left: -160px;
+  left: 50%;
+  position: absolute;
+  top: -26px;
+}
+.welcome-child-section.is-unlimited .welcome-small-sections__title.a-card {
+  border-radius: 4px;
+  background-color: white;
+  border: solid 1px hsl(242, 7%, 89%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+@media screen and (max-width: 575px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.welcome-small-section {
+  height: 100%;
+}
+
+.welcome-small-section__icon {
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 112px;
+  height: 112px;
+  font-size: 80px;
+}
+@media screen and (max-width: 575px) {
+  .welcome-small-section__icon {
+    width: 64px;
+    height: 64px;
+    font-size: 48px;
+  }
+}
+
+.welcome-small-section__inner {
+  padding: 20px 24px 24px;
+  height: 100%;
+  padding-bottom: 16px;
+}
+
+.welcome-small-section__title {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 11.2px;
+  font-weight: 600;
+  text-align: center;
+  font-feature-settings: "palt";
+}
+@media screen and (max-width: 575px) {
+  .welcome-small-section__title {
+    font-size: 16px;
+  }
+}
+.welcome-small-section__title:last-child {
+  margin-bottom: 0;
+}
+
+.welcome-small-section__description:not(:last-child) {
+  margin-bottom: 16px;
+}
+.welcome-small-section__description p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 0;
+  margin-bottom: 19.2px;
+}
+.welcome-small-section__description p:last-child {
+  margin-bottom: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=application.css.map */

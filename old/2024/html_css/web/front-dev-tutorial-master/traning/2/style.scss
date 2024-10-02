@@ -1,0 +1,45 @@
+.rect {
+  width: 100px;
+  height: 100px;
+  background-color: orangered;
+}
+.rect1 {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: orangered;
+  transform: translateX(50px) scaleY(2);
+  transform-origin: center center;
+}
+
+.rect2 {
+  margin-top: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: orangered;
+  transform: translate(50px);
+}
+
+.rect3 {
+  margin-top: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: orangered;
+  transform: translate(50px, 50px);
+}
+
+.rect3 {
+  margin-top: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: orangered;
+  transform: translate(-50px, -50px);
+}
+
+.rect4 {
+  margin-top: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: orangered;
+  transform: translate(100%, 100%);
+}
