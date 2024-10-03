@@ -117,6 +117,7 @@ GEM
       activesupport (>= 5.0.0)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
+    line-bot-api (1.29.0)
     logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -279,6 +280,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
+  line-bot-api
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)
