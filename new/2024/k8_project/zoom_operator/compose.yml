@@ -1,0 +1,21 @@
+services:
+# Use postgres/example user/password credentials
+  db:
+    image: postgres
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      # POSTGRES_DB: base_1
+  web:
+    build: .
+    # command: bundle exec rails s -b '0.0.0.0'
+    volumes:
+      - .:/app
+    tty: true
+    stdin_open: true
+    ports:
+      - "3002:3002"
+    depends_on:
+      - db
