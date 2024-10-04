@@ -5,14 +5,14 @@ services:
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: base_1
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: base_1
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      # POSTGRES_DB: base_1
   web:
     build: .
     # command: bundle exec rails s -b '0.0.0.0'
     volumes:
-      - .:/myapp
+      - .:/app
     tty: true
     stdin_open: true
     ports:
