@@ -5,8 +5,8 @@ services:
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: line_operator
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       # POSTGRES_DB: base_1
   web:
     build: .
