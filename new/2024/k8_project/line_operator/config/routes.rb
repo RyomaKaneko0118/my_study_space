@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   post 'callback' => 'line_bot#callback'
+  get "hello" => "line_bot#hello"
+  namespace :api do
+    namespace :v1 do
+      post 'line_bot/callback' => 'line_bot#callback'
+      get "line_bot/hello" => "line_bot#hello"
+    end
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"

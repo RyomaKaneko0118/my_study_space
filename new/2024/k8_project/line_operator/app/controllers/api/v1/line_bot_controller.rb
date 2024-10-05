@@ -1,4 +1,4 @@
-class LineBotController < ApplicationController
+class Api::V1::LineBotController < ApplicationController
   protect_from_forgery except: [:callback]
   require 'net/http'
   require "json/add/core"
@@ -29,6 +29,10 @@ class LineBotController < ApplicationController
       end
     end
     head :ok
+  end
+
+  def hello
+    render json: { message: "hello" }
   end
 
   private
