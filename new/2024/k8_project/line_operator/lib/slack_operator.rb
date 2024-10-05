@@ -4,14 +4,8 @@ module SlackOperator
 
   URL = "#{ENV["TMP_SERVER_URL"]}/api/v1/slack/callback"
   
-  def self.fetch_data
-    uri = URI.parse(URL)
-    puts "-------------- uri -------------------------"
-    Net::HTTP.get_response(uri)
-  end
-
   def self.notify(message)
-    uri = URI.parse(URL)
+    uri = URI.parse("https://f7r8ygeiqb.execute-api.ap-northeast-1.amazonaws.com/slack")
     puts "-------------- uri -------------------------"
     Net::HTTP.post_form(uri, { message: message })
   end
