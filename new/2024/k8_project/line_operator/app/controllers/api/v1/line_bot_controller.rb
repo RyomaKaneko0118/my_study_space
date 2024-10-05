@@ -3,6 +3,8 @@ class Api::V1::LineBotController < ApplicationController
   require 'net/http'
   require "json/add/core"
   
+  TMP_SERVER_URL = ENV["TMP_SERVER_URL"].freeze
+
   def callback
     body = request.body.read
     signature = request.env['HTTP_X_LINE_SIGNATURE']
@@ -16,9 +18,12 @@ class Api::V1::LineBotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          daily_person = fetch_daily_person(ENV["SPREAD_SHEET_URL"])
-
-          notify_to_slack(event.message['text'] + daily_person.gsub('"', ''))
+          res = fetch_daily_person
+          puts "-------------- daily_person -------------------------"
+          puts res
+          message = JSON.parse(res.body)
+          notify_to_slack(event.message['text'] + message["message"])
+          # notify_to_slack(event.message['text'] + res.body.gsub('"', ''))
 
           message = {
             type: 'text',
@@ -72,24 +77,10 @@ class Api::V1::LineBotController < ApplicationController
     puts res.body
   end
 
-  def fetch_daily_person(uri)
-    uri = URI.parse(uri)
-    http = Net::HTTP.new(uri.hostname, uri.port)
-    puts "-------------- request uri -------------------------"
-    puts uri.request_uri
-    req = Net::HTTP::Get.new(uri.request_uri)
-    http.use_ssl = true
-    res = http.request(req)
-    case res
-    when Net::HTTPOK
-      puts "-------------- second -------------------------"
-      puts res
-      puts res.body
-      res.body.force_encoding("UTF-8")
-    when Net::HTTPFound
-      puts "-------------- first -------------------------"
-      fetch_daily_person(res["location"])
-    end
+  def fetch_daily_person
+    uri = URI.parse("#{ENV["TMP_SERVER_URL"]}/api/v1/gas/callback")
+    puts "-------------- uri -------------------------"
+    Net::HTTP.get_response(uri)
   end
 
   def notify_to_slack(message)

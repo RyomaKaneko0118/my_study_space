@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'line_bot/callback' => 'line_bot#callback'
       get "line_bot/hello" => "line_bot#hello"
+      get "gas/callback" => "gas#callback"
     end
   end
 
