@@ -17,9 +17,12 @@ class LineBotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           daily_person = fetch_daily_person(ENV["SPREAD_SHEET_URL"])
+
+          notify_to_slack(event.message['text'] + daily_person.gsub('"', ''))
+
           message = {
             type: 'text',
-            text: event.message['text'] + daily_person
+            text: "slackに通知しました"
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -83,5 +86,25 @@ class LineBotController < ApplicationController
       puts "-------------- first -------------------------"
       fetch_daily_person(res["location"])
     end
+  end
+
+  def notify_to_slack(message)
+    uri = URI.parse(ENV["SLACK_WEBHOOK_URL"])
+
+    slack_text = <<~EOS
+      <!here> 会議が始まります。
+      担当者は準備をお願いします！
+
+      Zoom会議には以下URLで入れます。
+      #{message}
+    EOS
+
+    payload = {
+      username: "デイリーお知らせbot",
+      icon_emoji: ":spiral_calendar_pad",
+      text: slack_text
+    }.to_json
+
+    Net::HTTP.post_form(uri, { payload: payload })
   end
 end
