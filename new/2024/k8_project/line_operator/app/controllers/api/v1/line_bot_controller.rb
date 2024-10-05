@@ -2,6 +2,9 @@ class Api::V1::LineBotController < ApplicationController
   protect_from_forgery except: [:callback]
   require 'net/http'
   require "json/add/core"
+
+  include GasOperator
+  include SlackOperator
   
   TMP_SERVER_URL = ENV["TMP_SERVER_URL"].freeze
 
@@ -18,12 +21,10 @@ class Api::V1::LineBotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          res = fetch_daily_person
-          puts "-------------- daily_person -------------------------"
-          puts res
-          message = JSON.parse(res.body)
-          notify_to_slack(event.message['text'] + message["message"])
-          # notify_to_slack(event.message['text'] + res.body.gsub('"', ''))
+          res = GasOperator.fetch_data
+          
+          message = JSON.parse(res.body)["message"]
+          SlackOperator.notify(event.message['text'] + message)
 
           message = {
             type: 'text',
@@ -37,7 +38,7 @@ class Api::V1::LineBotController < ApplicationController
   end
 
   def hello
-    render json: { message: "hello" }
+    render json: { message: "hello#{GasOperator::TEST}" }
   end
 
   private
@@ -75,17 +76,5 @@ class Api::V1::LineBotController < ApplicationController
     req.initialize_http_header(headers)
     res = http.request(req)
     puts res.body
-  end
-
-  def fetch_daily_person
-    uri = URI.parse("#{ENV["TMP_SERVER_URL"]}/api/v1/gas/callback")
-    puts "-------------- uri -------------------------"
-    Net::HTTP.get_response(uri)
-  end
-
-  def notify_to_slack(message)
-    uri = URI.parse("#{ENV["TMP_SERVER_URL"]}/api/v1/slack/callback")
-    puts "-------------- uri -------------------------"
-    Net::HTTP.post_form(uri, { message: message })
   end
 end
