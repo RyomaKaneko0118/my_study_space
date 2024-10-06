@@ -23,7 +23,7 @@ ENV PATH="/root/.rbenv/bin:/root/.rbenv/shims:$PATH"
 RUN rbenv install 3.2.0 && rbenv global 3.2.0
 
 # Set the working directory
-WORKDIR /myapp
+WORKDIR /app
 
 # Copy the Gemfile and Gemfile.lock
 # COPY Gemfile /myapp/Gemfile
@@ -33,7 +33,7 @@ WORKDIR /myapp
 # RUN gem install bundler && bundle install
 
 # Copy the application code
-COPY . /myapp
+COPY . .
 
 # Precompile assets (optional, if using Rails with assets)
 # RUN bundle exec rails assets:precompile
