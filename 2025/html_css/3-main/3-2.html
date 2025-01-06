@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>3-2 CSSアニメーションの基本-CSS アニメーションで動きを指定しよう-</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--==============レイアウトを制御する独自のCSSを読み込み===============-->
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/application.css">
+</head>
+
+<body>
+  <div class="wrapper">
+		<p class="btn">↓　ここをクリックしたら隠れているエリアが表示され、ボタン自体が消える　↓</p>
+    <div class="hide_area">
+      <p>このエリアが出現します。</p>
+
+<!--アニメーション1回分の時間の長さを指定したい-->
+	  <p>アニメーション1回分の時間の長さを指定したい</p>
+		<p>fadeUp</p>
+    <div class="flex">
+	    <div class="change-time05 box fadeUp">0.5秒かけて変化</div>
+	    <div class="change-time1 box fadeUp">1秒かけて変化</div>
+	    <div class="change-time15 box fadeUp">1.5秒かけて変化</div>
+			<div class="change-time100 box fadeUp">10秒かけて変化</div>
+    </div>
+
+		<p>fadeIn</p>
+    <div class="flex">
+	    <div class="change-time05 box fadeIn">0.5秒かけて変化</div>
+	    <div class="change-time1 box fadeIn">1秒かけて変化</div>
+	    <div class="change-time15 box fadeIn">1.5秒かけて変化</div>
+			<div class="change-time100 box fadeIn">10秒かけて変化</div>
+    </div>
+
+		<p>fadeDown</p>
+    <div class="flex">
+	    <div class="change-time05 box fadeDown">0.5秒かけて変化</div>
+	    <div class="change-time1 box fadeDown">1秒かけて変化</div>
+	    <div class="change-time15 box fadeDown">1.5秒かけて変化</div>
+			<div class="change-time100 box fadeDown">10秒かけて変化</div>
+    </div>
+
+		<p>fadeLeft</p>
+    <div class="flex">
+	    <div class="change-time05 box fadeLeft">0.5秒かけて変化</div>
+	    <div class="change-time1 box fadeLeft">1秒かけて変化</div>
+	    <div class="change-time15 box fadeLeft">1.5秒かけて変化</div>
+			<div class="change-time100 box fadeLeft">10秒かけて変化</div>
+    </div>
+
+		<p>fadeRight</p>
+    <div class="flex">
+	    <div class="change-time05 box fadeRight">0.5秒かけて変化</div>
+	    <div class="change-time1 box fadeRight">1秒かけて変化</div>
+	    <div class="change-time15 box fadeRight">1.5秒かけて変化</div>
+			<div class="change-time100 box fadeRight">10秒かけて変化</div>
+    </div>
+
+		<p>rotateX</p>
+    <div class="flex">
+	    <div class="change-time05 box rotateX">0.5秒かけて変化</div>
+	    <div class="change-time1 box rotateX">1秒かけて変化</div>
+	    <div class="change-time15 box rotateX">1.5秒かけて変化</div>
+			<div class="change-time100 box rotateX">10秒かけて変化</div>
+			<div class="countinfinite box rotateX">10秒かけて変化</div>
+    </div>
+
+		<p>rotateY</p>
+    <div class="flex">
+	    <div class="change-time05 box rotateY">0.5秒かけて変化</div>
+	    <div class="change-time1 box rotateY">1秒かけて変化</div>
+	    <div class="change-time15 box rotateY">1.5秒かけて変化</div>
+			<div class="change-time100 box rotateY">10秒かけて変化</div>
+			<div class="countinfinite box rotateY">10秒かけて変化</div>
+    </div>
+
+		<p>rotateRightZ</p>
+    <div class="flex">
+	    <div class="change-time05 box rotateRightZ">0.5秒かけて変化</div>
+	    <div class="change-time1 box rotateRightZ">1秒かけて変化</div>
+	    <div class="change-time15 box rotateRightZ">1.5秒かけて変化</div>
+			<div class="change-time100 box rotateRightZ">10秒かけて変化</div>
+			<div class="countinfinite box rotateRightZ">10秒かけて変化</div>
+    </div>
+
+		<p>rotateLeftZ</p>
+    <div class="flex">
+	    <div class="change-time05 box rotateLeftZ">0.5秒かけて変化</div>
+	    <div class="change-time1 box rotateLeftZ">1秒かけて変化</div>
+	    <div class="change-time15 box rotateLeftZ">1.5秒かけて変化</div>
+			<div class="change-time100 box rotateLeftZ">10秒かけて変化</div>
+			<div class="countinfinite box rotateLeftZ">10秒かけて変化</div>
+    </div>
+
+		<p>flipLeftTop</p>
+    <div class="flex">
+	    <div class="change-time05 box flipLeftTop">0.5秒かけて変化</div>
+	    <div class="change-time1 box flipLeftTop">1秒かけて変化</div>
+	    <div class="change-time15 box flipLeftTop">1.5秒かけて変化</div>
+			<div class="change-time100 box flipLeftTop">10秒かけて変化</div>
+			<div class="countinfinite box flipLeftTop">10秒かけて変化</div>
+    </div>
+
+		<p>flipRightTop</p>
+    <div class="flex">
+	    <div class="change-time05 box flipRightTop">0.5秒かけて変化</div>
+	    <div class="change-time1 box flipRightTop">1秒かけて変化</div>
+	    <div class="change-time15 box flipRightTop">1.5秒かけて変化</div>
+			<div class="change-time100 box flipRightTop">10秒かけて変化</div>
+			<div class="countinfinite box flipRightTop">10秒かけて変化</div>
+    </div>
+
+		<p>zoomIn</p>
+    <div class="flex">
+	    <div class="change-time05 box zoomIn">0.5秒かけて変化</div>
+	    <div class="change-time1 box zoomIn">1秒かけて変化</div>
+	    <div class="change-time15 box zoomIn">1.5秒かけて変化</div>
+			<div class="change-time100 box zoomIn">10秒かけて変化</div>
+			<div class="countinfinite box zoomIn">10秒かけて変化</div>
+    </div>
+
+		<p>zoomOut</p>
+    <div class="flex">
+	    <div class="change-time05 box zoomOut">0.5秒かけて変化</div>
+	    <div class="change-time1 box zoomOut">1秒かけて変化</div>
+	    <div class="change-time15 box zoomOut">1.5秒かけて変化</div>
+			<div class="change-time100 box zoomOut">10秒かけて変化</div>
+			<div class="countinfinite box zoomOut">10秒かけて変化</div>
+    </div>
+
+		<p>blur</p>
+    <div class="flex">
+	    <div class="change-time05 box blur">0.5秒かけて変化</div>
+	    <div class="change-time1 box blur">1秒かけて変化</div>
+	    <div class="change-time15 box blur">1.5秒かけて変化</div>
+			<div class="change-time100 box blur">10秒かけて変化</div>
+			<div class="countinfinite box blur">10秒かけて変化</div>
+    </div>
+
+		<p>smooth</p>
+    <div class="flex">
+	    <div class="change-time05 box smooth">0.5秒かけて変化</div>
+	    <div class="change-time1 box smooth">1秒かけて変化</div>
+	    <div class="change-time15 box smooth">1.5秒かけて変化</div>
+			<div class="change-time100 box smooth">10秒かけて変化</div>
+			<div class="countinfinite box smooth">10秒かけて変化</div>
+    </div>
+
+		<div class="line">
+			<div class="line2">
+			  <div class="lineinappear">枠線が伸びて出現</div>
+			</div>
+		</div>
+
+		<div class="bgextend bgLRextend">
+			<span class="bgappear">背景色が伸びて出現<br>（左から）</span>
+		</div>
+    <div class="bgextend bgRLextend">
+			<span class="bgappear">背景色が伸びて出現<br>（右から）</span>
+		</div>
+    <div class="bgextend bgDUextend">
+			<span class="bgappear">背景色が伸びて出現<br>（下から）</span>
+		</div>
+    <div class="bgextend bgUDextend">
+			<span class="bgappear">背景色が伸びて出現<br>（上から）</span>
+		</div>
+
+	
+  <!--アニメーションの開始を遅らせたい-->
+  	  <p>アニメーションの開始を遅らせたい</p>
+      <div class="flex">
+  	    <div class="delay-time05 box fadeUp">0.5秒後にアニメーション開始</div>
+  	    <div class="delay-time1 box fadeUp">1秒後にアニメーション開始</div>
+  	    <div class="delay-time15 box fadeUp">1.5秒後にアニメーション開始</div>
+  			<div class="delay-time100 box fadeUp">10秒後にアニメーション開始</div>
+      </div>
+  	
+  <!--動きをループさせたい-->
+  	<p>動きをループさせたい</p>
+    <div class="flex">
+  	  <div class="count2 box fadeUp">動きを2回繰り返す</div>
+  		<div class="count10 box fadeUp">動きを10回繰り返す</div>
+  	  <div class="countinfinite box fadeUp">動きを無限に繰り返す</div>
+    </div>
+  	
+  <!--アニメーションの進行具合を操作したい-->
+  	<p>アニメーションの進行具合を操作したい</p>
+    <div class="flex">
+    	<div class="timing-ease box fadeUp">開始時と終了時が緩やかに変化（ease）</div>
+    	<div class="timing-ease-in box fadeUp">開始時は緩やかに変化、終了に近づくと早く変化（ease-in）</div>
+    	<div class="timing-ease-out box fadeUp">開始時は早く変化し、終了時は緩やかに変化（ease-out）</div>
+    	<div class="timing-ease-in-out box fadeUp">開始時と終了時は、かなり緩やかに変化（ease-in-out）</div>
+    	<div class="timing-linear box fadeUp">開始から終了まで一定に変化（linear）</div>
+    	<div class="timing-steps box fadeUp">パラパラ漫画のように数値をコマ数で変化（steps）</div>
+    	<div class="timing-cubic-bezier box fadeUp">変化の進行割合を3次ベジェ曲線で指定（cubic-bezier）</div>
+    </div>
+  
+    <div class="flex">
+    	<div class="timing-ease box fadeUp change-time100">開始時と終了時が緩やかに変化（ease）</div>
+    	<div class="timing-ease-in box fadeUp change-time100">開始時は緩やかに変化、終了に近づくと早く変化（ease-in）</div>
+    	<div class="timing-ease-out box fadeUp change-time100">開始時は早く変化し、終了時は緩やかに変化（ease-out）</div>
+    	<div class="timing-ease-in-out box fadeUp change-time100">開始時と終了時は、かなり緩やかに変化（ease-in-out）</div>
+    	<div class="timing-linear box fadeUp change-time100">開始から終了まで一定に変化（linear）</div>
+    	<div class="timing-steps box fadeUp change-time100">パラパラ漫画のように数値をコマ数で変化（steps）</div>
+    	<div class="timing-cubic-bezier box fadeUp change-time100">変化の進行割合を3次ベジェ曲線で指定（cubic-bezier）</div>
+    </div>
+  
+  <!--アニメーションをまとめて設定したい-->
+  	<p>アニメーションをまとめて設定するデモ</p>
+    <div class="box fadeDown">アニメーションをまとめて設定するデモ</div>	
+		<p>↓　画面が読み込まれたら現れる ↓　</p>
+
+	  <div class="box fadeUpTrigger">画面が読み込まれたらふわっ（下から）</div>
+	
+    <br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓
+    <br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓スクロールすると出る<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓<br>↓
+	
+	  <div class="box fadeUpTrigger">スクロールしたらふわっ（下から）</div>
+
+		<div class="box rotateXHoverTrigger">リンクにマウスが乗るとrotateXクラスが付与し、マウスが外れるとrotateXクラスが外れてfadeUpクラスがつく</div>
+	</div>
+
+	<p>fadeIn</p>
+	<div class="flex">
+		<div class="change-time05 box fadeIn">0.5秒かけて変化</div>
+		<div class="change-time1 box fadeIn">1秒かけて変化</div>
+		<div class="change-time15 box fadeIn">1.5秒かけて変化</div>
+		<div class="change-time100 box fadeIn">10秒かけて変化</div>
+	</div>
+
+	<div class="line">
+		<div class="line2">
+			<div class="lineinappear">枠線が伸びて出現</div>
+		</div>
+	</div>
+
+	<div class="bgextend bgLRextend">
+		<span class="bgappear">背景色が伸びて出現<br>（左から）</span>
+	</div>
+	<div class="bgextend bgRLextend">
+		<span class="bgappear">背景色が伸びて出現<br>（右から）</span>
+	</div>
+	<div class="bgextend bgDUextend">
+		<span class="bgappear">背景色が伸びて出現<br>（下から）</span>
+	</div>
+	<div class="bgextend bgUDextend">
+		<span class="bgappear">背景色が伸びて出現<br>（上から）</span>
+	</div>
+
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="js/application.js"></script>
+</html>

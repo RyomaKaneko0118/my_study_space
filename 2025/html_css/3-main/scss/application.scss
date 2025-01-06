@@ -1,0 +1,698 @@
+@charset "utf-8";
+
+/*========= レイアウトのためのCSS ===============*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.wrapper {
+	overflow: hidden;
+}
+
+.flex {
+	display:flex;
+	flex-wrap: wrap;
+}
+
+.box {
+	width: 220px;
+	padding: 20px;
+	margin:0 20px 20px 0;
+	background: #666;
+	color: #fff;
+}
+
+/*==================================================
+ふわっ
+===================================*/
+
+.fadeUp {
+  animation-name: fadeUpAnime;/*アニメーションの定義名*/
+  animation-duration: 1s;/*アニメーション変化時間 ※デフォルト*/
+  animation-fill-mode: forwards;/*アニメーションの開始と終了時の状態を指定*/
+  opacity: 0;
+}
+
+/*アニメーションの開始から終了までを指定する*/
+@keyframes fadeUpAnime {
+  from {
+    opacity: 0;
+	  transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+	  transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation-name: fadeInAnime;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+  
+  @keyframes fadeInAnime {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fadeDown {
+    // animation: fadeDownAnime 1s ease forwards;/*アニメーションの定義名、アニメーション１回分の時間の長さ、アニメーションの進行具合、アニメーションの開始を遅らせる、アニメーションの開始と終了時の状態を指定をまとめて設定*/
+    animation-name: fadeDownAnime;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-delay: 0.5s;
+    opacity:0;
+  }
+  
+  /*アニメーションの開始から終了までを指定する*/
+  @keyframes fadeDownAnime {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+.fadeLeft {
+  // animation: fadeDownAnime 1s ease forwards;/*アニメーションの定義名、アニメーション１回分の時間の長さ、アニメーションの進行具合、アニメーションの開始を遅らせる、アニメーションの開始と終了時の状態を指定をまとめて設定*/
+  animation-name: fadeLeftAnime;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+  animation-delay: 0.5s;
+  opacity:0;
+}
+
+/*アニメーションの開始から終了までを指定する*/
+@keyframes fadeLeftAnime {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fadeRight {
+  // animation: fadeDownAnime 1s ease forwards;/*アニメーションの定義名、アニメーション１回分の時間の長さ、アニメーションの進行具合、アニメーションの開始を遅らせる、アニメーションの開始と終了時の状態を指定をまとめて設定*/
+  animation-name: fadeRightAnime;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+/*アニメーションの開始から終了までを指定する*/
+@keyframes fadeRightAnime {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* rotateX */
+.rotateX {
+	animation-name: rotateXAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes rotateXAnime {
+	from {
+		transform: rotateX(0);
+		opacity: 0;
+	}
+	to {
+		transform: rotateX(-360deg);
+		opacity: 1;
+	}
+}
+
+/* rotateX */
+.rotateY {
+	animation-name: rotateYAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes rotateYAnime {
+	from {
+		transform: rotateY(0);
+		opacity: 0;
+	}
+	to {
+		transform: rotateY(-360deg);
+		opacity: 1;
+	}
+}
+
+.rotateRightZ {
+	animation-name: rotateRightZAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes rotateRightZAnime {
+	from {
+		transform: rotateZ(0);
+		opacity: 0;
+	}
+	to {
+		transform: rotateZ(-360deg);
+		opacity: 1;
+	}
+}
+
+.rotateLeftZ {
+	animation-name: rotateLeftZAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes rotateLeftZAnime {
+	from {
+		transform: rotateZ(0);
+		opacity: 0;
+	}
+	to {
+		transform: rotateZ(360deg);
+		opacity: 1;
+	}
+}
+
+.flipLeftTop {
+	animation-name: flipLeftTopAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes flipLeftTopAnime {
+	from {
+		transform: translate(-20px, 80px) rotate(-15deg);
+		opacity: 0;
+	}
+	to {
+    transform: translate(0, 0) rotate(0deg);
+		opacity: 1;
+	}
+}
+
+.flipRightTop {
+	animation-name: flipRightTopAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes flipRightTopAnime {
+	from {
+		transform: translate(-20px, 80px) rotate(25deg);
+		opacity: 0;
+	}
+	to {
+    transform: translate(0, 1) rotate(0deg);
+		opacity: 1;
+	}
+}
+
+.zoomIn {
+	animation-name: zoomInAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes zoomInAnime {
+	from {
+		transform: scale(0.6);
+	}
+	to {
+    transform: scale(1);
+	}
+}
+
+.zoomOut {
+	animation-name: zoomOutAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes zoomOutAnime {
+	from {
+		transform: scale(1.2);
+	}
+	to {
+    transform: scale(1);
+	}
+}
+
+.blur {
+	animation-name: blurAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes blurAnime {
+	from {
+    filter: blur(10px);
+		transform: scale(1.02);
+	}
+	to {
+    filter: blur(0);
+    transform: scale(1);
+	}
+}
+
+.smooth {
+	animation-name: smoothAnime;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+  transform-origin: left;
+}
+
+@keyframes smoothAnime {
+	from {
+    transform: translate3d(0, 100%, 0) skewY(12deg);
+	}
+	to {
+    transform: translate3d(0, 0, 0) skewY(0);
+	}
+}
+
+$duration-time: 2s;
+
+/*枠線が伸びて出現*/
+.line {
+  position: relative; /* 枠線が書かれる基点*/
+  /*上下線*/
+  &::before,
+  &::after {
+    position: absolute;
+    content:"";
+    width: 0;
+    height: 1px;
+    background: #333;/* 枠線の色*/
+  }
+
+  /*上線*/
+  &::before {
+  	top: 0;
+  	left: 0;
+  	// animation: lineAnime .5s linear 0s forwards;/*表示されて0秒後に上線が0.5秒かけて表示*/
+    animation-name: lineAnime;
+    animation-duration: $duration-time;
+    animation-timing-function: linear;
+    // アニメーションの1番目
+    animation-delay: $duration-time * (1 - 1);
+    animation-fill-mode: forwards;
+  }
+
+    /*下線*/
+  &::after { 
+  	bottom: 0;
+  	right: 0;
+  	// animation: lineAnime .5s linear 1s forwards;/*表示されて1秒後に下線が0.5秒かけて表示*/
+    animation-name: lineAnime;
+    animation-duration: $duration-time;
+    animation-timing-function: linear;
+    animation-delay: $duration-time * (3 - 1);
+    animation-fill-mode: forwards;
+  }
+}
+
+.line2 {
+  /*左右線*/
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 0;
+    background: #333;/* 枠線の色*/
+  }
+
+  /*右線*/
+  &::before { 
+  	top: 0;
+  	right: 0;
+  	// animation: lineAnime2 .5s linear .5s forwards;/*表示されて0.5秒後に右線が0.5秒かけて表示*/
+    animation-name: lineAnime2;
+    animation-duration: $duration-time;
+    animation-timing-function: linear;
+    animation-delay: $duration-time * (2 - 1);
+    animation-fill-mode: forwards;
+  }
+  
+  /*左線*/
+  &::after { 
+  	bottom: 0;
+  	left: 0;
+  	// animation: lineAnime2 .5s linear 1.5s forwards;/*表示されて1.5秒後に左線が0.5秒かけて表示*/
+    animation-name: lineAnime2;
+    animation-duration: $duration-time;
+    animation-timing-function: linear;
+    // アニメーションの最後(4番目)
+    animation-delay: $duration-time * (4 - 1);
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes lineAnime {
+	0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes lineAnime2 {
+	0% { height: 0%; }
+  100% { height: 100%; }
+}
+
+/*枠線内側の要素*/
+.line .lineinappear{
+	// animation: lineInnerAnime .5s linear 1.5s forwards;/*1.5秒後に中央のエリアが0.5秒かけて表示*/
+  animation-name: lineInnerAnime;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+	opacity: 0;/*初期値を透過0にする*/	
+}
+
+@keyframes lineInnerAnime{
+	0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.bgextend {
+	width: 220px;
+	padding: 20px;
+	margin: 0 20px 20px 0;
+  animation-name: bgextendAnimeBase;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	position: relative;
+	overflow: hidden;/*　はみ出た色要素を隠す　*/
+	opacity: 0;
+}
+
+@keyframes bgextendAnimeBase{
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1; 
+  }
+}
+
+/*中の要素*/
+.bgappear {
+	animation-name: bgextendAnimeSecond;
+	animation-duration: 5s;
+	animation-delay: 0.6s;
+	animation-fill-mode:forwards;
+	opacity: 0;
+}
+
+@keyframes bgextendAnimeSecond {
+	0% {
+	  opacity: 0;
+	}
+	100% {
+	  opacity: 1;
+  }
+}
+
+/*--------- 左から --------*/
+.bgLRextend::before {
+	animation-name: bgLRextendAnime;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #666;/*伸びる背景色の設定*/
+}
+@keyframes bgLRextendAnime {
+	0% {
+		transform-origin: left;
+		transform: scaleX(0);
+	}
+	50% {
+		transform-origin: left;
+		transform: scaleX(1);
+	}
+	50.001% {
+		transform-origin: right;
+	}
+	100% {
+		transform-origin: right;
+		transform: scaleX(0);
+	}
+}
+
+/*--------- 右から --------*/
+.bgRLextend::before{
+	animation-name: bgRLextendAnime;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #666;/*伸びる背景色の設定*/
+}
+@keyframes bgRLextendAnime {
+	0% {
+		transform-origin: right;
+		transform: scaleX(0);
+	}
+	50% {
+		transform-origin: right;
+		transform: scaleX(1);
+	}
+	50.001% {
+		transform-origin: left;
+	}
+	100% {
+		transform-origin: left;
+		transform: scaleX(0);
+	}
+}
+
+/*--------- 下から --------*/
+.bgDUextend::before {
+	animation-name: bgDUextendAnime;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #666;/*伸びる背景色の設定*/
+}
+@keyframes bgDUextendAnime {
+	0% {
+		transform-origin: bottom;
+		transform: scaleY(0);
+	}
+	50% {
+		transform-origin: bottom;
+		transform: scaleY(1);
+	}
+	50.001% {
+		transform-origin: top;
+	}
+	100% {
+		transform-origin: top;
+		transform: scaleY(0);
+	}
+}
+
+/*--------- 上から --------*/
+.bgUDextend::before {
+	animation-name: bgUDextendAnime;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #666;/*伸びる背景色の設定*/
+}
+
+@keyframes bgUDextendAnime {
+	0% {
+		transform-origin: top;
+		transform: scaleY(0);
+	}
+	50% {
+		transform-origin: top;
+		transform: scaleY(1);
+	}
+	50.001% {
+		transform-origin: bottom;
+	}
+	100% {
+		transform-origin: bottom;
+		transform: scaleY(0);
+	}
+}
+/*==================================================
+アニメーション設定
+===================================*/
+
+/* アニメーション１回分の時間の長さを指定するCSS*/
+
+.change-time05 {
+  animation-duration: 0.5s;
+}
+
+.change-time1 {
+  animation-duration: 1s;
+}
+
+.change-time15 {
+  animation-duration: 1.5s;
+}
+
+.change-time2 {
+  animation-duration: 2s;
+}
+
+.change-time25 {
+  animation-duration: 2.5s;
+}
+
+.change-time100 {
+  animation-duration: 10s;
+}
+
+/* アニメーションの開始を遅らせるCSS*/
+
+.delay-time05 {
+  animation-delay: 0.5s;
+}
+  
+.delay-time1 {
+  animation-delay: 1s;
+}
+  
+.delay-time15 {
+  animation-delay: 1.5s;
+}
+  
+.delay-time2 {
+  animation-delay: 2s;
+}
+  
+.delay-time25 {
+  animation-delay: 2.5s;
+}
+
+.delay-time100 {
+  animation-delay: 10s;
+}
+
+
+/* 動きをループさせるCSS*/
+
+.count2 {
+  animation-iteration-count: 2;/*この数字を必要回数分に変更*/
+}
+
+.count10 {
+  animation-iteration-count: 10;/*この数字を必要回数分に変更*/
+}
+
+.countinfinite {
+  animation-iteration-count: infinite;/*無限ループ*/
+}
+
+/* アニメーションの進行具合を操作するCSS*/
+
+.timing-ease {
+  animation-timing-function: ease;
+}
+
+.timing-ease-in {
+  animation-timing-function: ease-in;
+}
+
+.timing-ease-out {
+  animation-timing-function: ease-out;
+}
+
+.timing-ease-in-out {
+  animation-timing-function: ease-in-out;	
+}
+
+.timing-linear {
+  animation-timing-function: linear;	
+}
+
+.timing-steps {
+  animation-timing-function: steps(4, end);	
+}
+
+.timing-cubic-bezier {
+  animation-timing-function: cubic-bezier(.17,.67,.67,.51);	
+}
+
+.fadeUpTrigger {
+  opacity: 0;
+}
+
+.hide_area {
+	background:#eee;
+	padding:100px 20px;
+  display: none;
+}
+
+.hide_area.fadeUp {
+  display:block;
+}
+
+
+/*========= クリックしたら別のものが動く際の指定 ===============*/
+
+/*----ボタンの形状----*/
+
+.btn {
+	background:#333;
+	cursor: pointer;
+	padding: 10px 30px;
+	color: #fff;
+	text-align: center;
+}
+/*クリックされたら fadeUpクラスを付与し、display:block;で表示させる*/
+
+/* ボタンがクリックされた後にボタン自体が非表示になる　*/	
+	.btn.disp_none {
+		display: none;
+	}
+
+
