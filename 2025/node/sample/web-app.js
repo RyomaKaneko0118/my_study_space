@@ -7,6 +7,5 @@ http.createServer((req, res) => {
   if (Number.isNaN(n)) return res.end()
   
   const response = fibonacci(n)
-  process.send({ pid, response })
   res.end(response.toString())
-}).listen(3000)
+}).listen(3456)
