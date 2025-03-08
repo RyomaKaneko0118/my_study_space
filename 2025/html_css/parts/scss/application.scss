@@ -1,0 +1,18 @@
+@charset "utf-8";
+@import './mediaquery.scss';
+@import './variables.scss';
+// @import './reset.scss';
+@import './utility.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#breakpoints {
+  .box {
+    height: 100vh;
+    width: 100vw;
+  }
+}

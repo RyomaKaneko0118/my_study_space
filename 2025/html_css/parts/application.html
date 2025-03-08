@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>parts</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--==============レイアウトを制御する独自のCSSを読み込み===============-->
+  <link rel="stylesheet" type="text/css" href="css/application.css">
+</head>
+
+<body>
+  <section id="breakpoints">
+    <div class="box xs:color-primary sm:color-secondary md:color-tertiary lg:color-link xl:color-gray"></div>
+  </section>
+  <section id="tables">
+    <form id="user-information" action="http://127.0.0.1:5500/2025/html_css/parts/application.html" method="post">
+      <table border="1">
+        <caption>ユーザー情報</caption>
+        <tr>
+          <th>名前</th>
+          <td>
+            <input type="text" name="name">
+          </td>
+        </tr>
+        <tr>
+          <th>年齢</th>
+          <td>
+            <input type="number" name="age">
+          </td>
+        </tr>
+        <tr>
+          <th>性別</th>
+          <td>
+            <input type="radio" name="gender" value="男性">男性
+            <input type="radio" name="gender" value="女性">女性
+          </td>
+        </tr>
+        <tr>
+          <th>性別を非表示にする</th>
+          <td>
+            <input type="hidden" name="is-visible" value="false">
+            <input type="checkbox" id="is-visible">
+          </td>
+        </tr>
+        <tr>
+          <th>コメント</th>
+          <td>
+            <textarea name="comment" rows="4" cols="40"></textarea>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <input type="submit" value="送信">
+      </div>
+    </form>
+  
+  </section>
+  <section></section>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="js/application.js"></script>
+</html>
